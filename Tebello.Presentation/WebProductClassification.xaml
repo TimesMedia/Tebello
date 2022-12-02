@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              Width="150.443" Height="138.692"
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel Name="WebProduct">
+    <StackPanel Name="WebProduct" Background="White">
         <CheckBox Content="All" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False" Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
         <CheckBox Content="Prescription" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False"  Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
         <CheckBox Content="Over the counter" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False"  Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />

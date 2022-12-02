@@ -15,7 +15,7 @@
         </Style>
 
     </UserControl.Resources>
-    <Grid>
+    <Grid Background="White">
         <FlowDocumentPageViewer x:Name="Viewer2">
             <FlowDocument x:Name="gFlowDocument" PageWidth="793" ColumnWidth="793" PageHeight="1122" PagePadding="25">
 
