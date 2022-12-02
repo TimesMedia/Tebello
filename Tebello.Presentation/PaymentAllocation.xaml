@@ -1,0 +1,48 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Subs.Presentation"
+        xmlns:Data="clr-namespace:Subs.Data;assembly=Subs.Data" xmlns:local1="clr-namespace:Tebello.Presentation" x:Class="Subs.Presentation.PaymentAllocation"
+        Title="Payment arrangement" Height="935" Width="700" WindowStartupLocation="Manual" Left="0" Top="20">
+    <Window.Resources>
+        <!--<Data:SubscriptionDoc3 x:Key="subscriptionDoc3"/>
+        <CollectionViewSource x:Key="subscriptionCandidateViewSource" Source="{Binding SubscriptionCandidate, Source={StaticResource subscriptionDoc3}}"/>-->
+        <local1:DateConverter x:Key="lDateConverter"/>
+        <!--<CollectionViewSource x:Key="SubscriptionIssueViewSource" Source="{Binding SubscriptionIssueToSubscriptionCandidate, Source={StaticResource subscriptionCandidateViewSource}}"/>-->
+        <local1:RandConverter x:Key="lRandConverter"/>
+        <Style x:Key="AlignRight" TargetType="FrameworkElement">
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+        </Style>
+    </Window.Resources>
+    <StackPanel Orientation="Vertical">
+
+        <StackPanel Background="LightBlue"  Height="60" Orientation="Horizontal">
+            <Label x:Name="labelCustomerId" Content="123" Margin="10"/>
+            <!--<Label x:Name = "labelName" Content="456" Margin="10"/>
+            <Label x:Name="labelSurname" Content="789" Margin="10"/>-->
+        </StackPanel>
+     
+        <DataGrid x:Name="SubscriptionIssueDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="False" Height="449"
+                  Margin="0,0,0,0" RowDetailsVisibilityMode="Visible" RowHeight="30" CanUserAddRows="False" CanUserDeleteRows="False" Width="Auto" HorizontalAlignment="Left">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="issueDescriptionColumn" Binding="{Binding IssueDescription}" Header="Issue Description" Width="Auto"/>
+                <DataGridTextColumn x:Name="issueIdColumn" Binding="{Binding IssueId}" Header="Issue Id" Width="Auto"/>
+                <DataGridTextColumn x:Name="unitsLeftColumn" Binding="{Binding UnitsLeft}" Header="Units Left" Width="SizeToHeader"/>
+                <DataGridTemplateColumn Header="Deliver On Credit">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox  IsThreeState="False" IsChecked="{Binding Path=DeliverOnCredit, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="unitsPerIssueColumn" Binding="{Binding UnitsPerIssue}" Header="Units Per Issue" Width="Auto"/>
+                <DataGridTextColumn x:Name="unitPriceColumn" Binding="{Binding UnitPrice,Converter={StaticResource lRandConverter}}" Header="Unit Price" Width="Auto"/>
+                <DataGridTextColumn x:Name="totalColumn" Binding="{Binding Total,Converter={StaticResource lRandConverter}}" Header="Total" Width="Auto"/>
+                <DataGridTextColumn x:Name="startDateColumn" Header="Start Date" Width="Auto" Binding="{Binding StartDate, Converter={StaticResource lDateConverter}}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Content="Save" Height="23" Name="buttonSave" Width="75" Click="Click_Save" Margin="10"/>
+    </StackPanel>
+
+</Window>

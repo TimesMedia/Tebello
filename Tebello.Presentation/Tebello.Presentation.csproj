@@ -1,0 +1,475 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1A65ED56-4577-4FFC-BC1D-11DD613003D5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Tebello.Presentation</RootNamespace>
+    <AssemblyName>Tebello.Presentation</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Subs2\Subs.Presentation\bin\Debug\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="FlowDocumentConverter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Subs2\Subs.Presentation\bin\Release\FlowDocumentConverter.dll</HintPath>
+    </Reference>
+    <Reference Include="HiraokaHyperTools.PdfSharp-WPF">
+      <HintPath>..\..\Subs2\Subs.Presentation\bin\Release\HiraokaHyperTools.PdfSharp-WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="HiraokaHyperTools.PdfSharp.Xps, Version=1.1.9.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Subs2\Subs.Presentation\bin\Release\HiraokaHyperTools.PdfSharp.Xps.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Subs2\Subs.Presentation\bin\Release\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeKit, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Subs2\Subs.Presentation\bin\Release\MimeKit.dll</HintPath>
+    </Reference>
+    <Reference Include="ReachFramework" />
+    <Reference Include="Spire.License">
+      <HintPath>..\..\Subs2\Subs.Presentation\bin\Release\Spire.License.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Pdf">
+      <HintPath>..\..\Subs2\Subs.Presentation\bin\Release\Spire.Pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Subs.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Release\Subs.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Subs2\Subs.Business\bin\Release\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="AddressTypeControl.xaml.cs">
+      <DependentUpon>AddressTypeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrationCompany.xaml.cs">
+      <DependentUpon>AdministrationCompany.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrationCountry.xaml.cs">
+      <DependentUpon>AdministrationCountry.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrationDeliveryAddress.xaml.cs">
+      <DependentUpon>AdministrationDeliveryAddress.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrationPostCode.xaml.cs">
+      <DependentUpon>AdministrationPostCode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrationProduct.xaml.cs">
+      <DependentUpon>AdministrationProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrationPromotion.xaml.cs">
+      <DependentUpon>AdministrationPromotion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ClassificationControl.xaml.cs">
+      <DependentUpon>ClassificationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ClassificationPicker.xaml.cs">
+      <DependentUpon>ClassificationPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyControl2.xaml.cs">
+      <DependentUpon>CompanyControl2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CorrespondenceControl.xaml.cs">
+      <DependentUpon>CorrespondenceControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CountryControl.xaml.cs">
+      <DependentUpon>CountryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreditNote.xaml.cs">
+      <DependentUpon>CreditNote.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerClassification.xaml.cs">
+      <DependentUpon>CustomerClassification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerUpdate2.xaml.cs">
+      <DependentUpon>CustomerUpdate2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerUpdateExists2.xaml.cs">
+      <DependentUpon>CustomerUpdateExists2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DebitOrderBankStatement.xaml.cs">
+      <DependentUpon>DebitOrderBankStatement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Deliver.xaml.cs">
+      <DependentUpon>Deliver.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeliveryAddress2.xaml.cs">
+      <DependentUpon>DeliveryAddress2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeliveryOptionsControl.xaml.cs">
+      <DependentUpon>DeliveryOptionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ElicitDate.xaml.cs">
+      <DependentUpon>ElicitDate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ElicitDecimal.xaml.cs">
+      <DependentUpon>ElicitDecimal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ElicitEnumSingle.xaml.cs">
+      <DependentUpon>ElicitEnumSingle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ElicitRichText.xaml.cs">
+      <DependentUpon>ElicitRichText.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FNBBankStatement.xaml.cs">
+      <DependentUpon>FNBBankStatement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceControl.xaml.cs">
+      <DependentUpon>InvoiceControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IssuePicker2.xaml.cs">
+      <DependentUpon>IssuePicker2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance.xaml.cs">
+      <DependentUpon>Maintenance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentAllocation.xaml.cs">
+      <DependentUpon>PaymentAllocation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProForma2.xaml.cs">
+      <DependentUpon>ProForma2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProFormaControl.xaml.cs">
+      <DependentUpon>ProFormaControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SBBankStatement.xaml.cs">
+      <DependentUpon>SBBankStatement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatementControl2.xaml.cs">
+      <DependentUpon>StatementControl2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubscriptionCaptureChange.xaml.cs">
+      <DependentUpon>SubscriptionCaptureChange.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubscriptionDetailControl2.xaml.cs">
+      <DependentUpon>SubscriptionDetailControl2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubscriptionDormantControl.xaml.cs">
+      <DependentUpon>SubscriptionDormantControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubscriptionPicker2.xaml.cs">
+      <DependentUpon>SubscriptionPicker2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubscriptionsCapture.xaml.cs">
+      <DependentUpon>SubscriptionsCapture.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubscriptionStatusDisplayContro2.xaml.cs">
+      <DependentUpon>SubscriptionStatusDisplayContro2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubscriptionStatusPrintControl.xaml.cs">
+      <DependentUpon>SubscriptionStatusPrintControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities.cs" />
+    <Compile Include="WebProductClassification.xaml.cs">
+      <DependentUpon>WebProductClassification.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AddressTypeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AdministrationCompany.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AdministrationCountry.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AdministrationDeliveryAddress.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AdministrationPostCode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AdministrationProduct.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AdministrationPromotion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ClassificationControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ClassificationPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CompanyControl2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CorrespondenceControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CountryControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CreditNote.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomerClassification.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomerPicker3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomerUpdate2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomerUpdateExists2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DebitOrderBankStatement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Deliver.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeliveryAddress2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DeliveryOptionsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ElicitDate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ElicitDecimal.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ElicitEnumSingle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ElicitInteger.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ElicitRichText.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ElicitString.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FNBBankStatement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="InvoiceControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="IssuePicker2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Maintenance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Base.cs" />
+    <Compile Include="CustomerPicker3.xaml.cs">
+      <DependentUpon>CustomerPicker3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ElicitInteger.xaml.cs">
+      <DependentUpon>ElicitInteger.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ElicitString.xaml.cs">
+      <DependentUpon>ElicitString.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="PaymentAllocation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ProForma2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ProFormaControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SBBankStatement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StatementControl2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SubscriptionCaptureChange.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SubscriptionDetailControl2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SubscriptionDormantControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SubscriptionPicker2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SubscriptionsCapture.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SubscriptionStatusDisplayContro2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SubscriptionStatusPrintControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WebProductClassification.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tebello.Business\Tebello.Business.csproj">
+      <Project>{37354892-6cd6-459b-8cb6-1257bbc840f6}</Project>
+      <Name>Tebello.Business</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="mims-small.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

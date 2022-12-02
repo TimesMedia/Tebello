@@ -1,0 +1,363 @@
+﻿@model Tebello.MimsWeb.Models.UserTemplate
+
+@{
+    ViewBag.Title = "Account";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="/Scripts/jquery-3.4.1.js"></script>
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/Content/normalize.css">
+    <link rel="stylesheet" href="/Content/skeleton.css">
+    <link rel="stylesheet" href="/Content/Styles.css">
+    <link rel="stylesheet" href="~/Content/bootstrap.css">
+
+    <title>@ViewBag.Title</title>
+
+    <style type="text/css">
+        .dataElem {
+            margin: 0.5em 0.5em 0.5em 1em;
+        }
+
+        .dataElem input {
+            float: right;
+        }
+
+        .dataElem select {
+            float: right;
+        }
+
+        .validation-summary-errors li {
+            font-family: Arial;
+            margin: 1em 0em 0em 1em;
+            color: red;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /*   body {
+                    font: 16px Arial;
+                }
+                */
+        .autocomplete {
+            /*the container must be positioned relative:*/
+            position: relative;
+        }
+
+
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            /*position the autocomplete items to be the same width as the container:*/
+            top: 100%;
+            left: 0;
+            right: 0;
+        }
+
+            .autocomplete-items div {
+                padding: 10px;
+                cursor: pointer;
+                background-color: #fff;
+                border-bottom: 1px solid #d4d4d4;
+            }
+
+                .autocomplete-items div:hover {
+                    /*when hovering an item:*/
+                    background-color: #e9e9e9;
+                }
+
+        .autocomplete-active {
+            /*when navigating through the items using the arrow keys:*/
+            background-color: DodgerBlue !important;
+            color: #ffffff;
+        }
+
+        select {
+            width: 154px;
+        }
+
+
+        #NewCompanyData {
+            display: none;
+        }
+
+        .DescriptionStyle {
+            display:  none;
+            width: 300px;
+            background-color: white;
+            color: #000;
+            text-align: left;
+            border-radius: 6px;
+            border: 2px solid black;
+            padding: 1em 1em 1em 1em;
+            font: 12px;
+            position: fixed;
+            top: 4em;
+            left: 20%;
+            right: 20%;
+            width: 60%;
+            z-index:100;
+        }
+
+    </style>
+
+
+    <script>
+        gCompanies = [];
+
+        $(document).ready(function () {
+            {
+                $.ajax({
+                    url: '/home/Companies',
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (data) {
+                        try {
+                            var i = 0;
+                            $.each(data, function (index, value) {
+                                gCompanies[i] = { CompanyName: value.Value, CompanyId: value.Key }
+                                i = i + 1;
+                            })
+                        }
+                        catch (error) {
+                            console.log(error);
+                        }
+                    }
+                })
+            }
+        })
+
+    </script>
+
+</head>
+<body>
+    <div style="margin-top:2em;">
+        @using (Html.BeginForm())
+        {
+
+            <p style="font-family: Arial; margin:2em 0em 2em 1em; color:red; ">
+                @Html.ViewBag.Message
+            </p>
+
+            <p>
+                @Html.ValidationSummary()
+            </p>
+
+            <div class="container">
+
+                <div class="row">
+                    <div class="six columns">
+                        <div class="dataElem">
+                            @Html.LabelFor(x => x.CustomerId)
+                            <label style="float:right">@Model.CustomerId</label>
+                        </div>
+
+                        <div class="dataElem">
+                            @Html.LabelFor(x => x.TitleId)
+                            @Html.DropDownListFor(x => x.TitleId, @Model.TitleSelectList, new Dictionary<string, object>() { { "style", "width:154px" } })
+                        </div>
+
+                        <div class="dataElem">
+                            @Html.LabelFor(x => x.Initials)
+                            @Html.EditorFor(x => x.Initials)
+                        </div>
+
+                        <div class="dataElem">
+                            @Html.LabelFor(x => x.FirstName)
+                            @Html.EditorFor(x => x.FirstName)
+                        </div>
+
+                        <div class="dataElem">
+                            @Html.LabelFor(x => x.Surname)
+                            @Html.EditorFor(x => x.Surname)
+                        </div>
+
+                        <div class="dataElem">
+                            @Html.LabelFor(x => x.CellPhoneNumber)
+                            @Html.EditorFor(x => x.CellPhoneNumber)
+                        </div>
+
+                        <div class="dataElem">
+                            @Html.LabelFor(x => x.PhoneNumber)
+                            @Html.EditorFor(x => x.PhoneNumber)
+                            @Html.ValidationMessageFor(x => x.PhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="dataElem">
+                            <label>Email</label>
+                            @Html.EditorFor(x => x.EmailAddress)
+                        </div>
+
+                        <div class="dataElem">
+                            @Html.LabelFor(x => x.CompanyName)
+                            @Html.EditorFor(x => x.CompanyName)
+                            @Html.ValidationMessageFor(x => x.CompanyName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="dataElem">
+                            @Html.LabelFor(x => x.CountryId)
+                            @Html.DropDownListFor(x => x.CountryId, @Model.CountrySelectList)
+                        </div>
+
+
+                        <div class="dataElem">
+                            <label>Classification 1</label>
+                            @Html.DropDownListFor(x => x.ClassificationId1, @Model.Classification1SelectList,
+                           new
+                                {
+                               onchange = "SetCategory2(this)"
+
+                           }
+                       )
+                        </div>
+                        <div class="dataElem">
+                            <label>Classification 2</label>
+                            @Html.DropDownListFor(x => x.ClassificationId2, @Model.Classification2SelectList)
+                        </div>
+
+                        <div class="dataElem">
+                            <label>Council number</label>
+                            @Html.EditorFor(x => x.CouncilNumber)
+                        </div>
+                        <br />
+                        <div class="dataElem">
+                            @Html.LabelFor(x => x.Password)
+                            @Html.PasswordFor(x => x.Password)
+                        </div>
+
+                        <div class="dataElem">
+                            @Html.LabelFor(x => x.ConfirmedPassword)
+                            @Html.PasswordFor(x => x.ConfirmedPassword)
+                        </div>
+                    </div>
+
+                    <div class="six columns">
+
+
+                        <fieldset style="margin: 1em 0em 0em 0.6em;">
+                            <legend>Physical address for invoice</legend>
+
+                            <div class="dataElem">
+                                @Html.LabelFor(x => x.Province)
+                                @Html.EditorFor(x => x.Province)
+                            </div>
+
+                            <div class="dataElem">
+                                @Html.LabelFor(x => x.City)
+                                @Html.EditorFor(x => x.City)
+                            </div>
+
+                            <div class="dataElem">
+                                @Html.LabelFor(x => x.Suburb)
+                                @Html.EditorFor(x => x.Suburb)
+                            </div>
+
+
+                            <div class="dataElem">
+                                <label>Street name only</label>
+                                @Html.EditorFor(x => x.Street)
+                            </div>
+
+                            <div name="gExtensionData" class="dataElem" onmouseover="HintExtension()" onmouseout="UnHintExtension()">
+                                <label>Street extention</label>
+                                @Html.EditorFor(x => x.StreetExtension)
+                            </div>
+
+                            <div name="gSuffixData" class="dataElem" onmouseover="HintSuffix()" onmouseout="UnHintSuffix()">
+                                <label>Street suffix</label>
+                                @Html.EditorFor(x => x.StreetSuffix)
+                            </div>
+                            <div class="dataElem">
+                                @Html.LabelFor(x => x.StreetNo)
+                                @Html.EditorFor(x => x.StreetNo)
+                            </div>
+                            <div class="dataElem">
+                                @Html.LabelFor(x => x.Building)
+                                @Html.EditorFor(x => x.Building)
+                            </div>
+                            <div class="dataElem">
+                                @Html.LabelFor(x => x.Floor)
+                                @Html.EditorFor(x => x.Floor)
+                            </div>
+                            <div class="dataElem">
+                                @Html.LabelFor(x => x.Room)
+                                @Html.EditorFor(x => x.Room)
+                            </div>
+                            <div class="dataElem">
+                                @Html.LabelFor(x => x.PostCode)
+                                @Html.EditorFor(x => x.PostCode)
+                            </div>
+                        </fieldset>
+
+                        <div class="dataElem">
+                            <button type="submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+        <div class="DescriptionStyle" id="gExtension">
+            <label>E.g. Street, Road, Lane, Avenue</label>
+        </div>
+
+        <div class="DescriptionStyle" id="gSuffix">
+            <label>E.g. North, South, west, East, upper,lower</label>
+        </div>
+    </div>
+
+    <script>
+       function SetCategory2(p)
+       {
+           $('#ClassificationId2').empty();
+           $.ajax({
+               url: '/home/classifications',
+               data: { "ParentClassificationId": p.value },
+               type: 'get',
+               dataType: 'json',
+               success: function (data) {
+                   $('#ClassificationId2').append(new Option("Please select a profession", "", true, true));
+                   $.each(data, function (index, value) {
+                      $('#ClassificationId2').append(new Option(value.Value, value.Key, false, false));
+                   });
+               }
+           });
+       }
+
+       function HintExtension() {
+           var Target = document.getElementById("gExtension");
+           Target.style.display = 'block';
+           
+       }
+
+       function UnHintExtension() {
+           var Target = document.getElementById("gExtension");
+           Target.style.display = 'none';
+       }
+
+       function HintSuffix() {
+           var Target = document.getElementById('gSuffix');
+           Target.style.display = 'block';
+       }
+
+       function UnHintSuffix() {
+           var Target = document.getElementById('gSuffix');
+           Target.style.display = 'none';
+       }
+
+   </script>
+</body>
+</html>

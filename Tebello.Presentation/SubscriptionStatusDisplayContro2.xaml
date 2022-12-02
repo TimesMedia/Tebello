@@ -1,0 +1,286 @@
+﻿<UserControl x:Class="Subs.Presentation.SubscriptionStatusDisplayControl2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Subs.Presentation" xmlns:local1="clr-namespace:Tebello.Presentation"
+             mc:Ignorable="d" Width="800"
+             d:DesignHeight="1122" d:DesignWidth="793">
+    <UserControl.Resources>
+        <local1:RandConverter x:Key="lRandConverter"/>
+        <local1:IntegerConverter x:Key="lIntegerConverter"/>
+        <local1:DateConverter x:Key="lDateConverter"/>
+        <Style x:Key="AlignRight" TargetType="{x:Type FrameworkElement}">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+
+    </UserControl.Resources>
+    <ScrollViewer>
+        <StackPanel>
+       
+            <Grid x:Name="Basic" Margin="10,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="189"/>
+                    <ColumnDefinition Width="189"/>
+                    <ColumnDefinition Width="189"/>
+                    <ColumnDefinition Width="189"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="4" Margin="0,0,0,20"  FontSize="20" 
+                            FontWeight="Bold" Foreground="red">Subscription status and history</TextBlock>
+                <Label Grid.Row="1" Grid.Column="0" Content="Subscription id:"/>
+                <Label  Grid.Row="1" Grid.Column ="1" UseLayoutRounding="True" d:DesignUseLayoutRounding="True" Content="{Binding SubscriptionId}" 
+                        Foreground="Blue" Width="150"/>
+            </Grid>
+ 
+            <GroupBox Margin="10,20,0,0">
+                <GroupBox.Header>
+                    <TextBlock Margin="0,10,0,10" Foreground="Red">
+                                    <Bold>Basic information</Bold>
+                    </TextBlock>
+
+                </GroupBox.Header>
+
+                <Grid DataContext="{Binding ElementName=Basic, Path=DataContext}" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="PayerId" UseLayoutRounding="True" d:DesignUseLayoutRounding="True" />
+                    <Label Content="{Binding PayerId}" Grid.Column="1" Foreground="Blue" UseLayoutRounding="True" d:DesignUseLayoutRounding="True"/>
+                    <Label Grid.Column="2" Foreground="Blue" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
+                        <TextBlock Text="{Binding ReceiverSurname}" TextWrapping="WrapWithOverflow"/>
+                    </Label>
+                    <Label Grid.Column="3" Foreground="Blue" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
+                        <TextBlock Text="{Binding PayerCompany}" TextWrapping="WrapWithOverflow"/>
+                    </Label>
+
+                    <Label Grid.Row="1" Content="Receiver" UseLayoutRounding="True" d:DesignUseLayoutRounding="True"/>
+                    <Label Grid.Row="1" Content="{Binding ReceiverId}" Grid.Column="1" Foreground="Blue" UseLayoutRounding="True" 
+                            d:DesignUseLayoutRounding="True"/>
+                    <Label Grid.Row="1" Grid.Column="2" Foreground="Blue" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
+                        <TextBlock Text="{Binding ReceiverSurname}" TextWrapping="WrapWithOverflow"/>
+                    </Label>
+                    <Label Grid.Row="1" Grid.Column="3" Foreground="Blue" UseLayoutRounding="True" d:DesignUseLayoutRounding="True" >
+                        <TextBlock Text="{Binding ReceiverCompany}" TextWrapping="WrapWithOverflow"/>
+                    </Label>
+
+                    <Label Grid.Row="2" Content="Status" UseLayoutRounding="True" d:DesignUseLayoutRounding="True"/>
+                    <Label Grid.Row="2" Content="{Binding StatusString}" Grid.Column="1" Foreground="Blue" UseLayoutRounding="True" 
+                            d:DesignUseLayoutRounding="True"/>
+
+                    <Label Grid.Row="3" Content="DeliveryMethod" UseLayoutRounding="True" d:DesignUseLayoutRounding="True"/>
+                    <Label Grid.Row="3" Content="{Binding DeliveryMethodString}" Grid.Column="1" Foreground="Blue" UseLayoutRounding="True" 
+                            d:DesignUseLayoutRounding="True"/>
+
+                    <Label Grid.Row="4" Content="Product Name" UseLayoutRounding="True" d:DesignUseLayoutRounding="True"/>
+                    <Label Grid.Row="4" Grid.Column="1" Foreground="Blue" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
+                        <TextBlock Text="{Binding ProductName}" TextWrapping="WrapWithOverflow"/>
+                    </Label>
+
+                    <Label Grid.Row="5" Content="Number of issues" UseLayoutRounding="True" d:DesignUseLayoutRounding="True"/>
+                    <Label Grid.Row="5" Content="{Binding NumberOfIssues, Converter={StaticResource lIntegerConverter}}" Style="{StaticResource AlignRight}" 
+                            Grid.Column="1" Foreground="Blue" UseLayoutRounding="True" d:DesignUseLayoutRounding="True"/>
+
+                    <Label Grid.Row="6" Content="Copies per issue" UseLayoutRounding="True" d:DesignUseLayoutRounding="True"/>
+                    <Label Grid.Row="6" Content="{Binding UnitsPerIssue, Converter={StaticResource lIntegerConverter}}" Style="{StaticResource AlignRight}" 
+                            Grid.Column="1" Foreground="Blue" UseLayoutRounding="True" d:DesignUseLayoutRounding="True"/>
+
+                    <Label Grid.Row="7" Content="Vat percentage" UseLayoutRounding="True" d:DesignUseLayoutRounding="True"/>
+                    <Label Grid.Row="7" Content="{Binding VatPercentage, Converter={StaticResource lRandConverter} }"  Style="{StaticResource AlignRight}"  
+                            Grid.Column="1" Foreground="Blue" UseLayoutRounding="True" d:DesignUseLayoutRounding="True"/>
+
+                    <Label Grid.Row="3" Grid.Column="2" Content="Renewal Notice" UseLayoutRounding="True" d:DesignUseLayoutRounding="True"/>
+                    <Label Grid.Row="3" Grid.Column="3" Content="{Binding RenewalNotice}"  Foreground="Blue" UseLayoutRounding="True" 
+                            d:DesignUseLayoutRounding="True"/>
+
+                    <Label Grid.Row="4" Grid.Column="2" Content="Automatic renewal" UseLayoutRounding="True" d:DesignUseLayoutRounding="True"/>
+                    <Label Grid.Row="4" Grid.Column="3" Content="{Binding AutomaticRenewal}"  Foreground="Blue" UseLayoutRounding="True" 
+                            d:DesignUseLayoutRounding="True"/>
+
+                    <Label Grid.Row="5" Grid.Column="2" Content="DeliveryAddressId" UseLayoutRounding="True" d:DesignUseLayoutRounding="True"/>
+                    <Label Grid.Row="5" Grid.Column="3" Content="{Binding DeliveryAddressId}"  Foreground="Blue" UseLayoutRounding="True" 
+                                   d:DesignUseLayoutRounding="True"/>
+
+
+
+                    <!--<Label Grid.Row="5" Grid.Column="2" Content="DeliveryMethod" UseLayoutRounding="True" d:DesignUseLayoutRounding="True"/>
+                    <Label Grid.Row="5"  Grid.Column="3" Content="{Binding DeliveryMethodString}" Foreground="Blue" UseLayoutRounding="True" 
+                            d:DesignUseLayoutRounding="True"/>-->
+
+                    <Label Grid.Row="6" Grid.Column="2" Content="Order number" UseLayoutRounding="True" d:DesignUseLayoutRounding="True"/>
+                    <Label Grid.Row="6" Grid.Column="3" Content="{Binding OrderNumber}"  Foreground="Blue" UseLayoutRounding="True" 
+                            d:DesignUseLayoutRounding="True"/>
+
+                    <Label Grid.Row="7" Grid.Column="2" Content="InvoiceId" UseLayoutRounding="True" d:DesignUseLayoutRounding="True"/>
+                    <Label Grid.Row="7" Grid.Column="3" Content="{Binding InvoiceId}"  Foreground="Blue" UseLayoutRounding="True" 
+                            d:DesignUseLayoutRounding="True"/>
+
+                </Grid>
+
+        </GroupBox>
+            <GroupBox Margin="10,20,0,0">
+                <GroupBox.Header>
+                    <TextBlock Foreground="Red" >
+                                    <Bold>Calculation</Bold>
+                    </TextBlock>
+
+                </GroupBox.Header>
+                <Grid DataContext="{Binding ElementName=Basic, Path=DataContext}" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="41.435"/>
+                        <ColumnDefinition Width="158.565"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Base cost per unit" Grid.Row="0" UseLayoutRounding="True" d:DesignUseLayoutRounding="True" Grid.ColumnSpan="2"/>
+                    <Label Grid.Column="2" Foreground="Blue" Grid.Row="0" Style="{StaticResource AlignRight}" 
+                            Content="{Binding Path=BaseRate, Converter={StaticResource lRandConverter}}"/>
+
+                    <Label Content="Discount per unit" Grid.Row="1" UseLayoutRounding="True" d:DesignUseLayoutRounding="True" Grid.ColumnSpan="2"/>
+                    <Label Grid.Column="2" Foreground="Blue" Grid.Row="1" Style="{StaticResource AlignRight}" 
+                            Content="{Binding Path=DiscountPerUnit, Converter={StaticResource lRandConverter}}"/>
+
+                    <Line Grid.Row="2" Grid.Column="2" Stroke="Blue" X1="0" Y1="0" X2="100" Y2="0" Margin="0,0,0,28" Grid.RowSpan="2"></Line>
+
+                    <Label Content="Adjusted base rate per unit" Grid.Row="3" UseLayoutRounding="True" d:DesignUseLayoutRounding="True" Grid.ColumnSpan="2"/>
+                    <Label Grid.Column="2" Foreground="Blue" Grid.Row="3" Style="{StaticResource AlignRight}" 
+                            Content="{Binding Path=AdjustedBaseRate, Converter={StaticResource lRandConverter}}"/>
+
+                    <Label Content="Delivery cost per unit" Grid.Row="4" UseLayoutRounding="True" d:DesignUseLayoutRounding="True" Grid.ColumnSpan="2"/>
+                    <Label Grid.Column="2" Foreground="Blue" Grid.Row="4" Style="{StaticResource AlignRight}" 
+                            Content="{Binding Path=DeliveryCost, Converter={StaticResource lRandConverter}}"/>
+
+                    <Label Content="Vat per unit" Grid.Row="5" UseLayoutRounding="True" d:DesignUseLayoutRounding="True" Grid.ColumnSpan="2"/>
+                    <Label Grid.Column="2" Grid.Row="5" Foreground="Blue" Style="{StaticResource AlignRight}" 
+                            Content="{Binding Path=Vat, Converter={StaticResource lRandConverter}}"/>
+
+                    <Line Grid.Row="6" Grid.Column="2" Stroke="Blue" X1="0" Y1="0" X2="100" Y2="0" Margin="0,0,0,28" Grid.RowSpan="2"></Line>
+                    <Label Content="Unit cost" Grid.Row="7" UseLayoutRounding="True" d:DesignUseLayoutRounding="True" Grid.ColumnSpan="2"/>
+                    <Label Grid.Column="2" Grid.Row="7" Foreground="Blue" Style="{StaticResource AlignRight}" 
+                            Content="{Binding Path=UnitPrice, Converter={StaticResource lRandConverter}}"/>
+
+                    <Label Content="Number of units" Grid.Row="8" UseLayoutRounding="True" d:DesignUseLayoutRounding="True" Grid.ColumnSpan="2"/>
+                    <Label Grid.Column="2" Foreground="Blue" Grid.Row="8" Style="{StaticResource AlignRight}" 
+                            Content="{Binding Path=NumberOfUnits, Converter={StaticResource lIntegerConverter}}"/>
+
+                    <Line Grid.Row="9" Grid.Column="2" Stroke="Blue" X1="0" Y1="0" X2="100" Y2="0" Margin="0,0,0,28" Grid.RowSpan="2"></Line>
+
+                    <Label Content="Total cost" Grid.Row="10" UseLayoutRounding="True" d:DesignUseLayoutRounding="True" Grid.ColumnSpan="2"/>
+                    <Label Grid.Column="2" Foreground="Blue" Grid.Row="10" Style="{StaticResource AlignRight}" 
+                            Content="{Binding Path=TotalCost, Converter={StaticResource lRandConverter}}"/>
+
+                    <Line Grid.Row="11" Grid.Column="2" Stroke="Blue" X1="0" Y1="0" X2="100" Y2="0"></Line>
+                </Grid>
+            </GroupBox>
+               
+            <GroupBox Margin="10,20,0,0">
+                <GroupBox.Header>
+                    <TextBlock Foreground="Red" Margin="0,10,0,10">
+                                    <Bold>Issue information</Bold>
+                    </TextBlock>
+
+                </GroupBox.Header>
+                <DataGrid  x:Name="Issues" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="Auto" ItemsSource="{Binding}" 
+                            IsReadOnly="True" RowDetailsVisibilityMode="VisibleWhenSelected"
+                            VerticalAlignment="Stretch">
+                    <DataGrid.RowHeaderStyle>
+                        <Style></Style>
+                    </DataGrid.RowHeaderStyle>
+                    <DataGrid.Columns>
+
+                        <DataGridTemplateColumn Header="Issue Description" Width="300" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Height="Auto" Margin="3" TextWrapping="Wrap" Foreground="Blue">
+                                        <TextBox.Text>
+                                            <Binding Path="IssueDescription">
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn x:Name="sequenceColumn" Binding="{Binding Sequence}" Header="Sequence" Width="80" 
+                                            CellStyle="{StaticResource AlignRight}" Foreground="Blue"/>
+                        <DataGridTextColumn x:Name="unitsLeftColumn" Binding="{Binding UnitsLeft}" Header="Units Left" Width="80"
+                                            CellStyle="{StaticResource AlignRight}" Foreground="Blue"/>
+                        <DataGridCheckBoxColumn x:Name="deliverOnCreditColumn" Binding="{Binding DeliverOnCredit}" Header="Deliver On Credit" 
+                                                Width="150"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+               
+
+            <GroupBox x:Name="HistoryGroupBox" Margin="10,20,0,0">
+                <GroupBox.Header>
+                    <TextBlock Foreground="Red" Margin="0,10,0,10">
+                                    <Bold>Subscription history</Bold>
+                    </TextBlock>
+                </GroupBox.Header>
+
+                <DataGrid x:Name="History" AutoGenerateColumns="False" Height="Auto"  
+                            IsReadOnly="True"  RowDetailsVisibilityMode="VisibleWhenSelected">
+                    <DataGrid.RowHeaderStyle>
+                        <Style></Style>
+                    </DataGrid.RowHeaderStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="dateFromColumn" Header="Date" Binding="{Binding DateFrom, Converter = {StaticResource lDateConverter}}" 
+                                            Foreground="Blue" Width="100"/>
+                        <DataGridTextColumn x:Name="operationStringColumn" Binding="{Binding OperationString}" Header="Operation" Foreground="Blue" Width="150"/>
+
+                        <DataGridTemplateColumn Header="Issue Description" Width="300" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Height="Auto" Margin="3" TextWrapping="Wrap" Foreground="Blue">
+                                        <TextBox.Text>
+                                            <Binding Path="IssueString">
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                                
+                        <DataGridTextColumn x:Name="debitValueColumn" Binding="{Binding DebitValue, Converter={StaticResource lRandConverter}}" 
+                                            Header="Debit" CellStyle="{StaticResource AlignRight}"
+                                            Foreground="Blue" Width="80"/>
+                        <DataGridTextColumn x:Name="creditValueColumn" Binding="{Binding CreditValue, Converter={StaticResource lRandConverter}}" Header="Credit" 
+                                            CellStyle="{StaticResource AlignRight}" Foreground="Blue"  Width="80"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+ 
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

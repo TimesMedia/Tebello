@@ -1,0 +1,110 @@
+﻿@model Subs.Data.PaymentDoc.PayUResultRow
+
+@{
+    ViewBag.Title = "PayUResult";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PayUTransactionResult</title>
+
+    <style>
+
+        .unitclass {
+            margin: 0.5em 0.5em 0.5em 1em;
+            display: block;
+        }
+
+        .labelclass {
+        }
+
+        .dataclass {
+            float: right;
+        }
+    </style>
+
+
+</head>
+<body>
+    @Html.AntiForgeryToken()
+
+    <p style="font-family: Arial; margin:2em 0em 2em 1em; color:red; ">
+        @Html.ViewBag.Message
+    </p>
+
+    <div style="max-width:450px">
+        <p leftmargin="1em"><strong>PayU result</strong></p>
+
+        <div class="unitclass">
+            @Html.LabelFor(model => model.Reference, htmlAttributes: new { @class = "labelclass" })
+            <label class="dataclass">@Model.Reference</label>
+        </div>
+
+        <div class="unitclass">
+            @Html.LabelFor(model => model.AmountPayed, htmlAttributes: new { @class = "labelclass" })
+            <label class="dataclass">@Model.AmountPayed.ToString("C")</label>
+        </div>
+
+        <div class="unitclass">
+            @Html.LabelFor(model => model.Currency, htmlAttributes: new { @class = "labelclass" })
+            <label class="dataclass">@Model.Currency</label>
+        </div>
+
+        <div class="unitclass">
+            @Html.LabelFor(model => model.CardExpiry, htmlAttributes: new { @class = "labelclass" })
+            <label class="dataclass">@Model.CardExpiry</label>
+        </div>
+
+        <div class="unitclass">
+            @Html.LabelFor(model => model.CardNumber, htmlAttributes: new { @class = "labelclass" })
+            <label class="dataclass">@Model.CardNumber</label>
+        </div>
+
+        <div class="unitclass">
+            @Html.LabelFor(model => model.GatewayReference, htmlAttributes: new { @class = "labelclass" })
+            <label class="dataclass">@Model.GatewayReference</label>
+        </div>
+
+        <div class="unitclass">
+            @Html.LabelFor(model => model.CardType, htmlAttributes: new { @class = "labelclass" })
+            <label class="dataclass"> @Model.CardType</label>
+        </div>
+
+        <div class="unitclass">
+            @Html.LabelFor(model => model.NameOnCard, htmlAttributes: new { @class = "labelclass" })
+            <label class="dataclass">@Model.NameOnCard</label>
+        </div>
+
+        <div class="unitclass">
+            @Html.LabelFor(model => model.PointOfFailure, htmlAttributes: new { @class = "labelclass" })
+            <label class="dataclass">@Model.PointOfFailure</label>
+        </div>
+
+        <div class="unitclass">
+            @Html.LabelFor(model => model.ResultCode, htmlAttributes: new { @class = "labelclass" })
+            <label class="dataclass">@Model.ResultCode</label>
+        </div>
+
+        <div class="unitclass">
+            @Html.LabelFor(model => model.ResultMessage, htmlAttributes: new { @class = "labelclass" })
+            <label class="dataclass">@Model.ResultMessage</label>
+        </div>
+
+        <div class="unitclass">
+            @Html.LabelFor(model => model.Successful, htmlAttributes: new { @class = "labelclass" })
+            <label class="dataclass">@Model.Successful</label>
+        </div>
+
+        <div class="unitclass">
+            @Html.LabelFor(model => model.TransactionState, htmlAttributes: new { @class = "labelclass" })
+            <label class="dataclass">@Model.TransactionState</label>
+        </div>
+    </div>
+
+    <p leftmargin="1em"><strong>End of PayU result</strong></p>
+
+</body>
+</html>

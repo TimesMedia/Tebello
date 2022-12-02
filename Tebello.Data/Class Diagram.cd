@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Subs.Data.CustomerData3">
+    <Position X="1.25" Y="1" Width="3.75" />
+    <NestedTypes>
+      <Struct Name="Subs.Data.CustomerData3.OutstandingInvoice" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CustomerData3.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>YKQjyEBYAAIAAEXNBB2EwACA1ABUQjKCUYAB4hVgAAU=</HashCode>
+      <FileName>CustomerData3.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Arial" Size="12" />
+</ClassDiagram>

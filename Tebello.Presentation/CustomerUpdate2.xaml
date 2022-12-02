@@ -1,0 +1,343 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Subs.Presentation"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Data="clr-namespace:Subs.Data;assembly=Subs.Data" xmlns:local1="clr-namespace:Tebello.Presentation" x:Class="Subs.Presentation.CustomerUpdate2"
+        x:Name="CustomerUpdateWindow" BorderThickness="4" BorderBrush="Blue" Title="Customer Update Window" WindowStartupLocation="CenterScreen"
+        Loaded="CustomerUpdateWindow_Loaded" Height="915" MinHeight="915" Width="1199" MinWidth="950" Closing="CustomerUpdateWindow_Closing">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Height" Value="27"/>
+        </Style>
+
+        <Style x:Key="AlignRight" TargetType="{x:Type FrameworkElement}">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+
+        <Style TargetType="{x:Type DataGridCell}">
+            <Style.Triggers>
+                <Trigger Property="IsSelected"  Value="true">
+                    <Setter Property="Background" Value="Yellow"/>
+                    <Setter Property="Foreground" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <local1:DateConverter x:Key="lDateConverter"/>
+    </Window.Resources>
+    <Grid x:Name="CustomerGrid" Width="Auto" Height="auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="LightGreen" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="327"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="315"/>
+            <RowDefinition Height="340"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+
+        <!--Row 0-->
+
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Grid>
+                <Label Content="CustomerId"/>
+                <Label Width="75" Content="{Binding CustomerId}" HorizontalAlignment="Right" />
+
+            </Grid>
+
+            <Grid>
+                <Label Content="Title" Background="LightBlue" HorizontalAlignment="Left" Margin="0,0,20,0"/>
+                <ComboBox x:Name="ComboTitle" Width="63" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding Path=TitleId}" HorizontalAlignment="Right"/>
+            </Grid>
+
+
+            <Grid>
+                <Label  Content="Initials" Height="28" x:Name="label1" HorizontalAlignment="Left" Margin="0,0,20,0"/>
+                <TextBox x:Name="textBoxInitials" Width="44" Validation.Error="ValidationError" HorizontalAlignment="Right">
+                    <Binding Path="Initials" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+            </Grid>
+            <Grid>
+                <Label Content="Phone" Width="50" Height="28" x:Name="label3"  Margin="0,0,20,0" HorizontalAlignment="Left" Grid.ColumnSpan="2" />
+                <TextBox x:Name="textBoxPhoneNumber" Width="114" Validation.Error="ValidationError" HorizontalAlignment="Right">
+                    <Binding Path="PhoneNumber" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <Label Content="First name" />
+            <Label Content="Cell" Background="LightBlue" Height="28" x:Name="label4"  />
+            <Label Content="Council number"/>
+        </StackPanel>
+
+
+        <StackPanel Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+            <TextBox x:Name="TextFirstName" TextWrapping="Wrap" Width="Auto" Validation.Error="ValidationError">
+                <Binding Path="FirstName" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+
+            <TextBox x:Name="textBoxCellPhoneNumber" Width="auto" Validation.Error="ValidationError">
+                <Binding Path="CellPhoneNumber" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <TextBox Width="auto"  Text="{Binding CouncilNumber, Mode=TwoWay}"/>
+
+        </StackPanel>
+
+
+        <StackPanel Grid.Column="4">
+            <Label Content="Surname" Height="28" x:Name="label2"  />
+            <Label Content="Correspondence Email" Height="28" x:Name="label5" Background="LightBlue"/>
+            <CheckBox Margin="3,10,0,0" IsChecked="{Binding Marketing}" IsThreeState="False" >Marketing</CheckBox>
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="5">
+            <TextBox x:Name="textBoxSurname" Validation.Error="ValidationError" Width="204">
+                <Binding Path="Surname" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+  
+            <TextBox x:Name="textBoxEmailAddress" Validation.Error="ValidationError" Width="202">
+                <Binding Path="EmailAddress" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+
+            <Grid>
+                <Label Content="Correspondence" Margin="0,3,0,0"/>
+
+                <local:CorrespondenceControl Height="71" Width="73" Validation.Error="ValidationError" HorizontalAlignment="Right">
+                    <local:CorrespondenceControl.Correspondence>
+                        <Binding Path="Correspondence2" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </local:CorrespondenceControl.Correspondence>
+                </local:CorrespondenceControl>
+            </Grid>
+
+        </StackPanel>
+
+        <!--Row 1-->
+        <StackPanel Grid.Row="1" Grid.RowSpan="2">
+            <Label Content="Company"/>
+            <!--<TextBox x:Name="textBoxCompanyNameUnverified" Width="auto" Validation.Error="ValidationError" HorizontalAlignment="Stretch">
+                <Binding Path="CompanyNameUnverified" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>-->
+         
+            <local:CompanyControl2 x:Name="CompanyControl" Height="600"
+            Validation.Error="ValidationError" CompanyId="{Binding CompanyId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label x:Name="CountryId" Visibility="Visible" Validation.Error="ValidationError" Width="10" Height="10" BorderThickness="4" RenderTransformOrigin="-0.3,1.4">
+                <Binding Path="CountryId" Mode="TwoWay" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </Label>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Label Content="Practice number"/>
+            <Label Content="Country"/>
+            <!--<Label Content="Address line 1"/>
+            <Label Content="Address line 2"/>
+            <Label Content="Address line 3"/>
+            <Label Content="Address line 4"/>
+            <Label Content="Post code"/>-->
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="3">
+
+        </StackPanel>
+
+        <StackPanel  Grid.Row="1" Grid.Column="4">
+            <Label Content="Invoice Email" Width="129" HorizontalAlignment="Left"/>
+            <Label Content="Statement Email" Width="129" HorizontalAlignment="Left"/>
+            <Label Content="WebUrl"/>
+            <Label Content="National Id" />
+            <Label Content="Department"/>
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="1" Grid.Column="5">
+            <TextBox TextWrapping="Wrap" x:Name="textAccountEmail" Validation.Error="ValidationError" Width="202">
+                <Binding Path="InvoiceEmail" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <TextBox  TextWrapping="Wrap" x:Name="textStatementEmail" Validation.Error="ValidationError" Width="202">
+                <Binding Path="StatementEmail" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <TextBox TextWrapping="Wrap" Validation.Error="ValidationError" Width="202" >
+                <Binding Path="WebURL" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+
+            <Grid Width="203">
+                <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Width="60" x:Name="textNationalId1" MaxLength="6" Validation.Error="ValidationError">
+                <Binding Path="NationalId1" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+                </TextBox>
+                <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" Width="44" x:Name="textNationalId2" MaxLength="4" Validation.Error="ValidationError">
+                    <Binding Path="NationalId2" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <TextBox HorizontalAlignment="Right" TextWrapping="Wrap" Width="33" x:Name="textNationalId3" MaxLength="3" Validation.Error="ValidationError" RenderTransformOrigin="0.636,1.136">
+                    <Binding Path="NationalId3" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+            </Grid>    
+
+
+            <TextBox x:Name="textDepartment" TextWrapping="Wrap" Width="203" Validation.Error="ValidationError">
+                <Binding Path="Department" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <CheckBox x:Name="checkAutomaticPaymentAllocation" Content="Automatic payment allocation" IsChecked="{Binding AutomaticPaymentAllocation}" IsThreeState="False" 
+                      Margin="10,10,0,0" Click="checkAutomaticPaymentAllocation_Clicked"/>
+            <!--<local:AddressTypeControl x:Name="AddressTypeControl"  Width="auto" Height="82" AddressType="{Binding AddressType, Mode=TwoWay}" 
+                                      RadioButtonChanged="AddressTypeControl_RadioButtonChanged" Margin="0,10,0,10"/>-->
+
+        </StackPanel>
+
+        <!--Row 2-->
+        <!--<StackPanel Grid.Row="2"  Grid.Column="1"  Grid.ColumnSpan="2">
+            <DataGrid x:Name="CodeDataGrid" AutoGenerateColumns="False" Height="300"   Width="auto" IsReadOnly="True" SelectionMode="Single" EnableRowVirtualization="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="codeColumn" Binding="{Binding Path=Code }" Header="Code" Width="Auto"/>
+                    <DataGridTextColumn x:Name="addressLine4Column" Binding="{Binding Path=AddressLine4}" Header="Address Line 4" Width="Auto" />
+                    <DataGridTextColumn x:Name="addressLine3Column" Binding="{Binding Path=AddressLine3}" Header="Address Line 3" Width="Auto"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Name="buttonKeepCode" Content="Keep" Width="75" Click="ButtonKeepCode_Click" Margin="0,10,0,0"/>
+        </StackPanel>-->
+
+        <StackPanel Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="193">
+            <Grid>
+                <TextBox  Width="30" HorizontalAlignment="Left" Text="{Binding PracticeNumber1, Mode=TwoWay}" MaxLength="3"/>
+                <TextBox Width="30"  Text="{Binding PracticeNumber2, Mode=TwoWay}" HorizontalAlignment="Center" MaxLength="3"/>
+                <TextBox  Width="70"  Text="{Binding PracticeNumber3, Mode=TwoWay}" MaxLength="7" HorizontalAlignment="Right"/>
+            </Grid>
+
+            <local:CountryControl x:Name="CountryControl" Width="Auto" Height="26" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <!--<TextBox x:Name="textAddressLine1" MaxLength="50" Width="193" Validation.Error="ValidationError" HorizontalAlignment="Left">
+                <Binding Path="Address1" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <TextBox x:Name="textAddressLine2"  MaxLength="50" Width="193" Text="{Binding Address2}" HorizontalAlignment="Left"/>
+            <TextBox x:Name="textAddressLine3" MaxLength="50" Width="193" Validation.Error="ValidationError" HorizontalAlignment="Left"
+                     CharacterCasing="Upper" LostFocus="TextAddressLine3_LostFocus">
+                <Binding Path="Address3" NotifyOnValidationError="True" UpdateSourceTrigger="Explicit" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+
+            <TextBox x:Name="textAddressLine4"  MaxLength="50" Width="193" Text="{Binding Address4, Mode=TwoWay, UpdateSourceTrigger=Explicit}" HorizontalAlignment="Left"
+                      CharacterCasing="Upper" LostFocus="TextAddressLine4_LostFocus"/>
+            <TextBox x:Name="textPostCode" MaxLength="50" Width="193" Text="{Binding Address5, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
+                     HorizontalAlignment="Left" LostFocus="TextPostCode_LostFocus"/>
+            <Button Name="buttonKeepText" Content="Keep" Width="75" Click="ButtonKeepText_Click" Visibility="Visible" Margin="0,10,0,0"/>--><!--
+
+        </StackPanel>-->
+
+        <!--<StackPanel Grid.Row="2" Grid.Column="3"  Grid.ColumnSpan="2">
+            <DataGrid x:Name="SuburbDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="False" Height="300"  RowDetailsVisibilityMode="VisibleWhenSelected" 
+                      CanUserAddRows="False" Width="auto" IsReadOnly="True" SelectionMode="Single" VerticalAlignment="Stretch">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="addressLine3Column2" Binding="{Binding AddressLine3}" Header="Address Line 3" Width="Auto"/>
+                    <DataGridTextColumn x:Name="addressLine4Column2" Binding="{Binding AddressLine4}" Header="Address Line 4" Width="Auto"/>
+                    <DataGridTextColumn x:Name="codeColumn2" Binding="{Binding Code}" Header="Code" Width="Auto"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Name="buttonKeepSuburb" Content="Keep" Width="75" Click="ButtonKeepSuburb_Click" Margin="0,10,0,0"/>
+        </StackPanel>-->
+
+        <StackPanel Grid.Row="2" Grid.Column="5">
+            <Button Content="Submit" Click="Click_Submit"/>
+            <Button Content="Cancel" Click="Click_Cancel"/>
+            <Label Content="Last verification date" />
+            <TextBox x:Name="textVerification" Height="23" TextWrapping="Wrap" Text="{Binding VerificationDate, Converter={StaticResource lDateConverter}}"
+                    IsReadOnly="True" TextAlignment="Right"/>
+
+        </StackPanel>
+
+        <!--Row 3-->
+
+        <DataGrid x:Name="CommentDataGrid" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="3" Grid.ColumnSpan="6" Height="auto"
+                        RowDetailsVisibilityMode="VisibleWhenSelected"  CanUserDeleteRows="True" CanUserAddRows="True" Width="auto" AutoGenerateColumns="False" SelectionMode="Single"
+                       AddingNewItem="CommentDataGrid_AddingNewItem">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="commentIdColumn" Binding="{Binding CommentId}" Header="Comment Id" Width="SizeToHeader" Visibility="Hidden"/>
+                <DataGridTextColumn x:Name="customerIdColumn" Binding="{Binding CustomerId}" Header="Customer Id" Width="SizeToHeader" Visibility="Hidden"/>
+                <DataGridTextColumn x:Name="modifiedOnColumn" Header="Modified On" Width="SizeToHeader" Binding="{Binding ModifiedOn, Converter={StaticResource lDateConverter}}" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="commentColumn" Binding="{Binding Comment}" Header="Comment" Width="auto"/>
+                <DataGridTextColumn x:Name="modifiedByColumn" Binding="{Binding ModifiedBy}" Header="Modified By" Width="150" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

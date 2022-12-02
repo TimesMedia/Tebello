@@ -1,0 +1,167 @@
+﻿@model Tebello.MimsWeb.Models.LoginRequest
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="/Content/Styles.css">
+    <script src="/Scripts/jquery-3.4.1.js"></script>
+    <script src="/Scripts/jquery-ui.js"></script>
+    <link href="/Content/jquery-ui.css" rel="stylesheet"/>
+    <script src="/Scripts/Default.js"></script>
+
+     <title>@ViewBag.Title</title>
+
+    <style>
+        .LoginStyle {
+            padding: 0px 7px 1px 7px;
+            border-radius: 10px;
+            text-decoration: none;
+            text-shadow: none;
+            font-weight: 700;
+            color: white;
+            text-transform: capitalize;
+            font-size: 1.2em;
+            letter-spacing: .1em;
+            background-color: dodgerblue;
+            height: 2em;
+            column-span: all;
+        }
+
+       .editor-field input {
+            width: 1em;
+          
+        }
+    </style>
+
+    <script >
+        $(document).ready(function () {
+            $('#CustomerLookup').click(function () {
+                $('#dialog').dialog("open");
+            });
+
+            $('#dialog').dialog({
+                modal: true,
+                autoOpen: false,
+                buttons: [{
+                    text: "Go",
+                    click: function () {
+                        document.getElementById('Email').value = document.getElementById('EmailAddress').value;
+                        document.forms["SubmitForm"].submit();
+                    }
+                }]
+            });
+        });
+    </script>
+</head>
+<body>
+    <div style="margin-left: 1em">
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { id = "SubmitForm" }))
+        {
+            <p style="font-family: Arial; margin:2em 0em 2em 1em; color:red;">
+                @Html.ViewBag.Message
+            </p>
+
+            <p>
+                @Html.CheckBoxFor(x => x.ResetFlag, new { id = "ResetFlag", style = "visibility:hidden" })
+            </p>
+   
+            <p>
+                <input id="Email" name="Email" type="hidden" value="">
+            </p>
+
+            <div id="dialog">
+                <label>Email address</label>
+                <input type="text" id="EmailAddress"/>
+            </div>
+
+
+            <table>
+                <tr height="50">
+                     <td><label>Customer number</label></td>
+                     <td>@Html.EditorFor(x => x.CustomerId)</td>
+                </tr>
+
+                <tr height="50">
+                    <td>@Html.LabelFor(x => x.Password)</td>
+                    <td>@Html.PasswordFor(x => x.Password) </td>
+                </tr>
+
+                <tr height="50">
+                    <td>
+                        <label class="LoginStyle" id="CustomerLookup">Forgot MIMS customer number</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="LoginStyle" onclick="ResetPassword()">Forgot your MIMS password</label>
+                    </td>
+                </tr>
+
+                <tr height="50">
+                    <td>
+                        <label class="LoginStyle" onclick="UsePassword()">Login</label>
+                    </td>
+
+                </tr>
+            </table>
+
+            <script>
+                function UsePassword() {
+                    try {
+                        document.getElementById("ResetFlag").checked = false;
+                        document.forms["SubmitForm"].submit();
+                    }
+                    catch (message) {
+                        window.alert(message);
+                    }
+
+                }
+
+                function CustomerLookup() {
+                    try {
+
+                        window.alert("Under construction.");
+                        // Do an Ajax call to find all customers numbers on this email address, plus their names.
+
+                        // Display them in a list where one could be selected.
+
+                        //document.getElementById("ResetFlag").checked = false;
+                        //window.alert("Under construction.");
+
+
+                        //window.alert(document.getElementsByName('Email').values[0]);
+                        //document.forms["SubmitForm"].submit();
+
+                    }
+                    catch (message) {
+                        window.alert(message);
+                    }
+
+                }
+
+                function ResetPassword() {
+
+                    try {
+
+                        document.getElementById("ResetFlag").checked = true;
+                        document.forms["SubmitForm"].submit();
+                    }
+                    catch (message) {
+                        window.alert(message);
+                    }
+
+                }
+
+            </script>
+
+        }
+    </div>
+ </body >
+</html >

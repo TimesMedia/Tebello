@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="Subs.Presentation.DeliveryOptionsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Subs.Presentation"
+             mc:Ignorable="d" Width="150.443" Height="138.692">
+    <StackPanel Name="CheckBoxStack">
+        <CheckBox Content="Mail" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False" Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
+        <CheckBox Content="Collect" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False"  Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
+         <CheckBox Content="Courier" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False"  Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
+        <CheckBox Content="RegisteredMail" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False"  Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
+        <CheckBox Content="ElectronicSingle" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False"  Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
+        <CheckBox Content="ElectronicMultiple" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False"  Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
+    </StackPanel>
+</UserControl>

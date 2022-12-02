@@ -1,0 +1,114 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Subs.Presentation"
+        xmlns:Data="clr-namespace:Subs.Data;assembly=Subs.Data" xmlns:local1="clr-namespace:Tebello.Presentation" x:Class="Subs.Presentation.SBBankStatement"
+        mc:Ignorable="d"
+        Title="SB bank statement" Height="838.235" Width="1573.294" Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <!--<local:PaymentState2String x:Key="lPaymentState2String"/>-->
+        <local1:DateConverter x:Key="lDateConverter"/>
+        <local1:IntegerConverter x:Key="lIntegerConverter"/>
+        <local1:RandConverter x:Key="lRandConverter"/>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="LightBlue"/>
+        </Style>
+        <Style x:Key="AlignRight" TargetType="FrameworkElement">
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+        </Style>
+        <Data:PaymentDoc x:Key="paymentDoc"/>
+        <CollectionViewSource x:Key="SBBankStatementViewSource" Source="{Binding SBBankStatement, Source={StaticResource paymentDoc}}"/>
+    </Window.Resources>
+
+    <Canvas Margin="0,0,0,0" DataContext="{StaticResource SBBankStatementViewSource}">
+        <Button x:Name="buttonLoad" Content="Load a new bank statement from a file" Canvas.Left="10" Canvas.Top="10" Width="270" Click="buttonLoad_Click"/>
+
+        <DatePicker Name ="pickerStartDate" Margin="0,0,0,0" Canvas.Left="93" Canvas.Top="94"/>
+
+        <DatePicker Name ="pickerEndDate" Margin="0,0,0,0" Canvas.Left="282" Canvas.Top="95"/>
+
+
+        <Button x:Name="buttonSelectRange" Canvas.Left="523" Canvas.Top="75" Click="buttonSelectRange_Click" Content="Select loaded entries in the range" Width="270"/>
+        <Button x:Name="buttonNotPosted" Canvas.Left="523" Canvas.Top="111" Click="buttonNotPosted_Click" Content="Select loaded entries in range not posted yet" Width="270"/>
+
+        <Label Canvas.Left="900" Canvas.Top="75">Balance over period</Label>
+
+        <TextBox x:Name="textBalanceOverPeriod" Canvas.Left="1044" Canvas.Top="75" Width="132" Height="26" TextAlignment="Right"></TextBox>
+
+
+        <Button x:Name="buttonValidate" Canvas.Left="10" Canvas.Top="766" Click="buttonValidate_Click" Content="Validate the payments"/>
+        <Button x:Name="buttonPost" Canvas.Left="264" Canvas.Top="766" Click="buttonPost_Click" Content="Post the validated entries" IsEnabled="False"/>
+        <Button x:Name="buttonGenerateCashbook" Canvas.Left="500" Canvas.Top="766" Click="buttonGenerateCashbook_Click" Content="Generate a cashbook"/>
+
+
+        <Label Content="}" Height="122" Canvas.Left="427" Canvas.Top="36" Width="46" FontSize="80"/>
+
+        <Label Content="From" Canvas.Left="10" Canvas.Top="91"/>
+        <Label Content="to" Canvas.Left="229" Canvas.Top="94" RenderTransformOrigin="10.102,0.457"/>
+
+        <DataGrid x:Name="SBBankStatementDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="554" ItemsSource="{Binding}" Canvas.Left="10" SelectionUnit="CellOrRowHeader" 
+                  Canvas.Top="187" Width="1500" IsSynchronizedWithCurrentItem="True" MouseRightButtonUp="SBBankStatementDataGrid_MouseRightButtonUp" CanUserAddRows="False" CanUserDeleteRows="False">
+
+            <DataGrid.RowHeaderStyle>
+                <Style TargetType="{x:Type DataGridRowHeader}">
+                    <Setter Property="Background"  Value="Yellow"/>
+                    <Setter Property="Width"  Value="30"/>
+                    <Setter Property="BorderBrush" Value="Red" />
+                    <Setter Property="BorderThickness"  Value="3" />
+                </Style>
+            </DataGrid.RowHeaderStyle>
+
+            <DataGrid.Columns>
+                <!--<DataGridTextColumn x:Name="paymentIdColumn" Binding="{Binding PaymentId}" Header="Payment Id" IsReadOnly="True" Width="SizeToHeader"/>-->
+                <DataGridTextColumn x:Name="transactionDateColumn" CellStyle="{StaticResource AlignRight}" Header="Payment date"  Binding="{Binding TransactionDate, Converter={StaticResource lDateConverter}}" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="statementNoColumn" Binding="{Binding StatementNo}" Header="Statement No" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="allocationNoColumn" Binding="{Binding AllocationNo}" Header="Allocation No" Width="SizeToHeader" IsReadOnly="True"
+                                    CellStyle="{StaticResource AlignRight}"/>
+                <DataGridTextColumn x:Name="amountColumn" Binding="{Binding Amount, Converter={StaticResource lRandConverter}}" Header="Amount" Width="SizeToHeader" IsReadOnly="True" CellStyle="{StaticResource AlignRight}" />
+                <DataGridTextColumn x:Name="referenceColumn" Binding="{Binding Reference}" Header="Reference" Width="200" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="bankPaymentMethodColumn" Binding="{Binding BankPaymentMethod}" Width="200" Header="Bank Payment Method" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="customerIdColumn" Binding="{Binding CustomerId, Mode=TwoWay, Converter={StaticResource lIntegerConverter}, UpdateSourceTrigger=LostFocus}" Header="Customer Id" Width="SizeToHeader"
+                                    CellStyle="{StaticResource AlignRight}" IsReadOnly="false" />
+                <DataGridTemplateColumn Header="Message" Width="300" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Height="Auto" Margin="3" TextWrapping="Wrap" IsReadOnly="false">
+                                <TextBox.Text>
+                                    <Binding Path="Message">
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Binding="{Binding PaymentState, Converter={StaticResource lPaymentState2String}}" Header="State" Width="Auto" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding PaymentTransactionId}" Header="Payment Transaction Id" Width="SizeToHeader" IsReadOnly="True"
+                                    CellStyle="{StaticResource AlignRight}"/>
+
+                <!--<DataGridTextColumn x:Name="bankTransactionTypeColumn" Binding="{Binding BankTransactionType}" Header="Bank Transaction Type" Width="SizeToHeader"/>-->
+
+            </DataGrid.Columns>
+
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Find Customer" Click="FindCustomer_Click" />
+                    <MenuItem Header="Goto customer" Click="GotoCustomer_Click" />
+                    <MenuItem Header="Override" Click="Override_Click" />
+                    <MenuItem Header="Mark as transfer between banks" Click="MarkAsInternalTransfer_Click"/>
+                    <MenuItem Header="Mark as appying to another division" Click="MarkAsOtherDivision_Click"/>
+                    <MenuItem Header="Mark as multiple payers" Click="MarkAsMultiplePayer_Click"/>
+                    <MenuItem Header="Mark as debitorders" Click="MarkAsDebitOrder_Click"/>
+                    <MenuItem Header="Mark as bank fees" Click="MarkAsBankFees_Click"/>
+                    <MenuItem Header="Mark as reversible payment" Click="MarkAsBounced_Click"/>
+                    <MenuItem Header="Mark as incorrectly deposited" Click="MarkAsIncorrectlyDeposited_Click"/>
+                    <MenuItem Header="Subset a multiple payment" Click="AddAPayer_Click"/>
+                    <MenuItem Header="Mark as posted" Click="MarkAsPosted_Click"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+    </Canvas>
+</Window>

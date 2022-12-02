@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="Subs.Presentation.CountryControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Data="clr-namespace:Subs.Data;assembly=Subs.Data"
+             mc:Ignorable="d" Height="26.293" Width="auto">
+
+    <UserControl.Resources>
+        <Data:DeliveryAddressDoc x:Key="deliveryAddressDoc"/>
+        <CollectionViewSource x:Key="countryViewSource" Source="{Binding Country, Source={StaticResource deliveryAddressDoc}}"/>
+    </UserControl.Resources>
+    <Grid>
+         <ComboBox x:Name="ComboCountry" Width="193" ItemsSource="{Binding Source= {StaticResource countryViewSource}}" DisplayMemberPath="CountryName" SelectedValuePath="CountryId" 
+                      SelectionChanged="ComboCountry_SelectionChanged"  />
+    </Grid>
+</UserControl>

@@ -1,0 +1,131 @@
+﻿@using Tebello.MimsWeb.Models;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="/Content/Styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+
+    <style>
+
+        .Hamburger {
+            height: 2em;
+            width: 2em;
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        #MenuDiv a {
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+            #MenuDiv a:hover {
+                font-size: 1.2em;
+                background-color: aqua;
+            }
+
+
+        #MenuDiv div {
+            flex: 1;
+        }
+
+        .MimsImage {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1em;
+        }
+
+        .MenuContainer {
+            display: flex;
+            flex-flow: row wrap;
+            margin-left: 1em;
+        }
+
+        @@media (max-width: 480px) {
+            .MenuContainer {
+                display: flex;
+                flex-flow: column wrap;
+            }
+        }
+    </style>
+
+    <script>
+        function MenuFunction() {
+            var x = document.getElementById("MenuDiv");
+            var on = document.getElementById("HamburgerOn")
+            var off = document.getElementById("HamburgerOff")
+
+
+            if (x.style.display === "flex" | x.style.display === "") {
+                x.style.display = "none";
+                on.style.display = "none"
+                off.style.display = "block"
+
+            } else {
+                x.style.display = "flex";
+                on.style.display = "block"
+                off.style.display = "none"
+            }
+        }
+    </script>
+
+</head>
+<body>
+
+    <img src="~/Images/HamburgerOn.gif" id="HamburgerOn" class="Hamburger" onclick="MenuFunction()" />
+    <img src="~/Images/HamburgerOff.gif" id="HamburgerOff" class="Hamburger" onclick="MenuFunction()" />
+
+    <div class="MimsImage">
+        <img src="~/Content/img/logos/mims-small.png" width="300" />
+    </div>
+
+
+    <div id="MenuDiv" class="MenuContainer">
+
+
+        <div>@Html.ActionLink("HOME", "Index", "Home")</div>
+
+        <div>@Html.ActionLink("ABOUT", "About", "Home")</div>
+
+        <div>@Html.ActionLink("SHOP", "GetProducts", "Promotion")</div>
+
+        <div>@Html.ActionLink("CPD", "CPD", "Home")</div>
+
+        @*<div>@Html.ActionLink("DIGITAL", "CPD", "Home")</div>*@
+
+        @*<div> <a style="color: grey" ; href="http://www.mobimims.co.za/">mobiMIMS</a></div>
+            <div> <a style="color: grey" ; href="https://www.emims.co.za/emims">eMIMS</a></div>*@
+
+        <div>@Html.ActionLink("CONTACT", "Contact", "Home", new { target = "Contacts" })</div>
+
+        @{ LoginRequest lLoginRequest = SessionHelper.GetLoginRequest(Session);
+            if (lLoginRequest.CustomerId == null)
+            {
+                <div>@Html.ActionLink("LOGIN", "Login", "Home")</div>
+
+                <div>@Html.ActionLink("REGISTER", "RegisterEmail", "Home")</div>
+            }
+            else
+            {
+                <div>@Html.ActionLink("LOGOUT", "Logout", "Home")</div>
+                <div>@Html.ActionLink("PROFILE", "Account", "Home")</div>
+            }
+        }
+
+
+        @*<div>@Html.ActionLink("Test", "Test", "Home")</div>*@
+    </div>
+
+    <br />
+    @RenderBody()
+</body>
+</html>

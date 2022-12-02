@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="Subs.Presentation.CorrespondenceControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Width="72.513" Height="64.156">
+
+    <StackPanel Margin="0,0,0,0" Name="CheckBoxStack">
+        <CheckBox Content="Email" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False" Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
+        <CheckBox Content="SMS" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False"  Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
+        <CheckBox Content="WhatsUp" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False"  Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
+        <CheckBox Content="Phone" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False"  Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
+    </StackPanel>
+   
+</UserControl>

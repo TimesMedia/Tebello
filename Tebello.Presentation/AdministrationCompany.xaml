@@ -1,0 +1,159 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Subs.Presentation"
+        xmlns:Data="clr-namespace:Subs.Data;assembly=Subs.Data" x:Class="Subs.Presentation.AdministrationCompany"
+        mc:Ignorable="d"
+        Title="Company administration" Height="903.787" MinHeight="400" MinWidth="1100" Width="1226" 
+        WindowStartupLocation="Manual">
+    <Window.Resources>
+        <Data:AdministrationDoc x:Key="administrationDoc"/>
+        <CollectionViewSource x:Key="companyViewSource" Source="{Binding Company, Source={StaticResource administrationDoc}}"/>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="borderZero" BorderThickness="2" BorderBrush="Black" Background="Aquamarine" CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type DataGridCell}">
+            <Style.Triggers>
+                <Trigger Property="IsSelected"  Value="true">
+                    <Setter Property="Background" Value="Yellow"/>
+                    <Setter Property="Foreground" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <TabControl x:Name="TabControl1">
+        <TabItem Header=" Non verified companies" GotFocus="TabItem_GotFocus">
+
+            <DataGrid x:Name="datagridCustomers"  CanUserDeleteRows="False" SelectionMode="Single"
+                      AutoGenerateColumns="False" EnableRowVirtualization="False" RowHeight="30" ItemsSource="{Binding}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="CustomerId" Binding="{Binding CustomerId}" Header="CustomerId" Width="auto" 
+                                    CanUserSort="True" MinWidth="20"/>
+                    <DataGridTextColumn x:Name="CompanyNameUnverified" Binding="{Binding CompanyNameUnverified}" Header="CompanyName unverified" Width="auto" 
+                                    CanUserSort="True" MinWidth="90"/>
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="contextSelect" Header="Select" Click="Click_Select" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+
+        </TabItem>
+        <TabItem Header="Company template">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="77*"/>
+                    <ColumnDefinition Width="226*"/>
+                    <ColumnDefinition Width="303*"/>
+                    <ColumnDefinition Width="303*"/>
+                    <ColumnDefinition Width="303*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.ColumnSpan="2" Margin="20,05,0,50">Search string</Label>
+                <TextBox x:Name="SearchString" Height="23" TextWrapping="Wrap" Width="250"  Margin="0,25,0,0" Grid.ColumnSpan="2"/>
+                
+                <StackPanel  Grid.Column="2">
+                    <Button Name="buttonSearchOnCompany" Content="Search on company name"  Width="284" Click="ButtonSearchOnCompany_Click" Height="23" Margin="0,10,0,0"/>
+                    <Button Name="buttonSearchOnVatregistration" Content="Search on VatRegistration" Width="284" Click="ButtonSearchOnVatregistration_Click" Height="24" Margin="0,10,0,0"/>
+                </StackPanel>
+                <StackPanel Grid.Column="3">
+                    <Button Name="buttonSearchOnVendorNumber" Content="Search on VendorNumber" Canvas.Left="604" Canvas.Top="14" Width="254" Click="ButtonSearchOnVendorNumber_Click" Margin="0,10,0,0"/>
+                    <Button Name="buttonSearchOnCompanyRegistrationNumber" Content="Search on CompanyRegistrationNumber" Canvas.Left="604" Canvas.Top="59" Width="254" Click="ButtonSearchOnCompanyRegistrationNumber_Click"
+                Height="22" Margin="0,10,0,0"/>
+                </StackPanel>
+
+                <DataGrid x:Name="companyDataGrid" Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="4" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="Auto"  
+                    RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Stretch" Margin="0,0,0,10"
+                   Width="Auto" HorizontalAlignment="Stretch"      CanUserDeleteRows="False" RowHeight="30" Validation.Error="CompanyDataGrid_Error">
+                    <DataGrid.ItemsSource>
+                        <Binding NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus" Source="{StaticResource companyViewSource}">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule/>
+                                <DataErrorValidationRule/>
+                                <NotifyDataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGrid.ItemsSource>
+
+                    <DataGrid.RowHeaderStyle>
+                        <Style TargetType="{x:Type DataGridRowHeader}">
+                            <Setter Property="Background"  Value="Yellow"/>
+                            <Setter Property="Width"  Value="30"/>
+                            <Setter Property="BorderBrush" Value="Blue" />
+                            <Setter Property="BorderThickness"  Value="3" />
+                        </Style>
+                    </DataGrid.RowHeaderStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="CompanyColumn"  Header="Company" Width="auto" MinWidth="250" CanUserSort="True">
+                            <DataGridTextColumn.Binding>
+                                <Binding Path="CompanyName">
+                                </Binding>
+                            </DataGridTextColumn.Binding>
+
+                        </DataGridTextColumn>
+                        <DataGridTextColumn x:Name="VatRegistrationColumn" Binding="{Binding VatRegistration}" Header="VatRegistration" Width="auto" 
+                                    CanUserSort="True" MinWidth="80"/>
+                        <DataGridTextColumn x:Name="VendorNumber" Binding="{Binding VendorNumber}" Header="VendorNumber" Width="auto" 
+                                    CanUserSort="True" MinWidth="90"/>
+                        <DataGridTextColumn x:Name="CompanyRegistrationNumber" Binding="{Binding CompanyRegistrationNumber}" Header="CompanyRegistrationNumber" Width="auto" 
+                                    CanUserSort="True" MinWidth="90"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+             
+                
+                <GroupBox   Header="Save company template data" Height="200" Grid.Column="4" Grid.Row="1">
+                    <StackPanel VerticalAlignment="Bottom">
+                        <Button Name="buttonUpdateCompany" Content="Update" Width="164" Click="ButtonUpdateCompany_Click" Margin="0,10,0,0"/>
+                        <Button Name ="buttonAddCompany" Content="Add" Width="164" Canvas.Top="391" Click="ButtonAddCompany_Click" Height="25" Margin="0,10,0,0"/>
+                        <Button Name="buttonRemoveCompany" Content="Remove unlinked companies" Width="164" Click="ButtonRemoveCompany_Click" 
+                            Margin="0,10,0,10" ToolTip="Remove companies not linked to any customer." Height="30"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox  Grid.Row="2" Grid.Column="4"   Header="Consolidate companies" Height="200" VerticalAlignment="Top" >
+                    <StackPanel >
+                        <Button Name="buttonSelectSource" Content="Mark selection as source" Width="164"  Click="ButtonSelectSource_Click" Margin="0,10,0,0"/>
+                        <TextBox Name="textSource" Width="273" Margin="0,10,0,0"/>
+
+                        <Button Name="buttonSelectTarget" Content="Mark selection as target"  Width="164"  Click="ButtonSelectTarget_Click" Margin="0,10,0,0"/>
+                        <TextBox Name="textTarget" Width="273" Margin="0,10,0,0"/>
+
+                        <Button Name="buttonConsolidateCompany" Content="Consolidate"  Width="164"  Click="ButtonConsolidateCompany_Click" Margin="0,10,0,0"/>
+                    </StackPanel>
+                </GroupBox>
+
+
+                <GroupBox Header="Verify company on customer" Height="200" Grid.Column="4" Grid.Row="3">
+                    <Button Name="buttonUpdateCustomer" Content="Verify" Width="164" Click="ButtonUpdateCustomer_Click" Margin="0,10,0,0"/>
+                </GroupBox>
+
+
+
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>

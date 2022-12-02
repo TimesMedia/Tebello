@@ -1,0 +1,59 @@
+﻿@model Tebello.MimsWeb.Models.LoginRequest
+@{
+    ViewBag.Title = "Register email";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="/Content/normalise.css">
+    <link rel="stylesheet" href="/Content/Styles.css">
+
+    <title>@ViewBag.Title</title>
+
+    <style>
+        .myButton {
+            display: block;
+            padding: 3px 7px 1px 7px;
+            border-radius: 10px;
+            border-color: dodgerblue;
+            text-decoration: none;
+            font-family: Titillium, Arial, sans-serif;
+            font-weight: 700;
+            color: white;
+            font-size: 0.8em;
+            letter-spacing: .1em;
+            background-color: dodgerblue;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm())
+        {
+            <p style="margin:2em 0em 2em 1em; color:red;font-family:Arial;">
+                @Html.ViewBag.Message
+            </p>
+
+            <table>
+                <tr height="50">
+                    <td> Please enter your email address: </td>
+                </tr>
+
+                <tr>
+                    <td> @Html.TextBoxFor(x => x.Email)</td>
+                </tr>
+
+                <tr height="50">
+                    <td><input class="myButton" type="submit" value="Submit" /></td>
+                </tr>
+            </table>
+       }
+    </div>
+</body>
+</html>

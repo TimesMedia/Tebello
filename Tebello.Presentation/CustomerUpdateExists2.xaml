@@ -1,0 +1,48 @@
+﻿<Window x:Class="Subs.Presentation.CustomerUpdateExists2"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Subs.Presentation" WindowStyle="None"
+        Title="CustomerUpdateExists" Height="195.665" Width="1150" WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="LightBlue"/>
+        </Style>
+        <Style x:Key="AlignRight" TargetType="FrameworkElement">
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,410">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="31*"/>
+            <ColumnDefinition Width="118*"/>
+        </Grid.ColumnDefinitions>
+        <Canvas Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="2" >
+            <TextBox Canvas.Left="107" Canvas.Top="44" Height="23" Name="textBoxInitials" Width="57" />
+            <TextBox Canvas.Left="295" Canvas.Top="44" Height="23" Name="textBoxSurname" Width="149" />
+            <TextBox Canvas.Left="593" Canvas.Top="44" Height="23" Name="textBoxCellPhoneNumber" Width="132" />
+            <TextBox Canvas.Left="887" Canvas.Top="44" Height="23" Name="textBoxEmailAddress" Width="230" />
+
+
+            <WindowsFormsHost Canvas.Left="107" Canvas.Top="109" Height="26" Width="337" >
+                <wf:ComboBox x:Name="comboCompany" Enabled="True" DropDownHeight="300" />
+            </WindowsFormsHost>
+
+
+
+            <Label Canvas.Left="18" Canvas.Top="44" Content="Initials" Height="23" Name="label1" />
+            <Label Canvas.Left="222" Canvas.Top="44" Content="Surname" Height="23" Name="label2" RenderTransformOrigin="-1.04,0.249" />
+
+            <Label Canvas.Left="530" Canvas.Top="44" Content="Cell" Height="23" Name="label4" Width="45" RenderTransformOrigin="-1.122,0.304" />
+            <Label Canvas.Left="843" Canvas.Top="44" Content="EMail" Height="23" Name="label5" />
+            <Label Canvas.Left="18" Canvas.Top="108" Content="Company" Height="28" Name="label6" />
+            <Button Canvas.Left="530" Canvas.Top="107" Content="Check for existing customer" Height="27" Name="buttonCheckExisting" Width="195" Click="CheckExisting"/>
+            <Button Content="Cancel" Canvas.Left="843"  Canvas.Top="108" Height="27" Width="274" Click="Cancel_Click"/>
+        </Canvas>
+
+
+    </Grid>
+</Window>

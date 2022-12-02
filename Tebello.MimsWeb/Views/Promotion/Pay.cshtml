@@ -1,0 +1,47 @@
+﻿@using System.Collections.ObjectModel;
+@using Tebello.MimsWeb.Models;
+@using Subs.Data;
+
+@{
+    ViewBag.Title = "Pay";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/Content/normalise.css">
+    <link rel="stylesheet" href="/Content/Styles.css">
+    <title>Pay</title>
+
+    @*<style>
+            label {
+                display: inline-block;
+                width: 200px;
+                font-family: Arial;
+            }
+
+            .dataElem {
+                margin: 0.5em 0.5em 0.5em 1em;
+            }
+        </style>*@
+</head>
+
+<body>
+    <p style="font-family: Arial; margin:2em 0em 2em 1em; color:red; ">
+        @Html.ViewBag.Message
+        @TempData["Message"]
+    </p>
+    <p style="font-size:large; font-weight:800">You can now select your preferred method of payment</p>
+    <br />
+    <p> @Html.ActionLink("Pay via EFT", "PayEFT", "Promotion") </p>
+    <br />
+    <p> @Html.ActionLink("Pay via credit or debit card", "Index", "PayU") </p>
+
+    @*<table style="margin-left:2em;border-bottom: 3px solid blue;width:950px">
+            <tr></tr>
+        </table>*@
+
+</body>
+</html>

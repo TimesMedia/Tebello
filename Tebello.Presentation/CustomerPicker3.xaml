@@ -1,0 +1,446 @@
+﻿<Window x:Class="Tebello.Presentation.CustomerPicker3"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:my="clr-namespace:Subs.Data;assembly=Subs.Data"
+        xmlns:local="clr-namespace:Tebello.Presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local1="clr-namespace:Subs.Presentation"  mc:Ignorable="d" 
+        Title="CustomerPickerWindow" WindowState="Maximized" WindowStartupLocation="Manual" Left="0" Top="20"
+        Background="White" Height="920" MinWidth="1000" Width="1330">
+
+    <Window.Resources>
+        <my:LedgerDoc2 x:Key="ledgerDoc2" />
+        <local:RandConverter x:Key="lRandConverter"/>
+        <local:IntegerConverter x:Key="lIntegerConverter"/>
+        <local:DateConverter x:Key="lDateConverter"/>
+
+        <CollectionViewSource x:Key="customerViewSource"/>
+        <CollectionViewSource x:Key="transactionsViewSource" Source="{Binding Path=Transactions, Source={StaticResource ledgerDoc2}}" />
+        <CollectionViewSource x:Key="InvoicesAndPaymentsViewSource" Source="{Binding Path=InvoicesAndPayments, Source={StaticResource ledgerDoc2}}"/>
+        <CollectionViewSource x:Key="PaymentViewSource"/>
+        <CollectionViewSource x:Key="InvoiceViewSource"/>
+        <CollectionViewSource x:Key="SubscriptionsViewSource"/>
+        <CollectionViewSource x:Key="TooMuchTooLittleViewSource"/>
+
+
+        <Style x:Key="AlignRight" TargetType="FrameworkElement">
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type DataGridRowHeader}">
+            <Setter Property="Background"  Value="Yellow"/>
+            <Setter Property="Width"  Value="30"/>
+            <Setter Property="BorderBrush" Value="Red" />
+            <Setter Property="BorderThickness"  Value="3" />
+        </Style>
+
+    </Window.Resources>
+
+
+    <TabControl Height="Auto" HorizontalAlignment="Stretch" x:Name="tabControl1" VerticalAlignment="Stretch" Width="Auto" Margin="0,0,0,0" 
+                SelectionChanged="tabControl1_SelectionChanged">
+        <TabItem Header="Search" x:Name="tabSearch" TabIndex="0" >
+
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <GroupBox x:Name="SearchGroupBox" Header="Search for an existing subscriber by choosing one of the following criteria" Height="172" HorizontalAlignment="Left" Margin="0,0,0,0" 
+                                MinWidth="796" Background="White" Width="1167">
+                    <Canvas Height="Auto" Width="Auto" HorizontalAlignment="Left" >
+                        <Button Grid.Column="1" Content="Search by Customer Id." Height="22" x:Name="buttonSearchCustomerId" Width="147" Canvas.Left="16" Canvas.Top="118"
+                    			IsDefault="True" Click="buttonSearchCustomerId_Click"/>
+                        <Button Grid.Column="1" Content="Search by Surname" Height="22" x:Name="buttonSearchSurname" Width="147" Canvas.Left="16" Canvas.Top="7"
+                    			Click="buttonSearchSurname_Click"/>
+                        <Button Grid.Column="1" Content="Search by Company" Height="22" x:Name="buttonSearchCompany" Width="147" Canvas.Left="197" Canvas.Top="7"
+                    			Click="buttonSearchCompany_Click"/>
+                        <Button Grid.Column="1" Content="Search by Email" Height="22" x:Name="buttonSearchEmail" Width="147" Canvas.Left="403" Canvas.Top="118"
+                    			Click="buttonSearchEmail_Click"/>
+                        <Button Grid.Column="1" Content="Search by Invoice" Height="22" x:Name="buttonSearchInvoice" Width="147" Canvas.Left="16" Canvas.Top="59"
+                    			Click="buttonSearchInvoice_Click"/>
+                        <Button Grid.Column="1" Content="Load from existing list" Height="22" x:Name="buttonLoad" Width="163" Canvas.Left="197" 
+                                    Canvas.Top="118"
+                    			Click="buttonLoad_Click"/>
+
+                        <WindowsFormsHost Canvas.Left="208" Canvas.Top="55" Height="26" Width="342" ChildChanged="WindowsFormsHost_ChildChanged"  Loaded="WindowsFormsHost_Loaded">
+                            <wf:ComboBox x:Name="comboCompany" Enabled="True" DropDownHeight="300" />
+                        </WindowsFormsHost>
+
+                        <Button Canvas.Left="956" Canvas.Top="16" Content="Capture a new customer" Height="22" Name="buttonNew" Click="Click_NewCustomer" Width="184" />
+                        <Button Canvas.Left="956" Canvas.Top="67" Content="Resume capture of new customer" Height="22" Name="buttonNewResume" Click="Click_NewCustomerResume" 
+                                    Width="184" IsEnabled="False" />
+                        <Button Content="Write result to XML" Height="22" Name="button1" Width="184" HorizontalAlignment="Center" 
+                                    Click="buttonWriteResult_Click" Canvas.Left="956" Canvas.Top="118" />
+                    </Canvas>
+                </GroupBox>
+
+                <DataGrid x:Name="customerDataGrid" Grid.Row="1" Grid.Column="1" DataContext="{StaticResource customerViewSource}" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" 
+                            EnableRowVirtualization="True" SelectionChanged="CustomerDataGrid_SelectionChanged" Background="White"
+                            HorizontalAlignment="Left" ItemsSource="{Binding}" 
+						    Margin="0,10,0,0"  SelectionUnit="CellOrRowHeader"  
+                            SelectionMode="Single" IsReadOnly="True" 
+                            MouseDoubleClick="Click_CustomerSelect" MouseRightButtonUp="Click_MouseRightButtonUp" CanUserAddRows="False" RowHeight="30"
+                            Height="auto" VerticalAlignment="Stretch" FrozenColumnCount="6" KeyUp="CustomerDataGrid_KeyUp" CanUserSortColumns="True" CanUserReorderColumns="True">
+                    <DataGrid.RowHeaderStyle>
+                        <Style TargetType="{x:Type DataGridRowHeader}">
+                            <Setter Property="Background"  Value="Yellow"/>
+                            <Setter Property="Width"  Value="30"/>
+                            <Setter Property="BorderBrush" Value="Red" />
+                            <Setter Property="BorderThickness"  Value="3" />
+                        </Style>
+                    </DataGrid.RowHeaderStyle>
+                    <DataGrid.ItemContainerStyle>
+                        <Style>
+                            <Setter Property="DataGridRow.Margin" Value="6"/>
+                            <Setter Property="DataGridRow.Background" Value="Aquamarine"/>
+                        </Style>
+                    </DataGrid.ItemContainerStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="customerIdColumn" Binding="{Binding CustomerId}" Header="Customer Id" IsReadOnly="True" />
+                        <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Title}" Header="Title" />
+                        <DataGridTextColumn x:Name="initialsColumn" Binding="{Binding Initials}" Header="Initials" />
+                        <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name"  />
+                        <DataGridTextColumn x:Name="surnameColumn" Binding="{Binding Surname}" Header="Surname" />
+                        <DataGridTextColumn x:Name="countryNameColumn" Binding="{Binding CountryName}" Header="Country Name"  />
+                        <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone Number"  />
+                        <DataGridTextColumn x:Name="cellPhoneNumberColumn" Binding="{Binding CellPhoneNumber}" Header="Cell Phone Number"  />
+                        <DataGridTextColumn x:Name="liabilityColumn" Binding="{Binding Liability, StringFormat={}{0:R ### ### ##0.00}}" 
+                                                    CellStyle="{StaticResource AlignRight}" Header="Liability"  />
+                        <DataGridTextColumn x:Name="emailAddressColumn" Binding="{Binding EmailAddress}" Header="Email Address"  />
+                        <DataGridTextColumn x:Name="companyNameColumn" Binding="{Binding CompanyName}" Header="Company Naam" />
+                        <DataGridTextColumn Binding="{Binding CheckpointPaymentTransactionId}" Header="CPPaymentTransactionId" />
+                        <DataGridTextColumn Binding="{Binding CheckpointPaymentValue,Converter={StaticResource lRandConverter}}"  CellStyle="{StaticResource AlignRight}" Header="CPPaymentValue" />
+                        <DataGridTextColumn Binding="{Binding CheckpointPaymentDate,Converter={StaticResource lDateConverter}}" Header="CPPaymentDate" />
+                        <DataGridTextColumn Binding="{Binding CheckpointInvoiceDate,Converter={StaticResource lDateConverter}}" Header="CPInvoiceDate" />
+                        <DataGridTextColumn x:Name="nationalId1Column" Binding="{Binding NationalId1}" Header="National Id 1"  />
+                        <DataGridTextColumn x:Name="nationalId2Column" Binding="{Binding NationalId2}" Header="National Id 2"  />
+                        <DataGridTextColumn x:Name="nationalId3Column" Binding="{Binding NationalId3}" Header="National Id 3"  />
+                        <DataGridTextColumn x:Name="departmentColumn" Binding="{Binding Department}" Header="Department"  />
+                        <DataGridTextColumn x:Name="commentsColumn" Binding="{Binding Comments}" Header="Comments"  />
+                        <DataGridTextColumn x:Name="physicalAddressIdColumn" Binding="{Binding PhysicalAddressId}" Header="Physical Address Id"  />
+                        <DataGridTextColumn x:Name="modifiedByColumn" Binding="{Binding ModifiedBy}" Header="Modified By"  />
+                        <DataGridTextColumn x:Name="modifiedOnColumn" Binding="{Binding ModifiedOn, Converter={StaticResource lDateConverter}}" 
+                                                    Header="Modified On"  />
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="ConsolidateSource" Click="Click_ConsolidateSource"/>
+                            <MenuItem Header="ConsolidateTarget" Click="Click_ConsolidateTarget"/>
+                            <MenuItem Header="DeliveryAddress" Click="Click_DeliveryAddress" IsEnabled="{Binding IsEnabled, ElementName=Profile}"/>
+                            <MenuItem Header="Destroy customer" Click="Click_DestroyCustomer" Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                            <MenuItem Header="Statement" Click="Click_Statement" />
+                            <MenuItem Header="Invoices Reset checkpoints" Click="Click_ResetAllCheckpoints" />
+                            <MenuItem Header="Liability calculation" Click="Click_ShowLiabilities"/>
+                            <MenuItem Header="Profile" Click="Click_Profile" IsEnabled ="True" x:Name="Profile"/>
+                            <MenuItem Header="Select" Click="Click_CustomerSelect" />
+                            <MenuItem Header="Set password" Click="Click_SetPassword" />
+                            <MenuItem Header="Update" Click="Click_CustomerUpdate" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+            </Grid>
+
+        </TabItem>
+
+        <TabItem Name="Tab_Invoice" Header="Statement" TabIndex="1" Visibility="Hidden">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="19*"/>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="485*"/>
+                    <ColumnDefinition Width="292*"/>
+                    <ColumnDefinition Width="510*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Row 0-->
+
+                <WrapPanel x:Name="PaymentPanel" Orientation="Horizontal" HorizontalAlignment="Stretch" Height="Auto"  Grid.Row="0" Grid.ColumnSpan="5" Margin="0,10,0,10" >
+                    <StackPanel Margin="0,0,20,0">
+                        <Label >CustomerId</Label>
+                        <TextBox x:Name="CustomerId" TextAlignment="Right"  IsReadOnly="True"></TextBox>
+                    </StackPanel>
+                    <DatePicker x:Name="PaymentDatePicker"></DatePicker>
+                    <Label VerticalAlignment="Center">Amount:</Label>
+                    <TextBox x:Name="textPaymentLeft" VerticalAlignment="Center" Width="60"
+                                Text="{Binding Path=PaymentAmount, Converter={StaticResource lRandConverter}, UpdateSourceTrigger=LostFocus, Mode=TwoWay}"/>
+                    <Label Name="comboMethod" VerticalAlignment="Center" Content="Payment method" ></Label>
+
+                    <ComboBox x:Name="comboPaymentMethod" Canvas.Left="303" Canvas.Top="30" Width="167" DisplayMemberPath="Value" SelectedValuePath="Key" 
+                              SelectedValue="{Binding Path=PaymentMethod, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" Height="27">
+                    </ComboBox>
+
+                    <Label Content="Reference type"  VerticalAlignment="Center"></Label>
+
+                    <ComboBox x:Name="comboReferenceType" Canvas.Left="350" Canvas.Top="30" Width="167" DisplayMemberPath="Value" SelectedValuePath="Key" 
+                              SelectedValue="{Binding Path=ReferenceTypeId, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" Height="27">
+                    </ComboBox>
+
+                    <Label Content="Reference"  VerticalAlignment="Center" />
+                    <TextBox Name="textPaymentReference"  Width="208" Text="{Binding Path=PaymentReference, Mode=OneWayToSource,
+                    UpdateSourceTrigger=LostFocus}" TextWrapping="Wrap"/>
+                    <Button x:Name="buttonPayManually" Click="Click_buttonPayManually" Margin="10,0,0,0"  Tag="AuthorityHigh" Loaded="SetVisibility">Pay manually</Button>
+                </WrapPanel>
+
+                <!--Row 1-->
+
+                <Button Grid.Row="1" Grid.Column="0" Height="30" Click="Click_ResetAllCheckpoints" HorizontalAlignment="Left"  Width="230"  Tag="AuthorityHigh" Loaded="SetVisibility" Grid.ColumnSpan="3">Reset all checkpoints</Button>
+                <Label Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" FontSize="15" Background="Gold" Width="100">Payments</Label>
+                <Button x:Name="ButtonAllocate" Grid.Row="1" Grid.Column="5" Click="ButtonAllocate_Click" HorizontalAlignment="Right"  
+                         Tag="AuthorityHigh" Loaded="SetVisibility" Width="230">Allocate all the payments</Button>
+
+
+                <!--Row 2-->
+
+                <DataGrid x:Name="PaymentDataGrid" Grid.Row="2" Grid.ColumnSpan="5" ItemsSource="{Binding Source={StaticResource PaymentViewSource}}" AutoGenerateColumns="False" 
+                              LoadingRow="InvoiceDataGrid_LoadingRow" Width="Auto" HorizontalAlignment="Stretch" CanUserAddRows="False" CanUserDeleteRows="False" 
+                              EnableRowVirtualization="True" IsReadOnly="True" CanUserSortColumns="False" Margin="0,10,0,10" SelectionChanged="PaymentDataGrid_SelectionChanged"
+                              MaxHeight="250">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding TransactionId}" Header="TransactionId" Width="80"/>
+                        <DataGridTextColumn Binding="{Binding Operation}" Header="Operation" Width="125"/>
+                        <DataGridTextColumn Header="Date" Width="80" 
+                                                            Binding="{Binding Date, Converter={StaticResource lDateConverter}}"/>
+
+                        <DataGridTemplateColumn Header="Reference" Width="150" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Height="Auto" Margin="3" TextWrapping="Wrap">
+                                        <TextBox.Text>
+                                            <Binding Path="Reference2">
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Binding="{Binding Value, Converter={StaticResource lRandConverter}}" Header="Value" Width="100" CellStyle="{StaticResource AlignRight}" />
+                        <DataGridTextColumn Binding="{Binding InvoiceBalance, Converter={StaticResource lRandConverter}}" Header="Unallocated portion" Width="120" CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTextColumn Binding="{Binding StatementBalance, Converter={StaticResource lRandConverter}}" Header="Unallocated balance" Width="120" CellStyle="{StaticResource AlignRight}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Assign refund to payment..." Click="Click_AssignRefund"  Tag="AuthorityHigh" Loaded="SetVisibility" ToolTip="Allocate a historic refund."/>
+                            <MenuItem Header="Bounce payment" Click="Click_ReversePayment"/>
+                            <MenuItem Header="Highlight allocations" Click="Click_HighlightAllocations"/>
+                            <MenuItem Header="Refund payment" Click="Click_Refund" Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                            <MenuItem Header="Reverse payment" Click="Click_ReversePayment"/>
+                            <MenuItem Header="Select payment for allocation" Click="Click_SelectPaymentForAllocation" Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                            <MenuItem Header="Set as checkpoint" Click="Click_SetAsPaymentCheckpoint" ToolTip="Use the current row as input." Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                            <MenuItem Header="Set checkpoint one day further" Click="Click_SetAsPaymentCheckpoint1" ToolTip="Advance date by one day" Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                            <MenuItem Header="Set as reduced checkpoint..." Click="Click_SetAsReducedCheckpoint" ToolTip="You will  be prompted for a reduced value." Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+
+                <!--Row 3-->
+
+
+                <Button Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Width="230" Click="ButtonSetCheckpointInvoice"
+                        ToolTip="Invoke input."  Tag="AuthorityHigh" Loaded="SetVisibility" Grid.ColumnSpan="3">Set a checkpoint for invoices</Button>
+                <Label Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" FontSize="15" Background="Gold" Width="100">Invoices</Label>
+                <Button  Grid.Row="3" Grid.Column="4"  Click="ButtonCreateStatement_Click" HorizontalAlignment="Right"  Width="230"  Tag="AuthorityMedium" Loaded="SetVisibility">Create a statement</Button>
+
+
+                <!--Row 4-->
+
+                <DataGrid x:Name="InvoiceDataGrid" Grid.Row="4" Grid.ColumnSpan="5" ItemsSource="{Binding Source={StaticResource InvoiceViewSource}}" AutoGenerateColumns="False" 
+                              LoadingRow="InvoiceDataGrid_LoadingRow" GotFocus="InvoiceDataGrid_GotFocus"
+                              Width="Auto" HorizontalAlignment="Stretch" Height="auto" VerticalAlignment="Stretch" CanUserAddRows="False" CanUserDeleteRows="False"
+                              EnableRowVirtualization="True" IsReadOnly="True" CanUserSortColumns="False" MouseDoubleClick="InvoiceDataGrid_MouseDoubleClick" Margin="0,10,0,10" IsSynchronizedWithCurrentItem="True" Grid.RowSpan="2">
+                    <DataGrid.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Height="30" FontWeight="Bold" Foreground="Red" Background="PeachPuff"  Margin="0,20,0,0"/>
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                        </GroupStyle>
+                    </DataGrid.GroupStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding TransactionId}" Header="TransactionId" Width="80"/>
+                        <DataGridTextColumn Binding="{Binding InvoiceId}" Header="Invoice" Width="80"/>
+                        <DataGridTextColumn Binding="{Binding Operation}" Header="Operation" Width="125"/>
+                        <DataGridTextColumn Header="Date" Width="80" 
+                                                            Binding="{Binding Date, Converter={StaticResource lDateConverter}}"/>
+
+                        <DataGridTemplateColumn Header="Reference" Width="150" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Height="Auto" Margin="3" TextWrapping="Wrap">
+                                        <TextBox.Text>
+                                            <Binding Path="Reference2">
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Binding="{Binding Value, Converter={StaticResource lRandConverter}}" Header="Value" Width="100" CellStyle="{StaticResource AlignRight}" />
+                        <DataGridTextColumn Binding="{Binding InvoiceBalance, Converter={StaticResource lRandConverter}}" Header="Invoice balance" Width="100" CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTextColumn Binding="{Binding StatementBalance, Converter={StaticResource lRandConverter}}" Header="Statement balance" Width="110" CellStyle="{StaticResource AlignRight}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Allocate payment" Click="Click_AllocatePayment"  Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                            <MenuItem Header="Deallocate payment" Click="Click_DeallocatePayment"  Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                            <MenuItem Header="Reverse  writeoff of money" Click="Click_ReverseWriteOffMoney"  Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                            <MenuItem Header="Recreate the invoice" Click="Click_RecreateInvoice"  Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                            <MenuItem Header="View Subscriptions" Click="Click_ViewSubscriptions" />
+                            <MenuItem Header="Write off a certain amount" Click="Click_WriteOffMoney" Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+            </Grid>
+        </TabItem>
+        <TabItem x:Name="tabSubscription" Header="Subscription" TabIndex="2" Visibility="Visible" LostFocus="TabSubscription_LostFocus">
+            <Grid DataContext="{StaticResource InvoicesAndPaymentsViewSource}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="437"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+
+                <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
+                    <Label HorizontalAlignment="Center">INVOICES AND PAYMENTS</Label>
+                    <DataGrid x:Name="SubscriptionDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource SubscriptionsViewSource}}" 
+                                  Margin="0,0,0,0" RowDetailsVisibilityMode="VisibleWhenSelected" HorizontalAlignment="Left" RowHeight="30" CanUserAddRows="False" CanUserDeleteRows="False"
+                                  MouseDoubleClick="DisplayStatusAndHistory" Width="Auto" Height="auto" VerticalAlignment="Stretch">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding SubscriptionId}" Header="SubscriptionId" Width="100" 
+                                                    CellStyle="{StaticResource AlignRight}"/>
+                            <DataGridTextColumn Binding="{Binding Status}" Header="Status" Width="100"/>
+                            <DataGridTextColumn Binding="{Binding ProductName}" Header="Product" Width="150"/>
+                            <DataGridTextColumn Binding="{Binding Value, Converter={StaticResource lRandConverter}}" 
+                                                    Header="Value" Width="100" CellStyle="{StaticResource AlignRight}"/>
+                        </DataGrid.Columns>
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Status and history" Click="Click_StatusAndHistory" />
+                                <MenuItem Header="Deliver on credit" Click="Click_DeliverOnCredit" Tag="AuthorityMedium" Loaded="SetVisibility"/>
+
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                    </DataGrid>
+                </StackPanel>
+
+                <!--<GridSplitter Background="Black" ResizeBehavior="BasedOnAlignment" HorizontalAlignment="Stretch" Width="5" 
+                                  ShowsPreview="True" Grid.Column="1" Margin="0,0,0,0" />-->
+
+                <local1:SubscriptionStatusDisplayControl2 x:Name="gSubscriptionStatusDisplayControl" Grid.Column="2" Margin="11,0,0,0"/>
+
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Over payments and deliveries"  TabIndex="3" Height="23" VerticalAlignment="Bottom">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="76*"/>
+                    <ColumnDefinition Width="195*"/>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="9"/>
+                    <ColumnDefinition Width="91"/>
+                    <ColumnDefinition Width="278*"/>
+                    <ColumnDefinition Width="278*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="278*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Grid.Column="0" Content="Who paid too much?"  Click="buttonPaidTooMuch_Click" Grid.ColumnSpan="3" Height="40" VerticalAlignment="Bottom"/>
+                <Label Grid.Column="3" Content="In excess of" Height="28" x:Name="label2" Grid.ColumnSpan="2" Margin="0,6,0,7" />
+                <TextBox x:Name="textOverPaid" Grid.Column="5" Height="23" Width="120" TextAlignment="Right" HorizontalAlignment="Left" Margin="0,9" Text="1"/>
+
+                <Button Grid.Column="6" Content="Deliveries without payment?" Click="buttonOverDelivered_Click"/>
+                <Label Grid.Column="7" Content="In excess of" Height="28" x:Name="label3" Margin="0,6,0,7" />
+                <TextBox x:Name="textOverDelivered" Grid.Column="8" Height="23"  Width="120" TextAlignment="Right" HorizontalAlignment="Left" Margin="0,9" Text="1"/>
+
+                <DataGrid x:Name="PaidTooMuchDataGrid" Grid.Row="1" Grid.ColumnSpan="9" IsReadOnly="True" AutoGenerateColumns="False" RowHeight="30" EnableRowVirtualization="True" Height="auto" VerticalAlignment="Stretch"
+                          ItemsSource="{Binding Source={StaticResource TooMuchTooLittleViewSource}}" MouseDoubleClick="OverPaidDelivered_MouseDoubleClick">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding CustomerId}" Header="Customer"  Width="Auto"/>
+                        <DataGridTextColumn Binding="{Binding Surname}" Header="Surname"  Width="Auto" />
+                        <DataGridTextColumn Binding="{Binding CompanyName}" Header="Company"  Width="Auto"/>
+
+                        <DataGridTextColumn Binding="{Binding Discrepancy,Converter={StaticResource lRandConverter}}" 
+                                                    CellStyle="{StaticResource AlignRight}" Header="Overpayment"  Width="Auto"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Invoices" Click="Click_TooMuchTooLittleInvoice"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+
+                <DataGrid x:Name="OverDeliveredDataGrid" Grid.Row="1" Grid.ColumnSpan="9" IsReadOnly="True" AutoGenerateColumns="False" RowHeight="30" Visibility="Hidden"
+                          ItemsSource="{Binding Source={StaticResource TooMuchTooLittleViewSource}}" MouseDoubleClick="OverPaidDelivered_MouseDoubleClick">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding CustomerId}" Header="Customer"  Width="Auto"/>
+                        <DataGridTextColumn Binding="{Binding Surname}" Header="Surname"  Width="Auto" />
+                        <DataGridTextColumn Binding="{Binding CompanyName}" Header="Company"  Width="Auto"/>
+
+                        <DataGridTextColumn Binding="{Binding Liability,Converter={StaticResource lRandConverter}}" 
+                                                    CellStyle="{StaticResource AlignRight}" Header="Delivered without payment"  Width="Auto"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Invoices" Click="Click_TooMuchTooLittleInvoice" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Liability calculation" x:Name="tabRunning"  TabIndex="4">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <WrapPanel>
+                    <Button x:Name="ButtonRunningToXML" Click="ButtonRunningToXML_Click">Write to XML</Button>
+                    <Label>Your current liability is:</Label>
+                    <TextBox x:Name="textCurrentLiability" Margin="10,0,10,0" IsReadOnly="True"></TextBox>
+                    <Button Click="ButtonSynchroniseLiability_Click"  Tag="AuthorityHigh" Loaded="SetVisibility">Synchronise liability</Button>
+                </WrapPanel>
+                <DataGrid x:Name="LiabilityDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="auto" VerticalAlignment="Stretch" Grid.Row="1"
+                                  Margin="0,0,0,0" RowDetailsVisibilityMode="VisibleWhenSelected" HorizontalAlignment="Left"
+                                  MouseDoubleClick="DisplayStatusAndHistory">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn  Header="TransactionId" Width="80" Binding="{Binding TransactionId}"/>
+                        <DataGridTextColumn  Header="Date" Width="80" Binding="{Binding Date, Converter={StaticResource lDateConverter}}"/>
+                        <DataGridTextColumn Binding="{Binding Operation}" Header="Operation" Width="105"/>
+                        <DataGridTextColumn Binding="{Binding InvoiceId}" Header="InvoiceId" Width="105"/>
+                        <DataGridTextColumn Binding="{Binding SubscriptionId}" Header="SubscriptionId" Width="105"/>
+
+                        <DataGridTextColumn Binding="{Binding Value, Converter={StaticResource lRandConverter}}" Header="Value" Width="70" CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTextColumn Binding="{Binding Balance, Converter={StaticResource lRandConverter}}" Header="Balance" Width="70" CellStyle="{StaticResource AlignRight}"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="XPSViewer" x:Name="tabXps" TabIndex="3" Visibility="Hidden">
+            <DocumentViewer x:Name ="DocumentViewer1" Height="Auto" Width="Auto"/>
+        </TabItem>
+
+    </TabControl>
+</Window>

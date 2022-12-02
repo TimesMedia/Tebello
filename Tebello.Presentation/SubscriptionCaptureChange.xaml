@@ -1,0 +1,83 @@
+﻿<Window Name="Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Subs.Presentation"
+        xmlns:Data="clr-namespace:Subs.Data;assembly=Subs.Data" xmlns:local1="clr-namespace:Tebello.Presentation" x:Class="Subs.Presentation.SubscriptionCaptureChange"
+        Title="Subscription Capture Change" Height="519" Width="734" >
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="Height" Value="22"/>
+        </Style>
+        <local1:IntegerConverter x:Key="lIntegerConverter"/>
+        <local1:RandConverter x:Key="lRandConverter"/>
+        <Data:ProductDoc x:Key="productDoc"/>
+    </Window.Resources>
+
+    <TabControl Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" Margin="0,0,0,0">
+        <TabItem Header="Select">
+
+            <Canvas x:Name="SubscriptionCanvas" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="LightGreen" 
+                    Margin="0,0,0,0" >
+                <GroupBox Header="Who" Canvas.Left="10" Canvas.Top="25" Height="118" Width="684">
+                    <Canvas>
+                        <TextBox x:Name="textReceiverSurname" Height="23"   Width="270" Canvas.Left="149" Canvas.Top="10" IsReadOnly="True" Text="{Binding Path=Subscription.ReceiverSurname, Mode=OneWay}"/>
+                        <TextBox x:Name="textPayerSurname" Height="23"   Width="270" Canvas.Left="149" Canvas.Top="38"  IsReadOnly="True" Text="{Binding Path=Subscription.PayerSurname, Mode=OneWay}"/>
+                        <TextBox x:Name="textReceiverCompany" Height="23"   Width="231" Canvas.Left="433" Canvas.Top="10"  IsReadOnly="True" Text="{Binding Path=Subscription.ReceiverCompany, Mode=OneWay}"/>
+                        <TextBox x:Name="textPayerCompany"  Height="23"  Width="231" Canvas.Left="433" Canvas.Top="38"  IsReadOnly="True" Text="{Binding Path=Subscription.PayerCompany, Mode=OneWay}"/>
+                        <Button x:Name="buttonReceiver" Click="buttonReceiver_Click" Content="Select a receiver" Canvas.Left="10" Canvas.Top="10" Width="119"/>
+                        <Button x:Name="buttonSame" Click="buttonSame_Click" Content="Receiver is payer" Canvas.Left="10" Canvas.Top="66" Width="119"/>
+                        <Button x:Name="buttonPayer" Click="buttonPayer_Click"  Content="Select a payer" Canvas.Left="10" Canvas.Top="39" Width="119"/>
+                    </Canvas>
+                </GroupBox>
+                <TextBox x:Name="textProduct" Canvas.Left="165" Canvas.Top="166" Width="266" IsReadOnly="True" Text="{Binding Path=ProductName, Mode=OneWay}"/>
+                <TextBox x:Name="textUnitsPerIssue" Canvas.Left="165" Canvas.Top="208" Width="47" TextAlignment="Right"  Validation.Error="ValidationError" >
+                    <Binding Path="Subscription.UnitsPerIssue" Converter="{StaticResource lIntegerConverter}"  NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+
+                <Label Content="Explicit discount percentage" Canvas.Left="10" Canvas.Top="238" Width="140"/>
+                <TextBox x:Name="textDiscount" Canvas.Left="165" Canvas.Top="240" Width="55" Text="{Binding ExplicitDiscountPercentage, Converter={StaticResource lRandConverter}, Mode=TwoWay}" MaxLength="5"/>
+
+                <Label Content="Final price " Canvas.Left="12" Canvas.Top="275"/>
+                <TextBox x:Name="textFinalPrice" Height="23" Canvas.Left="165" Text="{Binding FinalPriceOverride, Converter={StaticResource lRandConverter}, Mode=TwoWay}" Canvas.Top="278" 
+                          TextAlignment="Right" Width="68" MaxLength="10"/>
+
+                <GroupBox Header="What" Canvas.Left="12" Canvas.Top="313" Height="88" Width="682">
+                    <Canvas>
+                        <Button x:Name="buttonStartIssue" Click="buttonStartIssue_Click" Canvas.Left="10" Canvas.Top="10" Width="119" Content="Start issue" TabIndex="10"/>
+                        <Button x:Name="buttonLastIssue" Click="buttonLastIssue_Click" Canvas.Left="10" Canvas.Top="37" Width="119" Content="Last issue" TabIndex="11"/>
+                        <TextBox x:Name="textStartIssueName" Canvas.Left="146" Canvas.Top="10" Width="514" Text="{Binding Path=Subscription.ProposedStartIssueName, Mode=OneWay}" IsReadOnly="true"/>
+                        <TextBox x:Name="textLastIssueName" Canvas.Left="146" Canvas.Top="37" Width="514" Text="{Binding Path=Subscription.ProposedLastIssueName, Mode=OneWay}" IsEnabled="False" IsReadOnly="true"/>
+
+                    </Canvas>
+
+                </GroupBox>
+                <GroupBox Header="How" Canvas.Left="462" Canvas.Top="162" Width="232" Height="102">
+                    <ComboBox x:Name="ComboDeliveryMethod" Canvas.Left="476" Canvas.Top="451" DisplayMemberPath="Value" SelectedValuePath="Key"
+                              SelectedValue="{Binding Path=Subscription.DeliveryMethodInt, Mode=TwoWay}" Margin="0,0,0,0">
+                    </ComboBox>
+
+
+                </GroupBox>
+
+                <GroupBox Header="Where" Canvas.Left="12" Canvas.Top="406" Width="232" Height="50">
+                    <Button x:Name="buttonSelectDeliveryAddress" Click="buttonSelectDeliveryAddress_Click" Content="Select delivery address" TabIndex="13"/>
+                </GroupBox>
+
+                <CheckBox x:Name="checkRenewal" Content="Generate renewal notices" Canvas.Left="279" Canvas.Top="208" Width="161" IsChecked="{Binding Path=Subscription.RenewalNotice, Mode=TwoWay}"/>
+                <CheckBox Content="Automatic renewal" Canvas.Left="279" Canvas.Top="243" IsChecked="{Binding Path=Subscription.AutomaticRenewal, Mode=TwoWay}"/>
+                <CheckBox Content="Free delivery" Canvas.Left="465" Canvas.Top="287" IsChecked="{Binding Path=Subscription.FreeDelivery, Mode=TwoWay}"/>
+                <Button x:Name="buttonReturn" Content="Return to basket" Click="buttonReturn_Click" Canvas.Left="462" Canvas.Top="425" Width="232" TabIndex="15"/>
+                <Label Content="Product" Canvas.Left="10" Canvas.Top="162"/>
+                <Label Content="Units per issue" Canvas.Left="10" Canvas.Top="204" Width="92" />
+
+
+
+            </Canvas>
+        </TabItem>
+    </TabControl>
+</Window>

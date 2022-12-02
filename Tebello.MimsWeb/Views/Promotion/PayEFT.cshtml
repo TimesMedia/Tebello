@@ -1,0 +1,91 @@
+﻿@using System.Collections.ObjectModel;
+@using Tebello.MimsWeb.Models;
+@using Subs.Data;
+@{
+    ViewBag.Title = "PayEFT";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/Content/normalise.css">
+    <link rel="stylesheet" href="/Content/Styles.css">
+    <title>PayEFT</title>
+
+    <style>
+        label {
+            display: inline-block;
+            width: 200px;
+            font-family: Arial;
+        }
+
+        .dataElem {
+            margin: 0.5em 0.5em 0.5em 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <p style="font-family: Arial; margin:2em 0em 2em 1em; color:red; ">
+        @Html.ViewBag.Message
+    </p>
+
+
+    <h1 style="margin:1em 0em 0em 2em">EFT Bank Account</h1>
+
+
+    <table style="margin: 1em 0em 1em 2em; font-family:Arial">
+        <tr>
+            <td>Account Name</td>
+            <td>ARENA HOLDINGS - MEDIA MIMS</td>
+        </tr>
+        <tr>
+            <td>Bank</td>
+            <td>Rand Merchant Bank</td>
+        </tr>
+        <tr>
+            <td>Branch Name</td>
+            <td>RMB Corporate Banking Johannesburg</td>
+        </tr>
+        <tr>
+            <td>Branch Code</td>
+            <td>255005</td>
+        </tr>
+        <tr>
+            <td>Account No</td>
+            <td>62793076326</td>
+        </tr>
+
+        <tr>
+            <td>SWIFT Code</td>
+            <td>FIRNZAJJ</td>
+        </tr>
+        @{
+            LoginRequest lLoginRequest = SessionHelper.GetLoginRequest(Session);
+            Basket lBasket = SessionHelper.GetBasket(Session);
+
+
+            <tr>
+                <td>Full amount</td>
+                <td>@lBasket.TotalDiscountedPrice.ToString("########0.00")</td>
+            </tr>
+            <tr>
+                <td>Bank reference</td>
+                <td>@lLoginRequest.CustomerId.ToString()</td>
+            </tr>
+        }
+
+    </table>
+
+    <p style="font-family: Arial; margin:2em 0em 0em 1em; color:red; ">
+        The subscriptions will be activated as soon as payment is confirmed.
+    </p>
+
+    <table style="margin-left:2em;border-bottom: 3px solid blue;width:950px">
+        <tr></tr>
+    </table>
+
+</body>
+</html>

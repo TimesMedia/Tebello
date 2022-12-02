@@ -1,0 +1,263 @@
+﻿<UserControl x:Class="Subs.Presentation.StatementControl2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Subs.Presentation" xmlns:local1="clr-namespace:Tebello.Presentation"
+             mc:Ignorable="d" 
+             Width="1253" Height="903" Padding="50">
+    <UserControl.Resources>
+        <local1:RandConverter x:Key="lRandConverter"/>
+        <local1:IntegerConverter x:Key="lIntegerConverter"/>
+        <local1:DateConverter x:Key="lDateConverter"/>
+        <Style x:Key="AlignRight" TargetType="{x:Type FrameworkElement}">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+
+    </UserControl.Resources>
+
+    <FlowDocumentScrollViewer IsToolBarVisible="True" Margin="0,0,0,0" >
+        <FlowDocument x:Name="gFlowDocument" FontFamily="Arial" FontSize="12" PageWidth = "1122" ColumnWidth = "1122" PageHeight = "793" PagePadding = "20" >
+
+            <BlockUIContainer>
+                <DockPanel Grid.Row="0" LastChildFill="true" Margin="0,0,0,15">
+                     <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" HorizontalAlignment="Center" FontFamily="Arial" FontSize="26" Foreground="Red">
+                        <Bold>Statement</Bold>
+                    </Label>
+                </DockPanel>
+            </BlockUIContainer>
+
+
+            <BlockUIContainer>
+                <DockPanel LastChildFill="true" Background="LightCyan">
+                    <StackPanel DockPanel.Dock="Left" Width="190">
+                        <Label>ARENA HOLDINGS (Pty) Ltd</Label>
+                        <Label>PO Box 1746</Label>
+                        <Label>Saxonwold 2132</Label>
+                    </StackPanel>
+
+                    <StackPanel DockPanel.Dock="Left" Width="185">
+                        <Label>Vat No:4730261205</Label>
+                        <Label></Label>
+                        <Label>Registration No: 2012/074397/07</Label>
+                    </StackPanel>
+
+                    <Image  Margin="100,0,0,0" Source=".\MIMS Blue Small transparent.jpg" Height="63" MinWidth="150" Width="159"></Image>
+
+                    <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
+                        <Label>Hill on Empire</Label>
+                        <Label>16 Empire Road</Label>
+                        <Label>Parktown</Label>
+                    </StackPanel>
+                </DockPanel>
+
+            </BlockUIContainer>
+
+
+
+            <BlockUIContainer >
+                <DockPanel x:Name="CustomerInfo" Background="Beige" LastChildFill="False" Margin="0,0,0,15">
+
+                    <Grid DockPanel.Dock="Left">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="To" />
+
+                        <Label Grid.Row="1" x:Name="Line1" Foreground="Blue"/>
+                        <Label Grid.Row="2" x:Name="Line2" Foreground="Blue"/>
+                        <Label Grid.Row="3" x:Name="Line3" Foreground="Blue"/>
+                        <Label Grid.Row="4" x:Name="Line4" Foreground="Blue"/>
+                        <Label Grid.Row="5" x:Name="Line5" Foreground="Blue"/>
+                        <Label Grid.Row="6" x:Name="Line6" Foreground="Blue"/>
+                        <Label Grid.Row="7" x:Name="Line7" Foreground="Blue"/>
+                        <Label Grid.Row="8" x:Name="Line8" Foreground="Blue"/>
+                    </Grid>
+
+                    <Grid DockPanel.Dock="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Content="Statement number"/>
+                        <Label Grid.Row="1" Content="Phone number"/>
+                        <Label Grid.Row="2" Content="Email"/>
+                        <Label Grid.Row="3" Content="Vat registration"/>
+                        <Label Grid.Row="4" Content="Supplier number"/>
+                        <Label Grid.Row="5" Content="Company registration number"/>
+                        <Label Grid.Row="6" Content="Payer customer id"/>
+                        <Label Grid.Row="7" Content="Date"/>
+
+                        <Label Grid.Row="0" Grid.Column="1" x:Name="StatementNumber" Foreground="Blue"/>
+                        <Label Grid.Row="1" Grid.Column="1" x:Name="PPhoneNumber" Foreground="Blue"/>
+                        <Label Grid.Row="2" Grid.Column="1" x:Name="PEmail" Foreground="Blue"/>
+                        <Label Grid.Row="3" Grid.Column="1" x:Name="PVatRegistration" Foreground="Blue"/>
+                        <Label Grid.Row="4" Grid.Column="1" x:Name="VendorNumber" Foreground="Blue"/>
+                        <Label Grid.Row="5" Grid.Column="1" x:Name="CompanyRegistrationNumber" Foreground="Blue"/>
+                        <Label Grid.Row="6" Grid.Column="1" x:Name="PayerId" Foreground="Blue"/>
+                        <Label Grid.Row="7" Grid.Column="1" x:Name="StatementDate" Foreground="Blue"/>
+
+                    </Grid>
+
+                </DockPanel>
+            </BlockUIContainer>
+
+            <Table x:Name="HistoryTable" IsEnabled="False" LineHeight="20">
+                <Table.Columns>
+                    <TableColumn  Width="151"/>
+                    <TableColumn  Width="121"/>
+                    <TableColumn  Width="220"/>
+                    <TableColumn  Width="220"/>
+                    <TableColumn  Width="100"/>
+                    <TableColumn  Width="120"/>
+                    <TableColumn  Width="120"/>
+                </Table.Columns>
+               
+                <TableRowGroup FontWeight="Bold" FontSize="12">
+                    <TableRow>
+                        <TableCell ColumnSpan="7" FontSize="16" FontWeight="ExtraBold">
+                            <Paragraph TextAlignment="Center">Payments</Paragraph>
+                        </TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell ColumnSpan="7" FontSize="16" FontWeight="ExtraBold">
+                            <Paragraph TextAlignment="Center"></Paragraph>
+                        </TableCell>
+                    </TableRow>
+
+                    <TableRow>
+                        <TableCell>
+                            <Paragraph>TransactionId</Paragraph>
+                        </TableCell>
+
+                        <TableCell>
+                            <Paragraph>Date</Paragraph>
+                        </TableCell>
+                        <TableCell>
+                            <Paragraph>Operation</Paragraph>
+                        </TableCell>
+                       
+                        <TableCell>
+                            <Paragraph>Reference</Paragraph>
+                        </TableCell>
+                        <TableCell>
+                            <Paragraph TextAlignment="Right">Value</Paragraph>
+                        </TableCell>
+                        <TableCell>
+                            <Paragraph TextAlignment="Right">Allocation balance</Paragraph>
+                        </TableCell>
+                        <TableCell>
+                            <Paragraph TextAlignment="Right">Balance</Paragraph>
+                        </TableCell>
+                    </TableRow>
+
+                    <TableRow/>
+                </TableRowGroup>
+                <TableRowGroup></TableRowGroup>
+
+                <TableRowGroup FontWeight="Bold" FontSize="12">
+                    <TableRow>
+                        <TableCell ColumnSpan="7" FontWeight="ExtraBold" FontSize="16">
+                            <Paragraph TextAlignment="Center">Invoices</Paragraph>
+                        </TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell ColumnSpan="7" FontSize="16" FontWeight="ExtraBold">
+                            <Paragraph TextAlignment="Center"></Paragraph>
+                        </TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>
+                            <Paragraph>TransactionId</Paragraph>
+                        </TableCell>
+                        <TableCell>
+                            <Paragraph>Date</Paragraph>
+                        </TableCell>
+                        <TableCell>
+                            <Paragraph>Operation</Paragraph>
+                        </TableCell>
+
+                        <TableCell>
+                            <Paragraph>Invoice</Paragraph>
+                        </TableCell>
+                       
+                        <TableCell>
+                            <Paragraph TextAlignment="Right">Value</Paragraph>
+                        </TableCell>
+                        <TableCell>
+                            <Paragraph TextAlignment="Right">Inv balance</Paragraph>
+                        </TableCell>
+                        <TableCell>
+                            <Paragraph TextAlignment="Right">Balance</Paragraph>
+                        </TableCell>
+                    </TableRow>
+
+                    <TableRow/>
+                </TableRowGroup>
+                <TableRowGroup></TableRowGroup>
+
+
+            </Table>
+
+            <BlockUIContainer>
+                <StackPanel Orientation="Horizontal">
+
+                    <StackPanel Margin="0,0,20,0">
+                        <Label>Riette van der Merwe      Tel (011) 280-5856</Label>
+                        <Label>Fax 086 675-7910</Label>
+                        <Label>E-mail: vandermerwer@mims.co.za</Label>
+                        <Label></Label>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,0,20,0">
+                        <Label Content="Account Name: ARENA HOLDINGS MEDIA MIMS"/>
+                        <Label Content="Bank: First National Bank"/>
+                        <Label Content="Branch: RMB Corporate Banking Johannesburg"/>
+                        <Label Content="Branch Code: 255005 Account No: 627 930 763 26"/>
+                        <Label Content="S.W.I.F.T Code: FIRNZAJJ"/>
+                    </StackPanel>
+                </StackPanel>
+            </BlockUIContainer>
+
+            <BlockUIContainer>
+                <Grid Background="LightCyan">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+
+                    </Grid.RowDefinitions>
+
+                    <Label x:Name="Footer1" Grid.Row="0" Grid.Column="0">Kindly fax your proof of payment to: 086 675-7910 or e-mail it to vandermerwer@mims.co.za</Label>
+                    <Label x:Name="Footer2" Grid.Row="1" Grid.Column="0">Kindly note that no books are dispatched before proof of payment has been received. Please ignore this statement if you have paid already.</Label>
+                    <Label x:Name="Footer3" Grid.Row="2" Grid.Column="0">Please include this invoice number on your proof of payment!</Label>
+
+                </Grid>
+            </BlockUIContainer>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+</UserControl>

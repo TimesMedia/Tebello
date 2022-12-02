@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Tebello.MimsWeb.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data Source=PKLWEBDB01\mssql2016std;Initial Catalog=MIMSTest2;User ID=MIMSWebServiceUser;Password=akkedis;Enlist=False;Pooling=True;Max Pool Size=10;Connect Timeout=100</Value>
+    </Setting>
+    <Setting Name="DirectoryPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">D:\MimsData</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

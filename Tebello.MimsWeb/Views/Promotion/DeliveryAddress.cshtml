@@ -1,0 +1,158 @@
+﻿@using Tebello.MimsWeb.Models;
+
+@model DeliveryAddressTemplate
+@{
+    ViewBag.Title = "DeliveryAddress";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/Content/normalise.css">
+    <link rel="stylesheet" href="/Content/Styles.css">
+
+    <title>DeliveryAddress</title>
+
+    <style>
+
+        .editor-label, .editor-field {
+            float: left;
+            margin-top: 10px;
+            margin-left: 1em;
+            height: 20px
+        }
+
+            .editor-field input {
+                width: 200px;
+            }
+
+        .editor-label {
+            clear: left;
+            display: inline-block;
+            width: 120px;
+            font-family: Arial;
+        }
+
+        .myButtons li {
+            display: inline;
+        }
+
+        .myButtons button {
+            display: inline;
+            padding: 0px 7px 1px 7px;
+            border-radius: 10px;
+            text-decoration: none;
+            text-shadow: none;
+            font-family: Titillium, Arial, sans-serif;
+            font-weight: 700;
+            color: white;
+            text-transform: capitalize;
+            font-size: 0.8em;
+            letter-spacing: .1em;
+            background-color: dodgerblue;
+        }
+
+        label {
+            display: inline-block;
+            width: 200px;
+            font-family: Arial;
+        }
+
+        .dataElem {
+            margin: 0.5em 0.5em 0.5em 1em;
+        }
+
+            .dataElem input {
+                width: 30em;
+            }
+
+            .dataElem select {
+                width: 30em;
+            }
+    </style>
+
+</head>
+<body>
+    <p style="padding:1em 1em 0em 1em">
+        @Html.ViewBag.Message
+    </p>
+
+    <p>
+        @Html.ValidationSummary()
+    </p>
+
+    @using (Html.BeginForm("DeliveryAddress", "Promotion"))
+    {
+        <div class="myButtons">
+            <ul>
+                <li><button type="submit">Confirm the delivery address</button></li>
+            </ul>
+        </div>
+
+        <fieldset style="margin: 1em 0em 0em 0.6em;">
+
+            
+            <div class="dataElem">
+                @Html.LabelFor(x => x.CountryId)
+                @Html.DropDownListFor(x => x.CountryId, @Model.CountrySelectList, new Dictionary<string, object>() { { "style", "width:154px" } })
+            </div>
+
+
+            <div class="dataElem">
+                @Html.LabelFor(x => x.Province)
+                @Html.EditorFor(x => x.Province)
+            </div>
+
+            <div class="dataElem">
+                @Html.LabelFor(x => x.City)
+                @Html.EditorFor(x => x.City)
+            </div>
+
+            <div class="dataElem">
+                @Html.LabelFor(x => x.Suburb)
+                @Html.EditorFor(x => x.Suburb)
+            </div>
+
+
+            <div class="dataElem">
+                @Html.LabelFor(x => x.Street)
+                @Html.EditorFor(x => x.Street)
+            </div>
+
+            <div class="dataElem">
+                @Html.LabelFor(x => x.StreetExtension)
+                @Html.EditorFor(x => x.StreetExtension)
+            </div>
+
+            <div class="dataElem">
+                @Html.LabelFor(x => x.StreetSuffix)
+                @Html.EditorFor(x => x.StreetSuffix)
+            </div>
+            <div class="dataElem">
+                @Html.LabelFor(x => x.StreetNo)
+                @Html.EditorFor(x => x.StreetNo)
+            </div>
+            <div class="dataElem">
+                @Html.LabelFor(x => x.Building)
+                @Html.EditorFor(x => x.Building)
+            </div>
+            <div class="dataElem">
+                @Html.LabelFor(x => x.Floor)
+                @Html.EditorFor(x => x.Floor)
+            </div>
+            <div class="dataElem">
+                @Html.LabelFor(x => x.Room)
+                @Html.EditorFor(x => x.Room)
+            </div>
+            <div class="dataElem">
+                @Html.LabelFor(x => x.PostCode)
+                @Html.EditorFor(x => x.PostCode)
+            </div>
+        </fieldset>
+
+    }
+</body>
+</html>

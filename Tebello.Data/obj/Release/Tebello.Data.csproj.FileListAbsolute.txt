@@ -1,0 +1,5 @@
+C:\CSharp\Tebello\Tebello.Data\bin\Release\Tebello.Data.dll
+C:\CSharp\Tebello\Tebello.Data\bin\Release\Tebello.Data.pdb
+C:\CSharp\Tebello\Tebello.Data\obj\Release\Tebello.Data.csproj.CoreCompileInputs.cache
+C:\CSharp\Tebello\Tebello.Data\obj\Release\Tebello.Data.dll
+C:\CSharp\Tebello\Tebello.Data\obj\Release\Tebello.Data.pdb

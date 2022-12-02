@@ -1,0 +1,155 @@
+﻿<Window Name="Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Subs.Presentation"
+        xmlns:Data="clr-namespace:Subs.Data;assembly=Subs.Data" xmlns:local1="clr-namespace:Tebello.Presentation" x:Class="Subs.Presentation.SubscriptionsCapture"
+        Title="Subscriptions capture" Height="726" Width="1138.368" WindowStartupLocation="Manual" WindowState="Normal">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Aquamarine"/>
+            <Setter Property="Height" Value="22"/>
+        </Style>
+        <Style x:Key="AlignRight" TargetType="{x:Type FrameworkElement}">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+
+        <local1:IntegerConverter x:Key="lIntegerConverter"/>
+        <local1:RandConverter x:Key="lRandConverter"/>
+        <CollectionViewSource x:Key="product2ViewSource"/>
+
+    </Window.Resources>
+
+    <TabControl Name="TabControl" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" Margin="0,0,-0,0">
+        <TabItem Header="Select">
+
+            <Canvas x:Name="SubscriptionCanvas" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="LightGreen" DataContext="{StaticResource product2ViewSource}" Margin="0,-4,-12,-34" >
+                <GroupBox Header="Who" Canvas.Left="10" Canvas.Top="25" Height="88" Width="986">
+                    <Canvas>
+                        <TextBox x:Name="textReceiverSurname" Height="23"   Width="270" Canvas.Left="201" Canvas.Top="5" IsReadOnly="True"
+                         Text="{Binding Path=ReceiverSurname, Mode=OneWay}"/>
+                        <TextBox x:Name="textPayerSurname" Height="23"   Width="270" Canvas.Left="201" Canvas.Top="33"  IsReadOnly="True" Text="{Binding Path=PayerSurname, Mode=OneWay}"/>
+                        <TextBox x:Name="textReceiverCompany" Height="23"   Width="231" Canvas.Left="508" Canvas.Top="5"  IsReadOnly="True" Text="{Binding Path=ReceiverCompany, Mode=OneWay}"/>
+                        <TextBox x:Name="textPayerCompany"  Height="23"  Width="231" Canvas.Left="508" Canvas.Top="33"  IsReadOnly="True" Text="{Binding Path=PayerCompany, Mode=OneWay}"/>
+                        <Button x:Name="buttonReceiver" Click="buttonReceiver_Click" Content="Select a receiver" Canvas.Left="10" Canvas.Top="10" Width="119"/>
+                        <Button x:Name="buttonSame" Click="buttonSame_Click" Content="Receiver is payer" Canvas.Left="10" Canvas.Top="37" Width="119"/>
+                        <Button x:Name="buttonPayer" Click="buttonPayer_Click"  Content="Select another payer" Canvas.Left="845" Canvas.Top="37" Width="119"/>
+                    </Canvas>
+                </GroupBox>
+                <GroupBox Header="Status" Canvas.Left="863" Canvas.Top="160" Height="138" Width="133">
+                    <Canvas>
+                        <RadioButton x:Name="radioQuote"  Content="Quote" Canvas.Left="10" Canvas.Top="10"/>
+                        <RadioButton  x:Name="radioActual" Content= "Actual" Canvas.Left="10" Canvas.Top="30" IsChecked="True"/>
+                        <Label Content="Order number" Canvas.Left="10"  Canvas.Top="50" />
+                        <TextBox x:Name="textCaptureOrderNumber" Height="23" Canvas.Left="10"  Canvas.Top="80" Width="101" Text="{Binding Path=OrderNumber, Mode=TwoWay}"/>
+                    </Canvas>
+
+
+                </GroupBox>
+
+                <CheckBox x:Name="checkRenewal" Content="Generate renewal notices" Canvas.Left="848" Canvas.Top="309" Width="161" IsChecked="true"/>
+                <CheckBox x:Name="checkAutomaticRenewal" Content="Automatic renewal" Canvas.Left="848" Canvas.Top="344" IsChecked="false"/>
+
+                <DataGrid x:Name="product2DataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="410" ItemsSource="{Binding}" Canvas.Left="10" RowDetailsVisibilityMode="VisibleWhenSelected" Canvas.Top="156" Width="828"
+                          SelectionUnit="CellOrRowHeader" 
+                          SelectionMode="Extended" IsReadOnly="True" AlternatingRowBackground="AquaMarine" 
+                             CanUserAddRows="False" RowHeight="30">
+                    <DataGrid.RowHeaderStyle>
+                        <Style TargetType="{x:Type DataGridRowHeader}">
+                            <Setter Property="Background"  Value="Yellow"/>
+                            <Setter Property="Width"  Value="30"/>
+                            <Setter Property="BorderBrush" Value="Red" />
+                            <Setter Property="BorderThickness"  Value="3" />
+                        </Style>
+                    </DataGrid.RowHeaderStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="typeColumn" Binding="{Binding SubscriptionTypeString}" Header="Type"  Width="Auto" />
+                        <DataGridTextColumn x:Name="mediumColumn" Binding="{Binding SubscriptionMediumString}" Header="Medium" Width="Auto"/>
+                        <DataGridTextColumn x:Name="productNameColumn" Binding="{Binding ProductName}" Header="Product Name" Width="Auto"/>
+                        <!--<DataGridCheckBoxColumn x:Name="cPDEnabledColumn" Binding="{Binding CPDEnabled}" Header="CPDEnabled" Width="SizeToHeader"/>-->
+                    </DataGrid.Columns>
+
+                </DataGrid>
+                <Button x:Name="buttonCancel" Content="Cancel without saving" Click="buttonCancel_Click" Canvas.Left="848" Canvas.Top="534" Width="148" Height="30"/>
+                <Button x:Name="buttonCalculate" Content="Calculate the basket" Canvas.Left="848" Canvas.Top="394" Width="148" Click="buttonCalculate_Click" RenderTransformOrigin="4.867,2" Height="32"/>
+                <Label Content="Selection options: " Canvas.Left="12" Canvas.Top="122"/>
+                <ComboBox x:Name="comboSubscriptionType" Canvas.Left="332" Canvas.Top="122" Width="156" SelectedValuePath="Key" DisplayMemberPath="Value"
+                          SelectionChanged="comboSubscription_SelectionChanged"/>
+                <ComboBox x:Name="comboSubscriptionMedium" Canvas.Left="588" Canvas.Top="126" Width="165" SelectedValuePath="Key" DisplayMemberPath="Value"
+                          SelectionChanged="comboSubscription_SelectionChanged"/>
+                <Label Content="Type" Canvas.Left="212" Canvas.Top="121"/>
+                <Label Content="Medium" Canvas.Left="517" Canvas.Top="121"/>
+            </Canvas>
+        </TabItem>
+
+        <TabItem Name="Basket" Header="Basket">
+
+            <Canvas Name="myCanvas" Margin="0,0,2,0">
+
+                <DataGrid Name="BasketGrid" Height="590" Width="1098"  AutoGenerateColumns="False" EnableRowVirtualization="True" 
+                             SelectionMode="Single" AlternatingRowBackground="AquaMarine" SelectionUnit="CellOrRowHeader" IsReadOnly="True"
+                             CanUserAddRows="False" Canvas.Top="10" Canvas.Left="10">
+                    <DataGrid.RowHeaderStyle>
+                        <Style TargetType="{x:Type DataGridRowHeader}">
+                            <Setter Property="Background"  Value="Yellow"/>
+                            <Setter Property="Width"  Value="30"/>
+                            <Setter Property="Height"  Value="30"/>
+                            <Setter Property="BorderBrush" Value="Red" />
+                            <Setter Property="BorderThickness"  Value="3" />
+                        </Style>
+                    </DataGrid.RowHeaderStyle>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Product" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        Height="Auto"
+                                        Text="{Binding ProductName}" 
+                                        TextWrapping="Wrap"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn x:Name="UnitsPerIssue"  Header="UnitsPerIssue"  Width="Auto" Binding="{Binding Subscription.UnitsPerIssue}" CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTextColumn x:Name="NumberOfIssues"  Header="NumberOfIssues"  Width="Auto" Binding="{Binding Subscription.NumberOfIssues}" CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTextColumn x:Name="UnitPrice"  Header="UnitPrice"  Width="Auto" Binding="{Binding Subscription.UnitPrice, 
+                            Converter={StaticResource lRandConverter}}" CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTextColumn x:Name="DeliveryMethodString"  Header="DeliveryMethod"  Width="Auto" Binding="{Binding Subscription.DeliveryMethodString}"/>
+                        <DataGridTextColumn x:Name="DeliveryCost"  Header="Delivery cost/unit"  Width="Auto" 
+                                            Binding="{Binding Subscription.DeliveryCost, Converter={StaticResource lRandConverter}}" CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTextColumn x:Name="Vat"  Header="Vat/unit"  Width="Auto" Binding="{Binding Subscription.Vat, Converter={StaticResource lRandConverter}}" 
+                                            CellStyle="{StaticResource AlignRight}" />
+                        <DataGridTextColumn x:Name="FullPrice"  Header="Full price"  Width="Auto" Binding="{Binding FullPrice, Converter={StaticResource lRandConverter}}" 
+                                            CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTextColumn x:Name="Discount"  Header="Discount"  Width="Auto" Binding="{Binding FullDiscount, Converter={StaticResource lRandConverter}}" 
+                                            CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTextColumn x:Name="DiscountedPrice"  Header="Discounted price"  Width="Auto" Binding="{Binding DiscountedPrice, Converter={StaticResource lRandConverter}}" 
+                                            CellStyle="{StaticResource AlignRight}"/>
+
+                        <DataGridTemplateColumn Header="Warning" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        Height="Auto"
+                                        Text="{Binding Warning}" 
+                                        TextWrapping="Wrap"
+                                        Foreground="Red"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Change" Click="BasketChange_Click" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+
+                </DataGrid>
+                <Button x:Name="buttonSubmit" Content="Submit" Canvas.Left="880" Canvas.Top="632" Width="75" Click="buttonSubmit_Click"/>
+
+
+            </Canvas>
+        </TabItem>
+
+
+    </TabControl>
+</Window>

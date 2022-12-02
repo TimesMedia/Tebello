@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Subs.Presentation.WebProductClassification"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Subs.Presentation"
+             mc:Ignorable="d" 
+             Width="150.443" Height="138.692"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel Name="WebProduct">
+        <CheckBox Content="All" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False" Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
+        <CheckBox Content="Prescription" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False"  Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
+        <CheckBox Content="Over the counter" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False"  Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
+        <CheckBox Content="Competitive sport" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False"  Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
+        <CheckBox Content="Treatment approaches" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False"  Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
+        <CheckBox Content="Veterinary medicine" HorizontalAlignment="Left"  VerticalAlignment="Top" IsThreeState="False"  Checked="CheckboxChanged"  Unchecked="CheckboxChanged" />
+    </StackPanel>
+
+</UserControl>

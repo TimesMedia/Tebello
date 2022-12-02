@@ -1,0 +1,28 @@
+﻿<Window x:Class="Subs.Presentation.ElicitDecimal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Width="221.99"  Background="White" Name="Window" Height="161.98" Title="          Integer  picker" WindowStyle="None">
+    <Window.Resources>
+        <ControlTemplate TargetType="{x:Type Button}" x:Key="ButtonTemplate">
+            <Border CornerRadius="10" BorderBrush="LightBlue" BorderThickness="2">
+                <Grid>
+                    <Rectangle Fill="White" RadiusX="10" RadiusY="20"/>
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                </Grid>
+            </Border>
+
+        </ControlTemplate>
+        <Style TargetType="{x:Type Button}" >
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Template" Value="{StaticResource ButtonTemplate}"/>
+        </Style>
+    </Window.Resources>
+    <StackPanel Margin="-2,0,2,0" x:Name="CheckKeyStrokes" PreviewTextInput="CheckKeyStrokes_PreviewTextInput">
+        <TextBlock Name="gQuestion" HorizontalAlignment="Center"  Height="Auto" Width="204"  TextWrapping="Wrap" />
+        <TextBox Name="gAnswer" x:FieldModifier="private" Focusable="True"  HorizontalAlignment="Center" Height="23" TextAlignment="Right" VerticalAlignment="Top" Width="125" Margin="40,10,49,10"/>
+        <StackPanel Orientation="Horizontal" Margin="10,0,10,0">
+            <Button  Content="Accept" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="75"   Click="ButtonAccept_Click" IsDefault="True" Margin="10"/>
+            <Button  Content="Cancel" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="75"  Click="ButtonCancel_Click" Margin="10"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

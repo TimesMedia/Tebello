@@ -1,0 +1,115 @@
+﻿<Window x:Class="Tebello.Presentation.Deliver"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tebello.Presentation" xmlns:my="clr-namespace:Subs.Data;assembly=Subs.Data" xmlns:cm="clr-namespace:System.ComponentModel;assembly=System"
+        mc:Ignorable="d"
+        Title="Deliver" Height="450" Width="800">
+    <Window.Resources>
+        <my:DeliveryDoc x:Key="deliveryDoc" />
+        <CollectionViewSource x:Key="deliveryRecordViewSource" Source="{Binding Path=DeliveryRecord, Source={StaticResource deliveryDoc}}" />
+        <local:RandConverter x:Key="lRandConverter"/>
+        <local:DateConverter x:Key="lDateConverter"/>
+        <Style x:Key="AlignRight" TargetType="FrameworkElement">
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+        </Style>
+        <cm:BackgroundWorker x:Key="backgroundWorker"
+          WorkerReportsProgress="True" 
+          DoWork="backgroundWorker_DoWork" ProgressChanged="backgroundWorker_ProgressChanged" 
+          RunWorkerCompleted="backgroundWorker_RunWorkerCompleted"></cm:BackgroundWorker>
+        <cm:BackgroundWorker x:Key="backgroundWorkerPost"
+          WorkerReportsProgress="True" 
+          DoWork="backgroundWorkerPost_DoWork" ProgressChanged="backgroundWorkerPost_ProgressChanged" 
+          RunWorkerCompleted="backgroundWorkerPost_RunWorkerCompleted"></cm:BackgroundWorker>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource deliveryRecordViewSource}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Button Click="buttonProposal" Content="Generate an issue specific proposal" HorizontalAlignment="Left" />
+                <Label x:Name="labelProduct" Background="Yellow">Product</Label>
+                <Label x:Name="labelIssue" Background="Orange">Issue</Label>
+            </StackPanel>
+            <Button Grid.Column="1" Click="buttonProposalActive" Content="Generate a proposal for all active products" Width="300" />
+            <Button  Grid.Column="2" Content="Load an existing proposal" Click="LoadValidProposal" Name="buttonValidateProposal" HorizontalAlignment="Right"/>
+        </Grid>
+
+        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="Auto" VerticalAlignment="Stretch" ItemsSource="{Binding}" 
+                  Name="deliveryRecordDataGrid" IsSynchronizedWithCurrentItem="True"
+                  RowHeight="30"    RowDetailsVisibilityMode="VisibleWhenSelected" CanUserDeleteRows="True" CanUserAddRows="False" Grid.Row="1">
+            <DataGrid.RowHeaderStyle>
+                <Style TargetType="{x:Type DataGridRowHeader}">
+                    <Setter Property="Background"  Value="Yellow"/>
+                    <Setter Property="Width"  Value="30"/>
+                    <Setter Property="BorderBrush" Value="Red" />
+                    <Setter Property="BorderThickness"  Value="3" />
+                </Style>
+            </DataGrid.RowHeaderStyle>
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn x:Name="skipColumn" Binding="{Binding Path=Skip}" Header="Skip" Width="30" />
+                <DataGridTextColumn Binding="{Binding Path=IssueDescription}" Header="Issue description" Width="auto" />
+                <DataGridTextColumn x:Name="subscriptionIdColumn" Binding="{Binding Path=SubscriptionId}" Header="Subscription Id" Width="SizeToHeader" />
+                <DataGridTextColumn x:Name="payerColumn" Binding="{Binding Path=Payer}" Header="Payer Id" Width="SizeToHeader" />
+                <DataGridCheckBoxColumn x:Name="DebitOrder" Binding="{Binding Path=DebitOrder}" Header="Debitorder" Width="SizeToHeader" IsReadOnly="True" CanUserSort="True" />
+                <DataGridTextColumn x:Name="receiverIdColumn" Binding="{Binding Path=ReceiverId}" Header="Receiver Id" Width="SizeToHeader" />
+                <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Path=Title}" Header="Title" Width="SizeToHeader" />
+                <DataGridTextColumn x:Name="initialsColumn" Binding="{Binding Path=Initials}" Header="Initials" Width="SizeToHeader" />
+                <DataGridTextColumn x:Name="surnameColumn" Binding="{Binding Path=Surname}" Header="Surname" Width="100" />
+                <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding Path=PhoneNumber}" Header="Phone Number" Width="SizeToHeader" />
+                <DataGridTextColumn x:Name="validationStatusColumn" Binding="{Binding Path=ValidationStatus}" Header="Validation Status" Width="Auto" />
+                <DataGridTextColumn x:Name="companyColumn" Binding="{Binding Path=Company}" Header="Company" Width="Auto" />
+                <DataGridTextColumn x:Name="deliveryaddressColumn" Binding="{Binding Path=DeliveryAddressId}" Header="DeliveryAddressId" Width="Auto" />
+                <DataGridTextColumn x:Name="descriptionColumn" Binding="{Binding Path=Description}" Header="Description" Width="SizeToHeader" />
+                <DataGridTextColumn x:Name="unitsPerIssueColumn" Binding="{Binding Path=UnitsPerIssue}" Header="Units Per Issue" Width="SizeToHeader" CellStyle="{StaticResource AlignRight}" />
+                <DataGridTextColumn x:Name="unitPriceColumn" Binding="{Binding Path=UnitPrice, Converter={StaticResource lRandConverter}}" Header="Unit Price" Width="SizeToHeader" CellStyle="{StaticResource AlignRight}"/>
+                <DataGridTextColumn x:Name="widthColumn" Binding="{Binding Path=Width}" Header="Width" Width="SizeToHeader" CellStyle="{StaticResource AlignRight}"/>
+                <DataGridTextColumn x:Name="expirationDateColumn" Binding="{Binding Path=ExpirationDate, Converter={StaticResource lDateConverter}}" 
+                                        Header="Excpiration Date" Width="SizeToHeader" />
+                <DataGridTextColumn x:Name="emailAddressColumn" Binding="{Binding Path=EmailAddress}" Header="Email Address" Width="Auto" />
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Subscription transactions" Click="Click_SubscriptionTransactions" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+
+
+
+
+        <Canvas Height="150" Grid.Row="2">
+
+            <Label Canvas.Left="25">Validate and post deliveries and save the XML instructions</Label>
+            <Button  Content="Validate the proposal" Click="buttonValidate_Click" Canvas.Left="25" Canvas.Top="78"  Height="23" Name="buttonValidate" Width="150"/>
+            <ProgressBar x:Name="ProgressBar1" Height="20" Canvas.Left="25" Canvas.Top="38" Width="343" Minimum="0" Maximum="100"></ProgressBar>
+            <Button  Content="Skip the marked entries" Click="Skip" Canvas.Left="25" Canvas.Top="120"  Height="22" Name="buttonSkip" Width="150"/>
+
+            <Button  Content="Post" Canvas.Left="218" Canvas.Top="78" Click="buttonPost_Click" Height="22" Name="buttonPost" Width="150"/>
+            <Button  Content="Save by deliverymethod"  Canvas.Left="218" Canvas.Top="120" Click="ButtonSplitByDeliveryMethod" Height="23" Name="buttonGenerateXML" Width="150"/>
+            <Label Canvas.Left="469">Format delivery lists for</Label>
+            <CheckBox Content="Payers" Canvas.Left="636" Canvas.Top="7"  Height="16" Name="checkPayers" IsChecked="True" Width="50" />
+            <CheckBox Canvas.Left="711" Canvas.Top="8" Content="NonPayers" Height="16" Name="checkNonPayers" IsChecked="True" />
+            <Button  Content="Courier list" Canvas.Left="478" Canvas.Top="38" Click="FormatCourierList" Height="23" Name="buttonFormatCourierList" Width="307"/>
+            <Button  Content="Create XSD" Canvas.Left="827" Canvas.Top="38" Click="buttonCreateXSD" Height="23" x:Name="CreateXSD" Width="307"/>
+
+            <Button  Content="Mag mail" Canvas.Left="478" Canvas.Top="78" Click="FormatMagMail" Height="22" Name="buttonFormatMagMail" Width="307"/>
+            <Button  Content="Registered mail" Canvas.Left="827" Canvas.Top="82" Click="FormatRegisteredMail" Height="22" Name="buttonFormatRegisteredMail" Width="307" Margin="0"/>
+
+            <Button Content="Collection list" Click="FormatCollectionList" Height="23" Name="buttonFormatCollectionList" Width="307" Canvas.Left="478" Canvas.Top="117" />
+        </Canvas>
+
+    </Grid>
+        
+    
+</Window>

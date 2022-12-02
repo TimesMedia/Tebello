@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Subs.Presentation.ClassificationControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Subs.Presentation"
+             mc:Ignorable="d" 
+             MinWidth="400" Width="400"  Loaded="ClassificationControl_Loaded">
+  
+        <TreeView x:Name="ClassificationTreeView" Width="400" Background="LightGreen">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Path=Nodes}">
+                        <TextBlock Text="{Binding Path=Classification}" FontSize="14">
+                            <TextBlock.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Add" Click="Click_AddClassification"/>
+                                    <MenuItem Header="Rename" Click="Click_RenameClassification"/>
+                                </ContextMenu>
+                            </TextBlock.ContextMenu>
+                        </TextBlock>
+                  </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+</UserControl>

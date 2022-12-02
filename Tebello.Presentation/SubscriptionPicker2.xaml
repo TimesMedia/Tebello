@@ -1,0 +1,82 @@
+﻿<Window x:Name="MainWindow"
+        x:Class="Subs.Presentation.SubscriptionPicker2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  
+        xmlns:local="clr-namespace:Subs.Presentation"
+        xmlns:Data="clr-namespace:Subs.Data;assembly=Subs.Data"
+        WindowState="Maximized" Background="White" FontSize="12" Loaded="Mainform_loaded" mc:Ignorable="d" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local1="clr-namespace:Tebello.Presentation"
+        MinWidth="800" SizeChanged="Window_SizeChanged" Width="777">
+    <Window.Resources>
+        <Data:SubscriptionDoc3 x:Key="subscriptionDoc3"/>
+        <CollectionViewSource x:Key="subscriptionViewSource" Source="{Binding Subscription, Source={StaticResource subscriptionDoc3}}"/>
+        <local1:DateConverter x:Key="lDateConverter"/>
+        <local1:RandConverter x:Key="lRandConverter"/>
+        <local1:IntegerConverter x:Key="lIntegerConverter"/>
+        <ContextMenu x:Key="ContextTransactions">
+            <MenuItem Header="Activate proposal" Click="Click_Activate" />
+            <MenuItem Header="Cancel" Click="Click_Cancel"/>
+            <MenuItem Header="Change automatic renewal" Click="Click_ChangeAutomaticRenewal" />
+            <MenuItem Header="Change receiver" Click="Click_ChangeReceiver" />
+            <MenuItem Header="Change delivery method" Click="Click_ChangeDeliveryMethod" />
+            <MenuItem Header="Change delivery address" Click="Click_ChangeDeliveryAddress" />
+            <MenuItem Header="Change renewal notice" Click="Click_ChangeRenewalNotice" />
+            <MenuItem Header="Deliver on credit" Click="Click_DeliverOnCredit" Tag="AuthorityMedium" Loaded="SetVisibility"/>
+            <MenuItem Header="Generate invoice directive" Click="Click_GenerateInvoiceDirective"  Tag="AuthorityMedium" Loaded="SetVisibility"/>
+            <MenuItem Header="Report" Click="Click_SubscriptionReport" />
+            <MenuItem Header="Renew" Click="Click_Renew" />
+            <MenuItem Header="Resume" Click="Click_Resume" />
+            <MenuItem Header="Return issue" Click="Click_ReturnIssue" />
+            <MenuItem Header="Skip" Click="Click_Skip" />
+            <MenuItem Header="Suspend" Click="Click_Suspend" />
+            <MenuItem Header="Write off stock" Click="Click_WriteOffIssue" Tag="AuthorityMedium" Loaded="SetVisibility"/>
+        </ContextMenu>
+        <Style x:Key="AlignRight" TargetType="{x:Type FrameworkElement}">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+    </Window.Resources>
+    <TabControl Name="TabControl" Margin="0,0,0,0">
+        <TabItem Header="Select">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <GroupBox Height="100">
+                    <Canvas Margin="0,0,0,0">
+                        <Button x:Name="ButtonSelectById" Content="Select by SubscriptionId" Click="SelectById_Click" Canvas.Left="10" Canvas.Top="21" Width="157" IsDefault="True"/>
+                        <Button x:Name="ButtonSelectByPayer" Content="Select by payer" Click="SelectByPayer_Click" Canvas.Left="190" Canvas.Top="62" Width="98"  ToolTip="I go back only two years."/>
+                        <Button x:Name="ButtonSelectByReceiver" Content="Select by receiver" Click="SelectByReceiver_Click" Canvas.Left="190" Canvas.Top="21" ToolTip="I go back only two years."/>
+                        <Button x:Name="ButtonSelectForRenewal" Content="Select for renewal notices" Click="SelectForRenewalNotices_Click" Canvas.Left="10" Canvas.Top="62" Width="157" />
+                        <Button x:Name="ButtonSelectDormant"  Content="Select dormant subscriptions" Canvas.Left="316" Canvas.Top="21" Click="SelectDormant_Click" 
+                                    Width="242" ToolTip="Select subscriptions up for renewal up to and including a certain issue."/>
+                        <Button x:Name="ButtonSelectRenewable"  Content="Select automatically renewable subscriptions" Canvas.Left="316" Canvas.Top="62" Click="SelectAutomaticallyRenewable_Click"/>
+                        <Button x:Name="ButtonCreateSubscription"  Content="Create new subscriptions" Canvas.Left="593" Canvas.Top="24" Click="NewSubscriptions_Click" Margin="0" Width="158"/>
+                        <Button x:Name="ButtonMassCancel"  Content="Cancel a list of subscriptions" Canvas.Left="593" Canvas.Top="65" Click="CancelSubscriptions_Click" Margin="0"
+                                Tag="AuthorityMedium" Loaded="SetVisibility"/>
+                    </Canvas>
+                </GroupBox>
+                <UserControl x:Name="SubscriptionGrid" Grid.Row="1" Height="auto" VerticalAlignment="Stretch"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Reports">
+            <StackPanel>
+                <Canvas Height="400">
+                    <Button Name="ButtonStatus" Content="Report on status and history" Click="Click_StatusAndHistoryReport2" Canvas.Left="14" Canvas.Top="21" Width="182"
+                                IsDefault="True"/>
+                    <Label Content="What instant in time should the renewal price be based on?" Canvas.Left="14" Canvas.Top="114"/>
+                    <DatePicker Height="152" Width="182" Canvas.Left="14" Canvas.Top="161" Name="DatePicker"/>
+                    <Button Name="ButtonRenewal"  Content="Generate renewal notices" Canvas.Left="14" Canvas.Top="347" Click="Click_GenerateRenewalNotices" Width="182"/>
+                    <ProgressBar Name="ProgressBar1" Height="18" Canvas.Left="302" Canvas.Top="351" Width="383" Minimum="0" Maximum="100"/>
+
+                </Canvas>
+            </StackPanel>
+        </TabItem>
+
+        <TabItem Header="Result">
+            <local:SubscriptionStatusPrintControl x:Name="lSubscriptionStatusPrintControl">
+            </local:SubscriptionStatusPrintControl>
+        </TabItem>
+    </TabControl>
+</Window>

@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9CFD4F49-5927-4EB7-B595-A6A52653C3AE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tebello.Data</RootNamespace>
+    <AssemblyName>Tebello.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.1016.290\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdministrationData2.cs" />
+    <Compile Include="AdministrationDoc.cs">
+      <DependentUpon>AdministrationDoc.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrationDoc.designer.cs">
+      <DependentUpon>AdministrationDoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrationDoc1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdministrationDoc.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Base.cs" />
+    <Compile Include="BaseModel.cs" />
+    <Compile Include="ClassificationData2.cs" />
+    <Compile Include="ClassificationDoc2.cs" />
+    <Compile Include="ClassificationDoc2.designer.cs">
+      <DependentUpon>ClassificationDoc2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerData3.cs" />
+    <Compile Include="CustomerDoc2.cs" />
+    <Compile Include="CustomerDoc21.Designer.cs" />
+    <Compile Include="DeliveryAddressDoc.cs">
+      <DependentUpon>DeliveryAddressDoc.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DeliveryAddressDoc.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliveryAddressDoc.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DeliveryAddressDoc1.Designer.cs" />
+    <Compile Include="DeliveryDoc.cs">
+      <DependentUpon>DeliveryDoc.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DeliveryDoc.designer.cs">
+      <DependentUpon>DeliveryDoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeliveryDoc1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliveryDoc.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ExceptionData.cs" />
+    <Compile Include="Functions.cs" />
+    <Compile Include="MIMS.designer.cs" />
+    <Compile Include="PaymentData.cs" />
+    <Compile Include="PaymentDoc.cs" />
+    <Compile Include="PaymentDoc.designer.cs">
+      <DependentUpon>PaymentDoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductData.cs" />
+    <Compile Include="ProductDataStatic.cs" />
+    <Compile Include="ProductDoc.cs" />
+    <Compile Include="ProductDoc.designer.cs">
+      <DependentUpon>ProductDoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProFormaData.cs" />
+    <Compile Include="PromotionData.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SBDebitOrderDoc.cs" />
+    <Compile Include="SBDebitOrderDoc.designer.cs">
+      <DependentUpon>SBDebitOrderDoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="Settings.Designer.cs" />
+    <Compile Include="Settings1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="SubscriptionData3.cs" />
+    <Compile Include="SubscriptionDoc3.cs">
+      <DependentUpon>SubscriptionDoc3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SubscriptionDoc3.designer.cs">
+      <DependentUpon>SubscriptionDoc3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubscriptionDoc31.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SubscriptionDoc3.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AdministrationDoc.xsc">
+      <DependentUpon>AdministrationDoc.xsd</DependentUpon>
+    </None>
+    <None Include="AdministrationDoc.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AdministrationDoc1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="AdministrationDoc.xss">
+      <DependentUpon>AdministrationDoc.xsd</DependentUpon>
+    </None>
+    <None Include="app.config" />
+    <None Include="Class Diagram.cd" />
+    <None Include="DeliveryAddressDoc.xsc">
+      <DependentUpon>DeliveryAddressDoc.xsd</DependentUpon>
+    </None>
+    <None Include="DeliveryAddressDoc.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DeliveryAddressDoc.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DeliveryAddressDoc.xss">
+      <DependentUpon>DeliveryAddressDoc.xsd</DependentUpon>
+    </None>
+    <None Include="DeliveryDoc.xsc">
+      <DependentUpon>DeliveryDoc.xsd</DependentUpon>
+    </None>
+    <None Include="DeliveryDoc.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DeliveryDoc1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DeliveryDoc.xss">
+      <DependentUpon>DeliveryDoc.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="SubscriptionDoc3.xsc">
+      <DependentUpon>SubscriptionDoc3.xsd</DependentUpon>
+    </None>
+    <None Include="SubscriptionDoc3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SubscriptionDoc31.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SubscriptionDoc3.xss">
+      <DependentUpon>SubscriptionDoc3.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

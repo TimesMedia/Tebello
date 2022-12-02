@@ -1,0 +1,89 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Subs.Presentation"
+        xmlns:Data="clr-namespace:Subs.Data;assembly=Subs.Data" xmlns:local1="clr-namespace:Tebello.Presentation" x:Class="Subs.Presentation.AdministrationCountry"
+        mc:Ignorable="d"
+        Title="Administration of country" Loaded="Window_Loaded" MinWidth="1000">
+    <Window.Resources>
+        <Data:DeliveryAddressDoc x:Key="deliveryAddressDoc"/>
+        <CollectionViewSource x:Key="countryViewSource" Source="{Binding Country, Source={StaticResource deliveryAddressDoc}}"/>
+        <CollectionViewSource x:Key="countryDeliveryCostViewSource" Source="{Binding FK_DeliveryCost_Country, Source={StaticResource countryViewSource}}"/>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Aquamarine"/>
+            <Setter Property="Height" Value="22"/>
+        </Style>
+        <Style x:Key="AlignRight" TargetType="{x:Type FrameworkElement}">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+        <local1:RandConverter x:Key="lRandConverter"/>
+    </Window.Resources>
+    <TabControl DataContext="{StaticResource countryViewSource}" Width="auto" HorizontalAlignment="Stretch" Margin="0,0,0,0">
+        <TabItem Header="Country">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <DataGrid x:Name="countryDataGrid1" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="Auto" VerticalAlignment="Stretch"
+                                        RowDetailsVisibilityMode="VisibleWhenSelected" Width="Auto"
+                                ItemsSource="{Binding Source={StaticResource countryViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="countryNameColumn1" Binding="{Binding CountryName}" Header="Country Name" Width="Auto"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button x:Name="buttonCountry" Content="Submit" Grid.Column="1" Width="75" Click="buttonCountry_Click" VerticalAlignment="Bottom"/>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="DeliveryCost">
+            <Grid Background="#FFE5E5E5" DataContext="{StaticResource countryViewSource}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <DataGrid x:Name="countryDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" 
+                            RowDetailsVisibilityMode="Visible"  Width="Auto" HorizontalAlignment="Stretch"  Height="Auto" VerticalAlignment="Stretch" 
+                            Grid.RowSpan="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="countryNameColumn" Binding="{Binding CountryName}" Header="Country Name" Width="Auto"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <DataGrid x:Name="fK_DeliveryCost_CountryDataGrid" Grid.Column="1" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="Auto" 
+                           SelectionUnit="FullRow" VerticalAlignment="Top"
+                            ItemsSource="{Binding Source={StaticResource countryDeliveryCostViewSource}}" RowDetailsVisibilityMode="Visible" 
+                           Margin="10,0,0,0" >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn x:Name="dateFromColumn" Header="Date From" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker SelectedDate="{Binding DateFrom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn x:Name="mail1Column" Binding="{Binding Mail1, Converter={StaticResource lRandConverter}}"  CellStyle="{StaticResource AlignRight}" Header="Mail less than 1" Width="SizeToHeader" />
+                        <DataGridTextColumn x:Name="mail2Column" Binding="{Binding Mail2, Converter={StaticResource lRandConverter}}" Header="Mail less than 5" Width="SizeToHeader"  CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTextColumn x:Name="mail3Column" Binding="{Binding Mail3, Converter={StaticResource lRandConverter}}" Header="Mail more than 5" Width="SizeToHeader" CellStyle="{StaticResource AlignRight}"/>
+
+                        <DataGridTextColumn x:Name="courier1Column" Binding="{Binding Courier1, Converter={StaticResource lRandConverter}}" Header="Courier less than 1" Width="SizeToHeader" CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTextColumn x:Name="courier2Column" Binding="{Binding Courier2, Converter={StaticResource lRandConverter}}" Header="Courier less than 5" Width="SizeToHeader" CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTextColumn x:Name="courier3Column" Binding="{Binding Courier3, Converter={StaticResource lRandConverter}}" Header="Courier more than 5" Width="SizeToHeader" CellStyle="{StaticResource AlignRight}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Name="buttonSubmitDeliveryCost" Content="Submit" Grid.Row="1" Grid.Column="1" Width="106" HorizontalAlignment="Left" 
+                        Click="buttonSubmitDeliveryCost_Click" Margin="10,10,0,0"/>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>

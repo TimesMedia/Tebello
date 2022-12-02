@@ -1,0 +1,178 @@
+﻿@using Subs.Data;
+@using Subs.Business;
+@using Tebello.MimsWeb.Models;
+@using System.Collections.ObjectModel;
+
+@model Basket
+
+@{
+    ViewBag.Title = "Basket";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/Content/normalise.css">
+    <link rel="stylesheet" href="/Content/Styles.css">
+    <script src="/Scripts/jquery-3.4.1.js"></script>
+    <script src="/Scripts/Default.js"></script>
+
+    <title>Cart</title>
+    <style>
+        p {
+            margin: 2em 1em 1em 1em;
+            color: red;
+        }
+
+        th, td {
+            padding: 1em 1em 1em 0.5em;
+            text-anchor: start;
+            text-align: left;
+        }
+
+        .myButtons button {
+            margin: 1em 0em 0em 0em;
+            display: inline;
+            padding: 0px 7px 1px 7px;
+            border-radius: 10px;
+            text-decoration: none;
+            text-shadow: none;
+            font-family: Titillium, Arial, sans-serif;
+            font-weight: 700;
+            color: white;
+            text-transform: capitalize;
+            font-size: 0.8em;
+            letter-spacing: .1em;
+            background-color: dodgerblue;
+        }
+
+
+        .myButtons a {
+            margin: 2em 0em 0em 1em;
+            display: inline;
+            padding: 0px 7px 1px 7px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-family: Titillium, Arial, sans-serif;
+            font-weight: 700;
+            color: white;
+            text-transform: capitalize;
+            font-size: 1.5em;
+            letter-spacing: .1em;
+            background-color: dodgerblue;
+        }
+
+        .myTotals {
+            padding: 1em 1em 1em 0.5em;
+            border-top: 1px solid black;
+            border-bottom: 2px solid black;
+        }
+
+
+        .NumberStyle {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        @Html.ViewBag.Message
+    </p>
+
+    <p id="gMessage" style="visibility: hidden;">
+    </p>
+
+    @using (Html.BeginForm("BasketModification", "Promotion", FormMethod.Post, new { id = "SubmitForm" }))
+    {
+        <div class="myButtons" margin-left="0.5em">
+            @Html.ActionLink("Finalise Your Order", "Submit", "Promotion",
+                    new { onclick = "return window.confirm('Are you sure that you want to submit these subscriptions ?')" })
+            @Html.ActionLink("Continue shopping", "List", "Promotion", new { display = "inline" })
+
+        </div>
+
+        <table>
+            <tr>
+                <th>Remove</th>
+                <th>Product</th>
+                <th onmouseover="ShowMessage('One can have more than one copy of a product per issue.')" onmouseleave="HideMessage()"> # of copies</th>
+                <th> #Issues</th>
+                <th> Delivery option</th>
+                <th> Delivery cost</th>
+                <th> VAT</th>
+                <th> Full price</th>
+                <th> Discount</th>
+                <th> Final price</th>
+                <th></th>
+            </tr>
+            @{
+                int i = 0;
+                string lUnitsPerIssue = "";
+                string lDropBox = "";
+
+                foreach (BasketItem p in Model.BasketItems)
+                {
+                    lUnitsPerIssue = "[" + i + "].UnitsPerIssue";
+                    lDropBox = "[" + i + "].Drop";
+                    <tr>
+                        <td>@Html.CheckBox(@lDropBox, false, new { onchange = "ModificationHandler()" })</td>
+                        <td>@p.ProductName </td>
+                        <td style="width:3em">
+                            <input class="NumberStyle" onchange="ModificationHandler()" type="number" name=@lUnitsPerIssue value=@p.Subscription.UnitsPerIssue
+                                   min="1" max="10000" step="1" />
+                        </td>
+
+                        <td style="text-align:right;width:3em">@p.Subscription.NumberOfIssues </td>
+                        <td>
+                            @Html.DropDownList("[" + i + "].DeliveryMethod", new SelectList(p.DeliveryOptions, "Key", "Value", p.Subscription.DeliveryMethodInt),
+                                                new Dictionary<string, object> { { "selected", p.Subscription.DeliveryMethodInt }, { "onchange", "ModificationHandler()" } })
+                        </td>
+
+                        <td style="text-align:right">@p.Subscription.DeliveryCost.ToString("####0.00") </td>
+
+                        <td style="text-align:right">@p.Subscription.Vat.ToString("####0.00") </td>
+
+                        <td style="text-align:right">@p.Price.ToString("####0.00") </td>
+                        <td style="text-align:right">@p.Discount.ToString("####0.00") </td>
+                        <td style="text-align:right">@p.DiscountedPrice.ToString("######0.00") </td>
+                        <td style="text-align:right;color:red">@p.Warning</td>
+                    </tr>
+                    i++;
+
+                }
+            }
+            <tr>
+                <td class="myTotals"><strong>Totals</strong></td>
+                <td class="myTotals"> </td>
+                <td class="myTotals" colspan="5"> </td>
+                <td class="myTotals" style="text-align:right">@Model.TotalPrice.ToString("########0.00") </td>
+                <td class="myTotals" style="text-align:right">@Model.TotalDiscount.ToString("########0.00") </td>
+                <td class="myTotals" style="text-align:right">@Model.TotalDiscountedPrice.ToString("########0.00") </td>
+
+            </tr>
+            <tr> </tr>
+        </table>
+        <script>
+            function ModificationHandler() {
+                document.forms["SubmitForm"].submit();
+            }
+
+            function ShowMessage(m) {
+                var lElement = document.getElementById('gMessage');
+                lElement.textContent = m;
+                lElement.style.visibility = 'visible';
+            }
+
+            function HideMessage() {
+                document.getElementById('gMessage').style.visibility = 'hidden';
+            }
+
+
+        </script>
+    } @*end of form*@
+
+</body>
+</html>

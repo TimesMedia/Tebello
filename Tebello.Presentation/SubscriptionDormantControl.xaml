@@ -1,0 +1,57 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Subs.Presentation"
+             xmlns:Data="clr-namespace:Subs.Data;assembly=Subs.Data" xmlns:local1="clr-namespace:Tebello.Presentation" x:Class="Subs.Presentation.SubscriptionDormantControl" 
+             mc:Ignorable="d" Loaded="UserControl_Loaded"  HorizontalAlignment="Left" BorderBrush="Blue" BorderThickness="3" SizeChanged="UserControl_SizeChanged">
+    <UserControl.Resources>
+        <local1:DateConverter x:Key="lDateConverter"/>
+        <local1:RandConverter x:Key="lRandConverter"/>
+        <Data:SubscriptionDoc3 x:Key="subscriptionDoc3"/>
+        <CollectionViewSource x:Key="DormantViewSource"/>
+        <Style x:Key="AlignRight" TargetType="FrameworkElement">
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Aquamarine"/>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel DataContext="{StaticResource DormantViewSource}" Margin="0,0,0,0" Width="auto" Orientation="Vertical">
+        <DataGrid x:Name="DormantDataGrid" Width="Auto" Margin="0,0,0,0" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False"
+                  Height="800" SelectionMode="Single" SelectionUnit="CellOrRowHeader"  AlternatingRowBackground="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" 
+                  CanUserAddRows="False" CanUserDeleteRows="False" MouseRightButtonUp="Click_MouseRightButtonUp" RowHeight="30" >
+            <DataGrid.RowHeaderStyle>
+                <Style TargetType="{x:Type DataGridRowHeader}">
+                    <Setter Property="Background"  Value="Yellow"/>
+                    <Setter Property="Width"  Value="30"/>
+                    <Setter Property="BorderBrush" Value="Blue" />
+                    <Setter Property="BorderThickness"  Value="3" />
+                </Style>
+            </DataGrid.RowHeaderStyle>
+
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="Padding" Value="10"/>
+                    <Setter Property="Background"  Value="Yellow"/>
+                    <Setter Property="BorderBrush" Value="Blue" />
+                    <Setter Property="BorderThickness"  Value="3" />
+
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Deliverable Issue" Binding="{Binding DeliverableIssueName}"/>
+                <DataGridTextColumn x:Name="lastDeliveryDateColumn" CellStyle="{StaticResource AlignRight}" Header="Last delivery date"  Binding="{Binding LastDeliveryDate, Converter={StaticResource lDateConverter}}"/>
+                <DataGridTextColumn x:Name="subscriptionIdColumn"  CellStyle="{StaticResource AlignRight}" IsReadOnly="True"  Header="Subscription Id" Binding="{Binding SubscriptionId}"/>
+                <DataGridTextColumn x:Name="productNameColumn" Header="Product name" Binding="{Binding ProductName}"/>
+                <DataGridTextColumn x:Name="payerColumn" CellStyle="{StaticResource AlignRight}" Header="Payer" Binding="{Binding Payer}"/>
+                <DataGridTextColumn x:Name="liabilityColumn" CellStyle="{StaticResource AlignRight}" Header="Liability" Binding="{Binding Liability, Converter={StaticResource lRandConverter}}" />
+                <DataGridTextColumn x:Name="lastSequenceByProductColumn"  CellStyle="{StaticResource AlignRight}" Header="Last sequence by product" Binding="{Binding LastSequenceByProduct}"/>
+                <DataGridTextColumn x:Name="lastsequenceBySubscriptionColumn"   CellStyle="{StaticResource AlignRight}" Header="Last sequence by subscription" Binding="{Binding LastsequenceBySubscription}"/>
+                <DataGridTextColumn x:Name="lagByIssuesColumn" CellStyle="{StaticResource AlignRight}" Header="Lag by issues" Binding="{Binding LagByIssues}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</UserControl>

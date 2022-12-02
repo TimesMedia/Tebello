@@ -1,0 +1,75 @@
+﻿<Window x:Class="Tebello.Presentation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tebello.Presentation"
+        WindowState="Normal"  MouseEnter="Window_MouseEnter"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="0,0,0,0" Height="Auto" Width="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+        <!--<Label x:Name="labelCurrentCustomer"  Grid.Row="1" Width="auto"/>-->
+
+        <Menu x:Name="MainMenu" KeyboardNavigation.TabNavigation="Cycle" Height="Auto" Width="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Bold"
+              Background="lightblue">
+            <Image Source="mims-small.png" Height="46" MinWidth="40" Width="95" Visibility="Visible"/>
+            <MenuItem Header="Administration " Width="114"  FontStyle="Oblique" Height="60">
+                <MenuItem Header="Company" Click="Click_Company" 
+                          Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                <MenuItem Header="Country" Click="Country_Click" Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                <!--<MenuItem Header="Customer title" Click="Click_CustomerTitle" Tag="AuthorityHigh" Loaded="SetVisibility"/>-->
+                <MenuItem Header="Customer classification" Click="Click_CustomerClassification" Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                <MenuItem Header="DeliveryAddress" Click="Click_DeliveryAddress" Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                <MenuItem Header="DeliveryCost" Click="Click_DeliveryCost" Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                <!--<MenuItem Header="MIMS specific" Click="Click_MIMS_Specific" Tag="AuthorityHigh" Loaded="SetVisibility"/>-->
+
+                <MenuItem Header="Post codes" Click="Click_PostCode" Tag="AuthorityHigh" Loaded="SetVisibility" x:Name="PostCodes"/>
+                <MenuItem Header="Product" Click="Click_AdministrationProduct"  Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                <MenuItem Header="Promotion" Click="Click_Promotion"  Tag="AuthorityHigh" Loaded="SetVisibility"/>
+                <MenuItem Header="Refresh valid values" Click="Click_Refresh"/>
+
+            </MenuItem>
+            <MenuItem Header="Product  " Tag="AuthorityHigh" Loaded="SetVisibility" FontWeight="Bold" FontStyle="Oblique" Background="LightBlue" Height="60"  >
+                <MenuItem Header="Deliver" Click="Click_Deliver"/>
+                <MenuItem Header="Delivery reversal" Click="DeliveryReversal"/>
+            </MenuItem>
+
+            <MenuItem Header="Subscription"  FontStyle="Oblique" HorizontalAlignment="Left" FontWeight="Bold" Height="60">
+                <MenuItem Header="GoTo" Click="Click_SubscriptionPicker"/>
+                <MenuItem Header="Quote" Click="Click_Quote"/>
+                <MenuItem Header="Global_Skip" Click="Click_GlobalSkip" Tag="AuthorityHigh" Loaded="SetVisibility"/>
+            </MenuItem>
+
+            <MenuItem x:Name="CustomerMenu" Header="Customer" HorizontalAlignment="Right" FontWeight="Bold" FontStyle="Oblique"  Height="60">
+                <MenuItem  Header="Go to" Click="Click_CustomerGoTo"/>
+                <!--<MenuItem Header="Communication" Click="Click_CommunicationInitiate" Tag="AuthorityMedium" Loaded="SetVisibility"/>
+                <MenuItem Header="SB bank statement" Click="Click_SBBankStatement" Tag="AuthorityMedium" Loaded="SetVisibility"/>
+                <MenuItem Header="FNB bank statement" Click="Click_FNBBankStatement" Tag="AuthorityMedium" Loaded="SetVisibility"/>
+                <MenuItem Header="DO bank statement" Click="Click_DebitOrderBankStatement" Tag="AuthorityMedium" Loaded="SetVisibility"/>
+                <MenuItem Header="CreditNote" Click="Click_CreditNote" Tag="AuthorityHigh" Loaded="SetVisibility"/>-->
+
+            </MenuItem>
+
+            <MenuItem Header=" Maintenance  " Tag="AuthorityHigh" Loaded="SetVisibility" FontWeight="Bold" FontStyle="Oblique" Height="60"  >
+                <MenuItem Header="Refresh enums" Click="Click_RefreshEnums"/>
+                <MenuItem Header="Postcode standardisation" Click="Click_PostCodeStandardisation"/>
+                <MenuItem Header="Postcode Add Sapo Compliment" Click="Click_PostCodeAddSapoCompliment"/>
+                <MenuItem Header="Test" Click="Click_Test"/>
+            </MenuItem>
+        </Menu>
+
+        <Grid Grid.Row="1">
+            <Rectangle Width="auto" Height="auto" Fill="White"/>
+            <Rectangle Width="auto" Fill="White" Stroke="lightBlue" />
+            <Label x:Name="labelCurrentCustomer" HorizontalAlignment="Center" VerticalAlignment="Center" ></Label>
+        </Grid>
+    </Grid>
+
+</Window>

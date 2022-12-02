@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Welcome";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/Content/normalise.css">
+    <link rel="stylesheet" href="/Content/Styles.css">
+    <title>Welcome</title>
+
+    <style>
+        p {
+            padding: 1em 1em 1em 1em;
+            font-family: Arial;
+            font-size: large;
+            font-weight: 600;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        @Html.ViewBag.Message
+    </p>
+
+</body>
+</html>

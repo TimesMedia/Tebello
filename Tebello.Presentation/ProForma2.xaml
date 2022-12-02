@@ -1,0 +1,109 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Subs.Presentation"
+        xmlns:Data="clr-namespace:Subs.Data;assembly=Subs.Data" x:Class="Subs.Presentation.ProForma2"
+        mc:Ignorable="d"
+        Title="ProForma2" Height="771.105" Width="1192.334" Loaded="Window_Loaded">
+    <Window.Resources>
+        <!--<Data:SubscriptionDoc3 x:Key="subscriptionDoc3"/>-->
+        <CollectionViewSource x:Key="subscriptionViewSource"/>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="borderZero" BorderThickness="2" BorderBrush="Black" Background="LightBlue" CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="AlignRight" TargetType="FrameworkElement">
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+        </Style>
+
+
+    </Window.Resources>
+    <Canvas DataContext="{StaticResource subscriptionViewSource}" Margin="0,0,0,0">
+
+        <Label Name="labelCustomerId" Content="CustomerId" Canvas.Left="41" Canvas.Top="10" Width="164"/>
+        <Label Name="labelSurname" Content="Surname" Canvas.Left="210" Canvas.Top="10" Width="228"/>
+        <Button Name="buttonSelectCustomer" Content="Select another customer" Canvas.Left="575" Width="372" Canvas.Top="62" Click="ButtonSelectCustomer_Click" />
+        <Button Name="buttonList" Content="List subscription proposals" Canvas.Left="41" Canvas.Top="62" Width="397"  Click="ButtonList_Click"/>
+
+        <DataGrid x:Name="subscriptionDataGrid" Width="1097" Canvas.Top="138" RowDetailsVisibilityMode="VisibleWhenSelected" Canvas.Left="41" ItemsSource="{Binding}" Height="478" 
+                   IsReadOnly="true" SelectionMode="Extended" EnableRowVirtualization="True" AutoGenerateColumns="False" RowHeight="20">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="SizeToHeader" Header="Proforma Id" Binding="{Binding ProFormaId}"/>
+                <DataGridTextColumn x:Name="subscriptionIdColumn" Width="SizeToHeader" IsReadOnly="True" Header="Subscription Id" Binding="{Binding SubscriptionId}"/>
+                <DataGridTextColumn x:Name="payerColumn" Width="SizeToHeader" Header="Payer" Binding="{Binding PayerId}"/>
+                <DataGridTextColumn x:Name="receiverColumn" Width="SizeToHeader" Header="Receiver" Binding="{Binding ReceiverId}"/>
+                <DataGridTextColumn x:Name="productNameColumn" Width="SizeToHeader" Header="Product Name" Binding="{Binding ProductName}"/>
+                <DataGridTextColumn x:Name="startIssueDescriptionColumn" Width="SizeToHeader" Header="Start Issue Description" Binding="{Binding StartIssueDescription}"/>
+                <DataGridTextColumn x:Name="lastIssueDescriptionColumn" Width="SizeToHeader" Header="Last Issue Description" Binding="{Binding LastIssueDescription}"/>
+                <!--<DataGridTextColumn x:Name="statusColumn" Width="SizeToHeader" Header="Status" Binding="{Binding Status}"/>
+                <DataGridTextColumn x:Name="deliveryMethodColumn" Width="SizeToHeader" Header="Delivery Method" Binding="{Binding DeliveryMethod}"/>-->
+                <DataGridTextColumn x:Name="unitsPerIssueColumn" Width="SizeToHeader" Header="Units Per Issue" Binding="{Binding UnitsPerIssue}"/>
+                <DataGridTextColumn x:Name="numberOfIssuesColumn" Width="SizeToHeader" Header="Number Of Issues" Binding="{Binding NumberOfIssues}"/>
+                <!--<DataGridTextColumn x:Name="productIdColumn" Width="SizeToHeader" Header="Product Id" Binding="{Binding ProductId}"/>-->
+                <DataGridTextColumn x:Name="baseRateColumn" Width="SizeToHeader" Header="Base Rate" Binding="{Binding BaseRate}"/>
+                <DataGridTextColumn x:Name="deliveryCostColumn" Width="SizeToHeader" Header="Delivery Cost" Binding="{Binding DeliveryCost}"/>
+                <DataGridCheckBoxColumn x:Name="freeDeliveryColumn" Width="SizeToHeader" Header="Free Delivery" Binding="{Binding FreeDelivery}"/>
+                <DataGridTextColumn x:Name="vatPercentageColumn" Width="SizeToHeader" Header="Vat Percentage" Binding="{Binding VatPercentage}"/>
+                <DataGridTextColumn x:Name="vatColumn" Width="SizeToHeader" Header="Vat" Binding="{Binding Vat}"/>
+                <DataGridTextColumn x:Name="unitPriceColumn" Width="SizeToHeader" Header="Unit Price" Binding="{Binding UnitPrice}"/>
+                <DataGridTextColumn x:Name="discountMultiplierColumn" Width="SizeToHeader" Header="Discount Multiplier" Binding="{Binding DiscountMultiplier}"/>
+                <!--<DataGridTextColumn x:Name="deliveryAddressIdColumn" Width="SizeToHeader" Header="Delivery Address Id" Binding="{Binding DeliveryAddressId}"/>-->
+                <DataGridTextColumn x:Name="orderNumberColumn" Width="SizeToHeader" Header="Order Number" Binding="{Binding OrderNumber}"/>
+
+                <DataGridCheckBoxColumn x:Name="renewalNoticeColumn" Width="SizeToHeader" Header="Renewal Notice" Binding="{Binding RenewalNotice}"/>
+                <DataGridCheckBoxColumn x:Name="automaticRenewalColumn" Width="SizeToHeader" Header="Automatic Renewal" Binding="{Binding AutomaticRenewal}"/>
+                <!--<DataGridTextColumn x:Name="modifiedByColumn" Width="SizeToHeader" Header="Modified By" Binding="{Binding ModifiedBy}"/>
+                <DataGridTemplateColumn x:Name="modifiedOnColumn" Width="SizeToHeader" Header="Modified On">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding ModifiedOn, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
+                <DataGridTextColumn x:Name="payerCompanyColumn" Width="SizeToHeader" Header="Payer Company" Binding="{Binding PayerCompany}"/>
+                <DataGridTextColumn x:Name="payerCountryColumn" Width="SizeToHeader" Header="Payer Country" Binding="{Binding PayerCountry}"/>
+                <DataGridTextColumn x:Name="payerSurnameColumn" Width="SizeToHeader" Header="Payer Surname" Binding="{Binding PayerSurname}"/>
+                <DataGridTextColumn x:Name="payerPhoneNumberColumn" Width="SizeToHeader" Header="Payer Phone Number" Binding="{Binding PayerPhoneNumber}"/>
+                <DataGridTextColumn x:Name="payerLiabilityColumn" Width="SizeToHeader" Header="Payer Liability" Binding="{Binding PayerLiability}"/>
+                <DataGridTextColumn x:Name="payerVatRegistrationColumn" Width="SizeToHeader" Header="Payer Vat Registration" Binding="{Binding PayerVatRegistration}"/>
+                <DataGridTextColumn x:Name="payerVatInvoiceNumberColumn" Width="SizeToHeader" Header="Payer Vat Invoice Number" Binding="{Binding PayerVatInvoiceNumber}"/>
+                <DataGridTextColumn x:Name="payerCommentsColumn" Width="SizeToHeader" Header="Payer Comments" Binding="{Binding PayerComments}"/>
+                <DataGridTextColumn x:Name="receiverSurnameColumn" Width="SizeToHeader" Header="Receiver Surname" Binding="{Binding ReceiverSurname}"/>
+                <DataGridTextColumn x:Name="receiverCompanyColumn" Width="SizeToHeader" Header="Receiver Company" Binding="{Binding ReceiverCompany}"/>
+                <DataGridTextColumn x:Name="receiverDepartmentColumn" Width="SizeToHeader" Header="Receiver Department" Binding="{Binding ReceiverDepartment}"/>
+                <DataGridTextColumn x:Name="receiverCountryColumn" Width="SizeToHeader" Header="Receiver Country" Binding="{Binding ReceiverCountry}"/>
+                <DataGridTextColumn x:Name="receiverFaxColumn" Width="SizeToHeader" Header="Receiver Fax" Binding="{Binding ReceiverFax}"/>
+                <DataGridTextColumn x:Name="receiverEMailColumn" Width="SizeToHeader" Header="Receiver EMail" Binding="{Binding ReceiverEMail}"/>
+                <DataGridTextColumn x:Name="commentsColumn" Width="SizeToHeader" Header="Comments" Binding="{Binding Comments}"/>
+                <DataGridTextColumn x:Name="statusNameColumn" Width="SizeToHeader" Header="Status Name" Binding="{Binding StatusName}"/>
+                <DataGridTextColumn x:Name="deliveryNameColumn" Width="SizeToHeader" Header="Delivery Name" Binding="{Binding DeliveryName}"/>
+                <DataGridTextColumn x:Name="periodDescriptionColumn" Width="SizeToHeader" Header="Period Description" Binding="{Binding PeriodDescription}"/>
+                <DataGridTemplateColumn x:Name="startDateColumn" Width="SizeToHeader" Header="Start Date">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding StartDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label Content="Select the subscriptions that you want to include in the pro forma invoice" Canvas.Left="41" Canvas.Top="661" RenderTransformOrigin="-2.597,1.412"/>
+        <Button Name="buttonGenerate" Content="Generate and email the proforma invoice" Canvas.Left="41" Canvas.Top="701" Width="397" Click="ButtonGenerate_Click"/>
+
+    </Canvas>
+</Window>

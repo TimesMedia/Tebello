@@ -1,0 +1,374 @@
+﻿<Window x:Class="Tebello.Presentation.AdministrationProduct"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tebello.Presentation" xmlns:Data="clr-namespace:Subs.Data;assembly=Subs.Data" xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase" xmlns:local1="clr-namespace:Subs.Presentation"
+        mc:Ignorable="d"
+        Title="AdministrationProduct" Height="450" Width="800">
+    <Window.Resources>
+        <Data:ProductDoc x:Key="productDoc"/>
+        <local:DeliveryOptionsToDictionary x:Key="lDeliveryOptionsToDictionary"/>
+        <CollectionViewSource x:Key="product2ViewSource" Source="{Binding Product2, Source={StaticResource productDoc}}"/>
+        <CollectionViewSource x:Key="issueViewSource" Source="{Binding Product2_Issue, Source={StaticResource product2ViewSource}}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Year" />
+                <scm:SortDescription PropertyName="No" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+        <CollectionViewSource x:Key="baseRateViewSource" Source="{Binding Product2_BaseRate, Source={StaticResource product2ViewSource}}"/>
+
+        <Style TargetType="{x:Type DataGridCell}" >
+            <Style.Triggers>
+                <!--  IsSelected  -->
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Yellow" />
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="AlignRight" TargetType="{x:Type FrameworkElement}">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+
+        <Style x:Key="WrappedColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding}"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="Turquoise"/>
+
+        </Style>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="Turquoise"/>
+            <Setter Property="Padding" Value="3"/>
+        </Style>
+
+        <Style  TargetType="Image">
+            <Setter Property="Block.BorderThickness" Value="4"/>
+        </Style>
+
+        <!--<Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Aquamarine"/>
+        </Style>-->
+
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="Background" Value="Aquamarine"/>
+        </Style>
+
+        <local:SubscriptionCategory x:Key="lSubscriptionCategory"/>
+        <local:DateConverter x:Key="lDateConverter"/>
+        <local:RandConverter x:Key="lRandConverter"/>
+        <local:SubscriptionMediumInt2Type x:Key="lSubscriptionMediumInt2Type"/>
+
+    </Window.Resources>
+
+    <TabControl x:Name="TabControl" >
+        <TabItem x:Name="ProductTab" Header="Product" DataContext="{StaticResource product2ViewSource}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="108*"/>
+                    <ColumnDefinition Width="144*"/>
+                    <ColumnDefinition Width="251*"/>
+                    <ColumnDefinition Width="251*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!--Row 0-->
+
+                <DataGrid x:Name="product2DataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="0,0,-0.416,0" ItemsSource="{Binding}" EnableRowVirtualization="True" 
+                        AutoGenerateColumns="False" HorizontalAlignment="Stretch" Width="Auto" AlternatingRowBackground="LightSkyBlue" Validation.Error="ValidationError" CanUserDeleteRows="False" 
+                        CanUserAddRows="False" SelectionUnit="CellOrRowHeader" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" 
+                        Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Top"
+                        SelectionChanged="product2DataGrid_SelectionChanged" Sorting="product2DataGrid_Sorting" MouseRightButtonUp="Product2DataGrid_MouseRightButtonUp">
+                    <DataGrid.RowHeaderStyle>
+                        <Style TargetType="{x:Type DataGridRowHeader}">
+                            <Setter Property="Background"  Value="Yellow"/>
+                            <Setter Property="Width"  Value="30"/>
+                            <Setter Property="BorderBrush" Value="Red" />
+                            <Setter Property="BorderThickness"  Value="3" />
+                        </Style>
+                    </DataGrid.RowHeaderStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="Auto" Header="Status" Binding="{Binding Status, Mode=OneTime}" CanUserSort="False" IsReadOnly="True"/>
+                        <DataGridTemplateColumn Header="Product name" Width="290" CanUserSort="True" CanUserReorder="False" SortMemberPath="ProductName" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Height="Auto" Margin="3" TextWrapping="Wrap" Validation.Error="ValidationError" >
+                                        <TextBox.Text>
+                                            <Binding Path="ProductName" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                                                <Binding.ValidationRules>
+                                                    <ExceptionValidationRule/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Width="SizeToHeader" Header="Medium" Binding="{Binding Medium, Converter={StaticResource lSubscriptionMediumInt2Type}}"
+                                            IsReadOnly="True"/>
+
+                        <DataGridTextColumn x:Name="displaySequenceColumn" Width="65" Header="Display sequence" Binding="{Binding DisplaySequence, Mode=TwoWay}"
+                                            HeaderStyle="{StaticResource WrappedColumnHeaderStyle}"  CellStyle="{StaticResource AlignRight}"/>
+
+                        <DataGridTextColumn x:Name="expirationDurationColumn" Width="65" Binding="{Binding ExpirationDuration}"  CellStyle="{StaticResource AlignRight}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="Expiration duration" 
+                                                ToolTip="The number of days that a subscription is expired before it gets cancelled."
+                                                TextWrapping="Wrap">
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn x:Name="defaultNumberOfIssuesColumn" Width="60" Header="Default number of issues" Binding="{Binding DefaultNumberOfIssues}"
+                                            HeaderStyle="{StaticResource WrappedColumnHeaderStyle}"  CellStyle="{StaticResource AlignRight}" />
+                        <DataGridTextColumn x:Name="weightColumn" Width="SizeToHeader" Header="Weight" Binding="{Binding Weight}" CellStyle="{StaticResource AlignRight}" />
+                        <DataGridTextColumn x:Name="lengthColumn" Width="50" Header="Length mm" Binding="{Binding Length}" CellStyle="{StaticResource AlignRight}" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}"/>
+                        <DataGridTextColumn x:Name="wydteColumn" Width="50" Header="Width mm" Binding="{Binding Wydte}" CellStyle="{StaticResource AlignRight}" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}"/>
+                        <DataGridTextColumn x:Name="hoogteColumn" Width="50" Header="Height mm" Binding="{Binding Hoogte}" CellStyle="{StaticResource AlignRight}" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}"/>
+                        <DataGridCheckBoxColumn x:Name="allowMultipleCopiesColumn" Width="60" Header="Allow multiple copies" Binding="{Binding AllowMultipleCopies}"
+                            HeaderStyle="{StaticResource WrappedColumnHeaderStyle}"/>
+                        <DataGridTextColumn x:Name="classificationColumn" Width="Auto"  Header="Classification" Binding="{Binding Classification}" CellStyle="{StaticResource AlignRight}"
+                                            IsReadOnly="true"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Image  x:Name="ProductImage" Grid.Row="0" Grid.Column="3" Source="{Binding Picture}" HorizontalAlignment="Stretch" Height="Auto" Width="Auto" Margin="10,0,0,0" VerticalAlignment="Top"/>
+
+
+                <!--Row 1-->
+                <Button x:Name="buttonAddPicture"  Content="Add picture"   Grid.Row="1" Grid.Column="0" Margin="0,10,0,0" Width="90"  HorizontalAlignment="Left"  Click="buttonAddPicture_Click"/>
+                <Button x:Name="buttonAddProduct"  Content="Add a product"  Width="90" Grid.Row="1" Grid.Column="2" Margin="0,10,0,0" HorizontalAlignment="Right"  Click="buttonAddProduct_Click"/>
+                <!--Row 2-->
+
+                <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="0,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
+
+                    <Label Content="Name"  Height="25"/>
+                    <TextBox x:Name="Naam"  Height="30" Text="{Binding ProductName, Mode=TwoWay}" MaxLength="200"/>
+                    <Label Content="Heading"  Height="25"/>
+                    <TextBox x:Name="Heading"  Height="70" Text="{Binding Heading, Mode=TwoWay}" VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" />
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,10,0,0" VerticalAlignment="Top">
+                    <Label Content="Description" Height="25" Margin="5,0,0,0" />
+                    <TextBox x:Name="Description" Height="125" HorizontalAlignment="Stretch" Width="auto" Margin="10,0,0,0"
+                            VerticalScrollBarVisibility="Visible" AcceptsReturn="True" AutoWordSelection="True" 
+                            ScrollViewer.CanContentScroll="True" TextWrapping="Wrap"  Validation.Error="ValidationError">
+                        <TextBox.Text>
+                            <Binding Path="ProductDescription" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <ExceptionValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+
+                <!--Row 3 -->
+                <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="0" Width="180" Margin="36,10,36,0" Grid.ColumnSpan="2">
+                    <Label Content="Valid delivery options"/>
+                    <local1:DeliveryOptionsControl Height="100"  Width="auto"  Validation.Error="ValidationError" 
+                                                LostFocus="DeliveryOptionsLostFocus" Margin="7,0,0,0">
+                        <local1:DeliveryOptionsControl.DeliveryOptions>
+                            <Binding Path="DeliveryOptions" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <ExceptionValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </local1:DeliveryOptionsControl.DeliveryOptions>
+                    </local1:DeliveryOptionsControl>
+
+                    <Label Content="Default delivery option"/>
+                    <ComboBox x:Name="DefaultDeliveryOption"  Validation.Error="ValidationError"
+                        ItemsSource="{Binding DeliveryOptions, Converter={StaticResource lDeliveryOptionsToDictionary}}"
+                        DisplayMemberPath="Value" SelectedValuePath="Key"
+                        SelectedValue="{Binding Path=DefaultDeliveryOption, Mode=TwoWay}" Width="auto">
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="2" Margin="20,0,0,0">
+                    <Label Content="Web classification" Margin="10,10,0,0" />
+
+                    <local1:WebProductClassification Height="100"  Width="auto"  Validation.Error="ValidationError" Margin ="15,0,0,0">
+                        <local1:WebProductClassification.Classification>
+                            <Binding Path="Category1" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <ExceptionValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </local1:WebProductClassification.Classification>
+                    </local1:WebProductClassification>
+
+
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="3" Margin="10" HorizontalAlignment="Stretch" Width="auto">
+                    <Label Content="Medium" Height="29" Width="100" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+
+                    <ComboBox SelectedValue="{Binding Path=Medium, Mode=TwoWay}"
+                            Validation.Error="ValidationError" 
+                            ItemsSource="{Binding Source={StaticResource lSubscriptionCategory}, Path=SubscriptionMedium}"
+                            SelectedValuePath="Key" DisplayMemberPath="Value" Width="auto" Margin="10,5,20,10"/>
+
+                    <Label Content="Classification" Margin="5,0,0,0"/>
+                    <TextBox x:Name="textClassification" Height="27" Width="210" Text="{Binding Classification, Mode=TwoWay}" TextWrapping="Wrap" MaxLength="20"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                        <Button x:Name="buttonSubmit" Content="Submit" Width="70" Click="buttonSubmitProduct_Click" Margin="10,0,0,0 "/>
+                        <Button x:Name="Exit" Content="Exit without changes" Width="auto" Click="Exit_Click" Margin="20,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+
+        <TabItem x:Name="TabIssue" Header="Issue">
+            <Grid DataContext="{StaticResource issueViewSource}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="122" />
+                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="607"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <DataGrid x:Name="issueDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="auto" VerticalAlignment="Stretch" ItemsSource="{Binding}"
+                            RowDetailsVisibilityMode="VisibleWhenSelected" HorizontalAlignment="Stretch" Width="Auto"  DataContext="{StaticResource issueViewSource}" 
+                            CanUserDeleteRows="True" CanUserAddRows="False" SelectionUnit="CellOrRowHeader" IsSynchronizedWithCurrentItem="True" Grid.ColumnSpan="3">
+                    <DataGrid.RowHeaderStyle>
+                        <Style TargetType="{x:Type DataGridRowHeader}">
+                            <Setter Property="Background"  Value="Yellow"/>
+                            <Setter Property="Width"  Value="30"/>
+                            <Setter Property="BorderBrush" Value="Red" />
+                            <Setter Property="BorderThickness"  Value="3" />
+                        </Style>
+                    </DataGrid.RowHeaderStyle>
+
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn x:Name="issueIdColumn" Binding="{Binding IssueId}" Header="Issue" Width="40"  CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTemplateColumn Header="Issue description" Width="auto" CanUserSort="True" CanUserReorder="False" SortMemberPath="Issue">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Height="Auto" Margin="3" TextWrapping="Wrap" Validation.Error="ValidationError">
+                                        <TextBox.Text>
+                                            <Binding Path="IssueDescription" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                                                <Binding.ValidationRules>
+                                                    <ExceptionValidationRule/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+
+                        <DataGridTextColumn x:Name="yearColumn" Binding="{Binding Year}" Header="Year" Width="40"  CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTextColumn x:Name="noColumn" Binding="{Binding No}" Header="No" Width="SizeToHeader"  CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTextColumn x:Name="sequenceColumn" Binding="{Binding Sequence}" Header="Sequence" Width="SizeToHeader" IsReadOnly="True" 
+                                                CellStyle="{StaticResource AlignRight}"/>
+
+                        <DataGridTextColumn x:Name="PromotionPriceColumn" Binding="{Binding PromotionPrice, Converter={StaticResource lRandConverter}}" 
+                                                HeaderStyle="{StaticResource WrappedColumnHeaderStyle}" Header="Promotion price" Width="60"  CellStyle="{StaticResource AlignRight}"/>
+
+                        <DataGridTextColumn x:Name="stockProducedColumn" Binding="{Binding StockProduced}" Header="Stock produced" Width="60" 
+                                                HeaderStyle="{StaticResource WrappedColumnHeaderStyle}" CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTextColumn x:Name="stockDeliveredColumn" Binding="{Binding StockDelivered}" Header="Stock delivered" IsReadOnly="True" 
+                                                HeaderStyle="{StaticResource WrappedColumnHeaderStyle}" Width="60"  CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTextColumn x:Name="stockLostColumn" Binding="{Binding StockLost}" Header="Stock lost" IsReadOnly="True" 
+                                                HeaderStyle="{StaticResource WrappedColumnHeaderStyle}"  Width="40"  CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTextColumn x:Name="stockReturnedColumn" Binding="{Binding StockReturned}" Header="Stock returned" IsReadOnly="True" 
+                                            HeaderStyle="{StaticResource WrappedColumnHeaderStyle}" Width="60"  CellStyle="{StaticResource AlignRight}"/>
+                        <DataGridTemplateColumn x:Name="startDateColumn" Header="Start Date" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker SelectedDate="{Binding StartDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn x:Name="endDateColumn" Header="End Date" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker SelectedDate="{Binding EndDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Grid Grid.Row="1" Grid.Column="0" Margin="0,10,0,0" Grid.ColumnSpan="3" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="buttonAddIssue" Grid.Column="0" Content="Add an issue" Height="30" Width="75" Click="buttonAddIssue_Click"/>
+                    <Button x:Name="buttonSubmitIssue" Grid.Column="1" Content="Submit" Width="75" Click="buttonSubmitIssue_Click"  Height="30"/>
+                    <Button x:Name="buttonExitIssue" Grid.Column="2" Content="Exit without saving" Width="115" Click="buttonExitIssue_Click"  Height="30"  Margin="0,0,10,0"/>
+                </Grid>
+            </Grid>
+        </TabItem>
+
+        <TabItem x:Name="TabBaseRate" Header="BaseRate" DataContext="{StaticResource baseRateViewSource}">
+            <Canvas Margin="0,1,0,-1">
+                <DataGrid x:Name="BaseRateDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="auto" 
+                            ItemsSource="{Binding}" Canvas.Left="10" RowDetailsVisibilityMode="VisibleWhenSelected" Canvas.Top="10" Width="400"
+                            CanUserDeleteRows="True" CanUserAddRows="False" SelectionUnit="CellOrRowHeader">
+                    <DataGrid.RowHeaderStyle>
+                        <Style TargetType="{x:Type DataGridRowHeader}">
+                            <Setter Property="Background"  Value="Yellow"/>
+                            <Setter Property="Width"  Value="30"/>
+                            <Setter Property="BorderBrush" Value="Red" />
+                            <Setter Property="BorderThickness"  Value="3" />
+                        </Style>
+                    </DataGrid.RowHeaderStyle>
+
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn x:Name="dateFromColumn" Header="Date From" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker SelectedDate="{Binding DateFrom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=PropertyChanged}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn x:Name="valueColumn" Binding="{Binding Value, Converter={StaticResource lRandConverter}}" Header="Value" 
+                                            CellStyle="{StaticResource AlignRight}"  Width="60" IsReadOnly="False"/>
+                        <DataGridTextColumn x:Name="modifiedByColumn" Binding="{Binding ModifiedBy}" Header="Modified By" Width="Auto" IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="modifiedOnColumn" Header="Modified On" Width="Auto" IsReadOnly="True"
+                                            Binding="{Binding DateFrom, Converter={StaticResource lDateConverter}}"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button x:Name="buttonCalculateBaseRate" Content="Calculate a base rate" Canvas.Left="481" Canvas.Top="54" Width="160" Click="buttonCalculateBaseRate_Click"/>
+                <Label Canvas.Left="477" Canvas.Top="81" Width="164">Proposed base rate</Label>
+                <TextBox x:Name="TextProposedBaseRate" Canvas.Left="481" Canvas.Top="112" Width="160" IsReadOnly="True"></TextBox>
+                <Button x:Name="buttonAddBaseRate" Content="Add a new BaseRate" Canvas.Left="481" Canvas.Top="338" Width="160" Click="buttonAddBaseRate_Click"/>
+                <Button x:Name="buttonSubmitBaseRate" Content="Submit" Canvas.Left="481" Canvas.Top="379" Width="160" Click="buttonSubmitBaseRate_Click"/>
+                <Button x:Name="buttonExitBaseRate" Content="Exit without saving" Canvas.Left="481" Canvas.Top="421" Width="160" Click="buttonExitBaseRate_Click"/>
+
+            </Canvas>
+        </TabItem>
+    </TabControl>
+</Window>

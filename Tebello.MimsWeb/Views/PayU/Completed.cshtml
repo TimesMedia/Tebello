@@ -1,0 +1,61 @@
+﻿@model Tebello.MimsWeb.Models.PayUResult
+
+@{
+    ViewBag.Title = "Completed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="/Scripts/jquery-3.4.1.js"></script>
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/Content/normalize.css">
+    <link rel="stylesheet" href="/Content/skeleton.css">
+    <link rel="stylesheet" href="/Content/Styles.css">
+
+    <title>@ViewBag.Title</title>
+
+</head>
+
+<body>
+
+    <p style="font-family: Arial; margin:2em 0em 2em 1em; color:red; ">
+        @Html.ViewBag.Message
+    </p>
+
+    <table>
+        <tr>
+            <td>@Html.LabelFor(x => x.PointOfFailure)</td>
+            <td>@Model.PointOfFailure</td>
+        </tr>
+
+        <tr>
+            <td>@Html.LabelFor(x => x.ResultCode)</td>
+            <td>@Model.ResultCode</td>
+        </tr>
+
+        <tr>
+            <td>@Html.LabelFor(x => x.ResultMessage)</td>
+            <td>@Model.ResultMessage</td>
+        </tr>
+
+
+
+        <tr>
+            <td>@Html.LabelFor(x => x.Successful)</td>
+            <td>@Model.Successful</td>
+        </tr>
+
+        <tr>
+            <td>@Html.LabelFor(x => x.TransactionState)</td>
+            <td>@Model.TransactionState</td>
+        </tr>
+    </table>
+</body>
+</html>

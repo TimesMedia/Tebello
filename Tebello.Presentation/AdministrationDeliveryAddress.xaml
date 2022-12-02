@@ -1,0 +1,192 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Data="clr-namespace:Subs.Data;assembly=Subs.Data" xmlns:ComponentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase" x:Class="Subs.Presentation.AdministrationDeliveryAddress"
+        Title="Delivery address administration" Height="749" MinWidth="1250" Width="1250" Loaded="Window_Loaded" WindowState="Normal" WindowStartupLocation="Manual">
+    <Window.Resources>
+        <Data:DeliveryAddressDoc x:Key="deliveryAddressDoc"/>
+        <CollectionViewSource x:Key="deliveryAddressViewSource"/>
+
+        <CollectionViewSource x:Key="countryViewSource" Source="{Binding Country, Source={StaticResource deliveryAddressDoc}}"/>
+        <CollectionViewSource x:Key="provinceViewSource" Source="{Binding FK_Province_Country, Source={StaticResource countryViewSource}}"/>
+        <CollectionViewSource x:Key="provinceCityViewSource" Source="{Binding FK_City_Province, Source={StaticResource provinceViewSource}}">
+            <CollectionViewSource.SortDescriptions>
+                <ComponentModel:SortDescription Direction="Ascending" PropertyName="CityName"/>
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+        <CollectionViewSource x:Key="provinceCitySuburbViewSource" Source="{Binding FK_Suburb_City, Source={StaticResource provinceCityViewSource}}"/>
+        <CollectionViewSource x:Key="provinceCitySuburbStreetViewSource" Source="{Binding FK_Street_Suburb, Source={StaticResource provinceCitySuburbViewSource}}"/>
+
+        <Style x:Key="AlignRight" TargetType="{x:Type FrameworkElement}">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}" >
+            <Setter Property="Background" Value="Yellow"/>
+        </Style>
+
+
+        <Style TargetType="{x:Type DataGridCell}" >
+            <Style.Triggers>
+                <!--  IsSelected  -->
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Yellow" />
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type DataGrid}">
+            <Setter Property="Margin" Value="10,10,0,0"/>
+
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+
+                Value="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={RelativeSource Self}}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </Window.Resources>
+    <TabControl x:Name="TabControl">
+        <TabItem Header="Non verified addresses">
+            <DataGrid x:Name="deliveryAddressDataGrid" Grid.Row="1" AutoGenerateColumns="False" EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected"
+                                Height="Auto"   HorizontalScrollBarVisibility="Visible" Width="1080" SelectionUnit="CellOrRowHeader" RowHeight="30"
+                                IsReadOnly="True" IsSynchronizedWithCurrentItem="True" MouseDoubleClick="Click_Select"
+                                Margin="10" DataContext="{StaticResource deliveryAddressViewSource}" ItemsSource="{Binding}">
+                <DataGrid.RowHeaderStyle>
+                    <Style TargetType="{x:Type DataGridRowHeader}">
+                        <Setter Property="Background"  Value="Yellow"/>
+                        <Setter Property="Width"  Value="30"/>
+                        <Setter Property="BorderBrush" Value="Red" />
+                        <Setter Property="BorderThickness"  Value="3" />
+                    </Style>
+                </DataGrid.RowHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="deliveryAddressIdColumn" Binding="{Binding DeliveryAddressId}" Header="Delivery Address Id" IsReadOnly="True" 
+                                                CellStyle="{StaticResource AlignRight}" Width="Auto"/>
+                    <DataGridTextColumn x:Name="countryStringColumn" Binding="{Binding CountryName}" Header="Country" Width="Auto"/>
+                    <DataGridTextColumn x:Name="provinceColumn" Binding="{Binding Province, Mode=OneWay}" Header="Province" Width="Auto"/>
+                    <DataGridTextColumn x:Name="cityColumn" Binding="{Binding City}" Header="City" Width="Auto"/>
+                    <DataGridTextColumn x:Name="suburbColumn" Binding="{Binding Suburb}" Header="Suburb" Width="Auto"/>
+                    <DataGridTextColumn x:Name="streetColumn" Binding="{Binding Street}" Header="Street" Width="Auto"/>
+                    <DataGridTextColumn x:Name="streetExtensionColumn1" Binding="{Binding StreetExtension}" Header="Street Extension" Width="Auto"/>
+                    <DataGridTextColumn x:Name="streetSuffixColumn1" Binding="{Binding StreetSuffix}" Header="Street Suffix" Width="Auto"/>
+                    <DataGridTextColumn x:Name="streetStreetIdColumn1" Binding="{Binding StreetId}" Header="StreetId" Width="Auto"/>
+                    <DataGridTextColumn x:Name="streetNoColumn" Binding="{Binding StreetNo}" Header="Street No" Width="Auto"
+                                                CellStyle="{StaticResource AlignRight}"/>
+                    <DataGridTextColumn x:Name="buildingColumn" Binding="{Binding Building}" Header="Building" Width="Auto"/>
+                    <DataGridTextColumn x:Name="floorColumn" Binding="{Binding FloorNo}" Header="Floor" Width="Auto"/>
+                    <DataGridTextColumn x:Name="roomColumn" Binding="{Binding Room}" Header="Room" Width="Auto"
+                                                CellStyle="{StaticResource AlignRight}"/>
+                    <DataGridTextColumn x:Name="postCodeColumn" Binding="{Binding PostCode}" Header="Post Code" Width="Auto"
+                                                CellStyle="{StaticResource AlignRight}"/>
+                    <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Phone Number" Width="Auto"/>
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="contextSelect" Header="Select" Click="Click_Select" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+        </TabItem>
+
+        <TabItem Header="Address Template">
+            <Grid x:Name="AddressTree" HorizontalAlignment="Stretch" Width="auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="46*"/>
+                    <ColumnDefinition Width="34*"/>
+                    <ColumnDefinition Width="194*"/>
+                    <ColumnDefinition Width="275*"/>
+                    <ColumnDefinition Width="229*"/>
+                    <ColumnDefinition Width="458*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+
+                <TextBox  x:Name="textCountry" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
+                <TextBox  x:Name="textProvince" IsReadOnly="True" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"/>
+                <TextBox  x:Name="textCity"  IsReadOnly="True" Grid.Row="0" Grid.Column="3" Margin="10,0,0,0"/>
+                <TextBox  x:Name="textSuburb" IsReadOnly="True" Grid.Row="0" Grid.Column="4" Margin="10,0,0,0"/>
+                <StackPanel Orientation="Horizontal"  Grid.Row="0" Grid.Column="5">
+                    <TextBox  x:Name="textStreet" IsReadOnly="True" Margin="10,0,0,0" Width="{Binding ActualWidth, ElementName=streetNameColumn}"/>
+
+                    <TextBox  x:Name="textExtension" IsReadOnly="True" Width="{Binding ActualWidth, ElementName=streetExtensionColumn}"/>
+
+                    <TextBox  x:Name="textSuffix" IsReadOnly="True" Width="{Binding ActualWidth, ElementName=streetSuffixColumn}"/>
+                </StackPanel>
+
+                <DataGrid x:Name="countryDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="false" Grid.Row="2" Grid.Column="0"
+                      ItemsSource="{Binding Source={StaticResource countryViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" 
+                      Width="auto" IsReadOnly="True" Grid.ColumnSpan="3" IsSynchronizedWithCurrentItem="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="countryNameColumn" Binding="{Binding CountryName}" Header="Country Name" Width="auto"/>
+                        <DataGridTextColumn x:Name="countryIdColumn" Binding="{Binding CountryName}" Header="CountryId" Width="auto" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <DataGrid x:Name="Province_DataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="0,0,0,0" 
+                      ItemsSource="{Binding Source={StaticResource provinceViewSource}}" 
+                      EnableRowVirtualization="True" AutoGenerateColumns="False" Width="auto" Grid.Row="3" Grid.ColumnSpan="3">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="provinceNameColumn" Width="Auto" Header="Province Name" Binding="{Binding ProvinceName}"/>
+                        <DataGridTextColumn Width="Auto" Header="CountryId" Binding="{Binding CountryId}"/>
+                        <DataGridTextColumn x:Name="provinceIdColumn" Width="Auto" Header="ProvinceId" Binding="{Binding ProvinceId}" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <DataGrid x:Name="City_DataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True"  Width="auto" 
+                      ItemsSource="{Binding Source={StaticResource provinceCityViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" 
+                      Grid.Row="2" Grid.Column="3" Grid.RowSpan="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="cityNameColumn" Binding="{Binding CityName}" Header="City Name" Width="auto"/>
+                        <DataGridTextColumn x:Name="cityIdColumn" Binding="{Binding CityId}" Header="CityId" Width="SizeToHeader" IsReadOnly="True"/>
+                        <DataGridTextColumn  Binding="{Binding ProvinceId}" Header="ProvinceId" Width="SizeToHeader"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Create list of customers" Click="CreateListOfCustomersByCity_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <DataGrid x:Name="Suburb_DataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True"
+                      ItemsSource="{Binding Source={StaticResource provinceCitySuburbViewSource}}" 
+                      RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Row="2" Grid.Column="4" Width="auto" Grid.RowSpan="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="suburbNameColumn" Binding="{Binding SuburbName}" Header="Suburb Name" Width="auto"/>
+                        <DataGridTextColumn x:Name="suburbIdColumn" Binding="{Binding SuburbId}" Header="SuburbId" Width="SizeToHeader" IsReadOnly="True"/>
+                        <DataGridTextColumn  Binding="{Binding CityId}" Header="CityId" Width="SizeToHeader"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Create list of customers" Click="CreateListOfCustomersBySuburb_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <DataGrid x:Name="Street_DataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Width="auto" Grid.Row="2" Grid.RowSpan="2"
+                      ItemsSource="{Binding Source={StaticResource provinceCitySuburbStreetViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Column="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="streetNameColumn" Binding="{Binding StreetName}" Header="Street Name" Width="auto"/>
+                        <DataGridTextColumn x:Name="streetExtensionColumn" Binding="{Binding StreetExtension}" Header="Street Extension" Width="auto"/>
+                        <DataGridTextColumn x:Name="streetSuffixColumn" Binding="{Binding StreetSuffix}" Header="Street Suffix" Width="auto"/>
+                        <DataGridTextColumn Binding="{Binding SuburbId}" Header="SuburbId" Width="auto"/>
+                        <DataGridTextColumn  Binding="{Binding StreetId}" Header="StreetId" Width="auto" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Content="Submit Country" Grid.Row="4" Width="101" HorizontalAlignment="Left"   Click="SubmitCountry" Grid.ColumnSpan="3"/>
+                <Button Content="Submit Province" Grid.Row="4" Width="97"  HorizontalAlignment="Right"  Click="SubmitProvince" Grid.Column="2"/>
+                <Button Content="Submit City" Grid.Row="4" Grid.Column="3" Width="75" Click="SubmitCity" Margin="100,0"/>
+                <Button Content="Submit Suburb"  Grid.Row="4" Grid.Column="4" Click="SubmitSuburb" Width="100" />
+                <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="5">
+                    <Button Content="Submit Street"  Width="83" Click="SubmitStreet" Margin="12,0,0,0"/>
+                    <Button Content="Standardise address"  Width="135" Click="SubmitStreetId" Margin="180,0,0,0" />
+                </StackPanel>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>

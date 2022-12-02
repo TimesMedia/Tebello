@@ -1,0 +1,22 @@
+<<<<<<< HEAD
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "port": 50915,
+      "name": "Visual Studio launch configuration override"
+    }
+  ]
+}
+||||||| 6b27882
+=======
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "port": 50915,
+      "name": "Visual Studio launch configuration override"
+    }
+  ]
+}
+>>>>>>> 199ca90e3cf46030abd6d9b7b34535cfae0a0c65
