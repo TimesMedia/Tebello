@@ -22,7 +22,7 @@
             <FlowDocument x:Name="gFlowDocument" FontFamily="Arial" FontSize="12" PageWidth = "1122" ColumnWidth = "1122" PageHeight = "793" PagePadding = "10">
 
                 <BlockUIContainer>
-                    <Grid Background="Aqua" Width="Auto">
+                    <Grid Background="LightBlue" Width="Auto">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="auto"/>
@@ -250,7 +250,7 @@
                 </BlockUIContainer>
 
                 <BlockUIContainer>
-                    <Grid Background="Aqua">
+                    <Grid Background="LightBlue">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>

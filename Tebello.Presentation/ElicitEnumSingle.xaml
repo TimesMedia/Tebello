@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Subs.Presentation"
         mc:Ignorable="d"
-        Width="221.99"  Background="Gold" Name="Window" Height="161.98" Title="          Enum picker" WindowStyle="None">
+        Width="221.99"  Background="White" Name="Window" Height="161.98" Title="          Enum picker" WindowStyle="None">
 
     <Window.Resources>
         <ControlTemplate TargetType="{x:Type Button}" x:Key="ButtonTemplate">
-            <Border CornerRadius="10" BorderBrush="Blue" BorderThickness="2">
+            <Border CornerRadius="10" BorderBrush="White" BorderThickness="2">
                 <Grid>
-                    <Rectangle Fill="Aquamarine" RadiusX="10" RadiusY="20"/>
+                    <Rectangle Fill="LightBlue" RadiusX="10" RadiusY="20"/>
                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
                 </Grid>
             </Border>

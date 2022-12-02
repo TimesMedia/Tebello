@@ -1,12 +1,12 @@
 ﻿<Window x:Class="Subs.Presentation.ElicitDate"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Width="221.99"  Background="Gold" Name="Window" Height="161.98" Title="          Date picker" WindowStyle="None">
+        Width="221.99"  Background="White" Name="Window" Height="161.98" Title="          Date picker" WindowStyle="None">
     <Window.Resources>
         <ControlTemplate TargetType="{x:Type Button}" x:Key="ButtonTemplate">
-            <Border CornerRadius="10" BorderBrush="Blue" BorderThickness="2">
+            <Border CornerRadius="10" BorderBrush="White" BorderThickness="2">
                 <Grid>
-                    <Rectangle Fill="Aquamarine" RadiusX="10" RadiusY="20"/>
+                    <Rectangle Fill="lightblue" RadiusX="10" RadiusY="20"/>
                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
                 </Grid>
             </Border>
