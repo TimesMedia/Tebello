@@ -885,7 +885,7 @@ namespace Subs.Data
                 Command.Parameters.Add("@ReferenceType3", SqlDbType.NVarChar, 20);
                 Command.Parameters.Add("@Reference3", SqlDbType.NVarChar, 40);
                 Command.Parameters.Add("@DateFrom", SqlDbType.DateTime);
-                Command.Parameters.Add("@Explanation", SqlDbType.NVarChar, 200);
+                Command.Parameters.Add("@Value", SqlDbType.Decimal);
 
                 Command.Parameters["@PayerId"].Value = PayerId;
                 Command.Parameters["@Operation"].Value = Operation.VATInvoice;
@@ -893,7 +893,7 @@ namespace Subs.Data
                 Command.Parameters["@ReferenceType3"].Value = "From transactionId of batch";
                 Command.Parameters["@Reference3"].Value = LastTransactionId;
                 Command.Parameters["@DateFrom"].Value = System.DateTime.Now;
-                Command.Parameters["@Explanation"].Value = "Total value = " + pTotalValue.ToString("########0.00");
+                Command.Parameters["@Value"].Value = pTotalValue;
 
                 Command.ExecuteNonQuery();
                 return true;
@@ -963,7 +963,7 @@ namespace Subs.Data
             }
         }
 
-        public static void CreditNote(int SubscriptionId, int Reduction, string CreditNoteNumber, string Explanation, decimal pReductionValue)
+        public static void CreditNote(int SubscriptionId, int InvoiceId, int Reduction, string CreditNoteNumber, string Explanation, decimal pReductionValue)
         {
             SqlConnection lConnection = new SqlConnection();
 
@@ -981,7 +981,7 @@ namespace Subs.Data
                 Command.Parameters.Add("@Operation", SqlDbType.Int);
                 Command.Parameters.Add("@ReferenceTypeId", SqlDbType.Int);
                 Command.Parameters.Add("@Reference", SqlDbType.NVarChar, 40);
-                //Command.Parameters.Add("@InvoiceId", SqlDbType.Int);
+                Command.Parameters.Add("@InvoiceId", SqlDbType.Int);
                 Command.Parameters.Add("@ReferenceType3", SqlDbType.NVarChar, 20);
                 Command.Parameters.Add("@Reference3", SqlDbType.NVarChar, 40);
                 Command.Parameters.Add("@DateFrom", SqlDbType.DateTime);
@@ -992,7 +992,7 @@ namespace Subs.Data
                 Command.Parameters["@Operation"].Value = Operation.CreditNote;
                 Command.Parameters["@ReferenceTypeId"].Value = 7; //Reduction in units
                 Command.Parameters["@Reference"].Value = Reduction.ToString();
-                //Command.Parameters["@InvoiceId"].Value = InvoiceId;
+                Command.Parameters["@InvoiceId"].Value = InvoiceId;
                 Command.Parameters["@ReferenceType3"].Value = "Creditnote number";
                 Command.Parameters["@Reference3"].Value = CreditNoteNumber;
                 Command.Parameters["@DateFrom"].Value = System.DateTime.Now;

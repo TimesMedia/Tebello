@@ -9,9 +9,9 @@
 
     <Window.Resources>
         <ControlTemplate TargetType="{x:Type Button}" x:Key="ButtonTemplate">
-            <Border CornerRadius="8" BorderBrush="LightBlue" BorderThickness="2">
+            <Border CornerRadius="8" BorderBrush="White" BorderThickness="2">
                 <Grid>
-                    <Rectangle Fill="White" RadiusX="10" RadiusY="10"/>
+                    <Rectangle Fill="LightBlue" RadiusX="10" RadiusY="20"/>
                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
                 </Grid>
             </Border>

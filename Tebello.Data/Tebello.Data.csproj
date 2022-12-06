@@ -98,6 +98,13 @@
     </Compile>
     <Compile Include="ExceptionData.cs" />
     <Compile Include="Functions.cs" />
+    <Compile Include="LedgerData.cs" />
+    <Compile Include="LedgerDoc2.cs">
+      <DependentUpon>LedgerDoc2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="LedgerDoc2.designer.cs">
+      <DependentUpon>LedgerDoc2.cs</DependentUpon>
+    </Compile>
     <Compile Include="MIMS.designer.cs" />
     <Compile Include="PaymentData.cs" />
     <Compile Include="PaymentDoc.cs" />
@@ -178,6 +185,13 @@
     </None>
     <None Include="DeliveryDoc.xss">
       <DependentUpon>DeliveryDoc.xsd</DependentUpon>
+    </None>
+    <None Include="LedgerDoc2.xsc">
+      <DependentUpon>LedgerDoc2.xsd</DependentUpon>
+    </None>
+    <None Include="LedgerDoc2.xsd" />
+    <None Include="LedgerDoc2.xss">
+      <DependentUpon>LedgerDoc2.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

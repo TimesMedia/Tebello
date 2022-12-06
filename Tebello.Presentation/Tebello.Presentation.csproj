@@ -264,8 +264,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="AdministrationPromotion.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ClassificationControl.xaml">
       <Generator>MSBuild:Compile</Generator>

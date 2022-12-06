@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Subs.Presentation"
         xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Data="clr-namespace:Subs.Data;assembly=Subs.Data" xmlns:local1="clr-namespace:Tebello.Presentation" x:Class="Subs.Presentation.CustomerUpdate2"
-        x:Name="CustomerUpdateWindow" BorderThickness="4" BorderBrush="Blue" Title="Customer Update Window" WindowStartupLocation="CenterScreen"
+        x:Name="CustomerUpdateWindow" BorderThickness="4" BorderBrush="LightBlue" Title="Customer Update Window" WindowStartupLocation="CenterScreen"
         Loaded="CustomerUpdateWindow_Loaded" Height="915" MinHeight="915" Width="1199" MinWidth="950" Closing="CustomerUpdateWindow_Closing">
 
     <Window.Resources>
@@ -29,7 +29,7 @@
         </Style>
         <local1:DateConverter x:Key="lDateConverter"/>
     </Window.Resources>
-    <Grid x:Name="CustomerGrid" Width="Auto" Height="auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="LightGreen" >
+    <Grid x:Name="CustomerGrid" Width="Auto" Height="auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Lavender" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="327"/>
             <ColumnDefinition Width="*"/>
@@ -56,7 +56,7 @@
             </Grid>
 
             <Grid>
-                <Label Content="Title" Background="LightBlue" HorizontalAlignment="Left" Margin="0,0,20,0"/>
+                <Label Content="Title" Background="Lavender" HorizontalAlignment="Left" Margin="0,0,20,0"/>
                 <ComboBox x:Name="ComboTitle" Width="63" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding Path=TitleId}" HorizontalAlignment="Right"/>
             </Grid>
 
@@ -85,7 +85,7 @@
 
         <StackPanel Grid.Column="1">
             <Label Content="First name" />
-            <Label Content="Cell" Background="LightBlue" Height="28" x:Name="label4"  />
+            <Label Content="Cell" Background="Lavender" Height="28" x:Name="label4"  />
             <Label Content="Council number"/>
         </StackPanel>
 
@@ -113,7 +113,7 @@
 
         <StackPanel Grid.Column="4">
             <Label Content="Surname" Height="28" x:Name="label2"  />
-            <Label Content="Correspondence Email" Height="28" x:Name="label5" Background="LightBlue"/>
+            <Label Content="Correspondence Email" Height="28" x:Name="label5" Background="Lavender"/>
             <CheckBox Margin="3,10,0,0" IsChecked="{Binding Marketing}" IsThreeState="False" >Marketing</CheckBox>
 
         </StackPanel>

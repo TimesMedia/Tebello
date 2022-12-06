@@ -1,35 +1,23 @@
 ﻿using Subs.Data;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Tebello.Presentation
 {
-    /// <summary>
-    /// Interaction logic for AdministrationPromotion.xaml
-    /// </summary>
-    public partial class AdministrationPromotion : Window
+      public partial class AdministrationPromotion : Window
     {
-
         #region Globals
         private readonly Subs.Data.SubscriptionDoc3.PromotionDataTable gPromotionTable = new SubscriptionDoc3.PromotionDataTable();
         private readonly Subs.Data.SubscriptionDoc3TableAdapters.PromotionTableAdapter gPromotionAdapter = new Subs.Data.SubscriptionDoc3TableAdapters.PromotionTableAdapter();
         private SubscriptionDoc3.PromotionRow gSelectedPromotion;
-
+ 
         private ObservableCollection<PromotionData> gPromotions = new ObservableCollection<PromotionData>();
         private CollectionViewSource gPromotionViewSource = new CollectionViewSource();
 
@@ -100,7 +88,7 @@ namespace Tebello.Presentation
                 MessageBox.Show("Error in ValidationError " + ex.Message);
             }
         }
-
+     
         private void PromotionDataGrid_SelectionChanged(object sender, RoutedEventArgs e)
         {
             try
@@ -143,7 +131,7 @@ namespace Tebello.Presentation
             {
                 PromotionData lPromotion = (PromotionData)gPromotionViewSource.View.CurrentItem;
                 lPromotion.PayerId = Settings.CurrentCustomerId;
-            }
+              }
         }
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
@@ -168,7 +156,7 @@ namespace Tebello.Presentation
                 gPromotions.Add(lPromotion);
                 PromotionDataGrid.ScrollIntoView(lPromotion);
                 PromotionDataGrid.SelectedItem = lPromotion;
-
+                  
                 DataGridRow lRow = (DataGridRow)PromotionDataGrid.ItemContainerGenerator.ContainerFromItem(lPromotion);
                 lRow.Background = new SolidColorBrush(Colors.Orange);
 
@@ -195,7 +183,7 @@ namespace Tebello.Presentation
                 throw ex;
             }
         }
-        private void buttonSubmit_Click(object sender, RoutedEventArgs e)
+         private void buttonSubmit_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -233,10 +221,11 @@ namespace Tebello.Presentation
 
         private void SaveBulletinEntry_Click(object sender, RoutedEventArgs e)
         {
-            if (NoteData.SetBulletin(BulletinEntry.Text))
+            if(NoteData.SetBulletin(BulletinEntry.Text))
             {
                 MessageBox.Show("Bulletin entry succesfully updated.");
             };
         }
+
     }
 }

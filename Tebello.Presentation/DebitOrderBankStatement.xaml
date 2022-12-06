@@ -13,7 +13,7 @@
         <local1:IntegerConverter x:Key="lIntegerConverter"/>
         <local1:RandConverter x:Key="lRandConverter"/>
         <Style TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="Aquamarine"/>
+            <Setter Property="Background" Value="LightBlue"/>
         </Style>
         <Style x:Key="AlignRight" TargetType="FrameworkElement">
             <Setter Property="HorizontalAlignment" Value="Right"></Setter>
