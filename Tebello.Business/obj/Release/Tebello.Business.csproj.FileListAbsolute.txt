@@ -29,3 +29,17 @@ C:\Users\NhlapoT\Documents\GitHub\Tebello\Tebello.Business\obj\Release\Tebello.B
 C:\Users\NhlapoT\Documents\GitHub\Tebello\Tebello.Business\obj\Release\Tebello.Business.csproj.CopyComplete
 C:\Users\NhlapoT\Documents\GitHub\Tebello\Tebello.Business\obj\Release\Tebello.Business.dll
 C:\Users\NhlapoT\Documents\GitHub\Tebello\Tebello.Business\obj\Release\Tebello.Business.pdb
+Q:\Tebello\Tebello.Business\bin\Release\Tebello.Business.dll
+Q:\Tebello\Tebello.Business\bin\Release\Tebello.Business.pdb
+Q:\Tebello\Tebello.Business\bin\Release\Microsoft.Bcl.AsyncInterfaces.dll
+Q:\Tebello\Tebello.Business\bin\Release\System.Buffers.dll
+Q:\Tebello\Tebello.Business\bin\Release\System.Memory.dll
+Q:\Tebello\Tebello.Business\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+Q:\Tebello\Tebello.Business\bin\Release\System.Text.Encodings.Web.dll
+Q:\Tebello\Tebello.Business\bin\Release\System.Text.Json.dll
+Q:\Tebello\Tebello.Business\bin\Release\System.Threading.Tasks.Extensions.dll
+Q:\Tebello\Tebello.Business\bin\Release\System.ValueTuple.dll
+Q:\Tebello\Tebello.Business\obj\Release\Tebello.Business.csproj.CoreCompileInputs.cache
+Q:\Tebello\Tebello.Business\obj\Release\Tebello.Business.csproj.CopyComplete
+Q:\Tebello\Tebello.Business\obj\Release\Tebello.Business.dll
+Q:\Tebello\Tebello.Business\obj\Release\Tebello.Business.pdb

@@ -251,8 +251,8 @@ namespace Subs.Business
 
                 //We record the credit note in the transaction table. The credit note batch job will generate it at a later stage.
 
-                LedgerData.CreditNote(pSubscriptionData.SubscriptionId, IssueBiz.GetUnitsLeft(pSubscriptionData.SubscriptionId),
-                       CreditNoteNumberString, pReason, IssueBiz.GetUnitsLeft(pSubscriptionData.SubscriptionId) * pSubscriptionData.UnitPrice);
+                //LedgerData.CreditNote(pSubscriptionData.SubscriptionId, IssueBiz.GetUnitsLeft(pSubscriptionData.SubscriptionId),
+                //       CreditNoteNumberString, pReason, IssueBiz.GetUnitsLeft(pSubscriptionData.SubscriptionId) * pSubscriptionData.UnitPrice);
 
                 //Remove the units left to be in  line with an empty subscription
                 // If it fails, it will throw an exception.

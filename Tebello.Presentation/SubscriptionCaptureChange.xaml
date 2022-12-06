@@ -17,7 +17,7 @@
     <TabControl Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" Margin="0,0,0,0">
         <TabItem Header="Select">
 
-            <Canvas x:Name="SubscriptionCanvas" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White" 
+            <Canvas x:Name="SubscriptionCanvas" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="LightGreen" 
                     Margin="0,0,0,0" >
                 <GroupBox Header="Who" Canvas.Left="10" Canvas.Top="25" Height="118" Width="684">
                     <Canvas>

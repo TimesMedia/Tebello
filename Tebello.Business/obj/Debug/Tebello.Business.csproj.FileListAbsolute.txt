@@ -38,7 +38,9 @@ Q:\Tebello\Tebello.Business\obj\Debug\Tebello.Business.csproj.CopyComplete
 Q:\Tebello\Tebello.Business\obj\Debug\Tebello.Business.dll
 Q:\Tebello\Tebello.Business\obj\Debug\Tebello.Business.pdb
 C:\Users\NhlapoT\Documents\GitHub\Tebello\Tebello.Business\obj\Debug\Tebello.Business.csproj.AssemblyReference.cache
-Q:\Tebello\Tebello.Business\obj\Debug\Tebello.Business.csproj.AssemblyReference.cache
+C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Business\obj\Debug\Tebello.Business.csproj.CoreCompileInputs.cache
+C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Business\obj\Debug\Tebello.Business.dll
+C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Business\obj\Debug\Tebello.Business.pdb
 C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Business\bin\Debug\Tebello.Business.dll
 C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Business\bin\Debug\Tebello.Business.pdb
 C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Business\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
@@ -60,8 +62,4 @@ C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Business\bin\Debug\Subs.Data.
 C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Business\bin\Debug\System.Memory.xml
 C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Business\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Business\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Business\obj\Debug\Tebello.Business.csproj.AssemblyReference.cache
-C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Business\obj\Debug\Tebello.Business.csproj.CoreCompileInputs.cache
 C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Business\obj\Debug\Tebello.Business.csproj.CopyComplete
-C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Business\obj\Debug\Tebello.Business.dll
-C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Business\obj\Debug\Tebello.Business.pdb

@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tebello.Presentation"
-        mc:Ignorable="d" MinWidth="1000"
-        Title="AdministrationPromotion" Height="450" Width="Auto">
-
+        xmlns:Data="clr-namespace:Subs.Data;assembly=Subs.Data"
+        mc:Ignorable="d"  MinWidth="1000"
+        Title="AdministrationPromotion" Width="auto">
     <Window.Resources>
         <CollectionViewSource x:Key="promotionViewSource"/>
         <Style x:Key="AlignRight" TargetType="{x:Type FrameworkElement}">
@@ -97,5 +97,4 @@
             </StackPanel>
         </TabItem>
     </TabControl>
-   
 </Window>

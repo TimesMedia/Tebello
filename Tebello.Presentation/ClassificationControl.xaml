@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              MinWidth="400" Width="400"  Loaded="ClassificationControl_Loaded">
   
-        <TreeView x:Name="ClassificationTreeView" Width="400" Background="White">
+        <TreeView x:Name="ClassificationTreeView" Width="400" Background="LightBlue">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Path=Nodes}">
                         <TextBlock Text="{Binding Path=Classification}" FontSize="14">
