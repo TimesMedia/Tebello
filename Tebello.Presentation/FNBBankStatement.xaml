@@ -9,7 +9,7 @@
         Title="FNB bank statement" Height="838.235" Width="1246.794" Loaded="Window_Loaded">
 
     <Window.Resources>
-        <!--<local:PaymentState2String x:Key="lPaymentState2String"/>-->
+        <local1:PaymentState2String x:Key="lPaymentState2String"/>
         <local1:DateConverter x:Key="lDateConverter"/>
         <local1:IntegerConverter x:Key="lIntegerConverter"/>
         <local1:RandConverter x:Key="lRandConverter"/>

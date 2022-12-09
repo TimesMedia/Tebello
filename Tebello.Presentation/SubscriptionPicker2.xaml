@@ -5,7 +5,7 @@
   
         xmlns:local="clr-namespace:Subs.Presentation"
         xmlns:Data="clr-namespace:Subs.Data;assembly=Subs.Data"
-        WindowState="Maximized" Background="White" FontSize="12" Loaded="Mainform_loaded" mc:Ignorable="d" 
+        WindowState="Maximized" Background="Lavender" FontSize="12" Loaded="Mainform_loaded" mc:Ignorable="d" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local1="clr-namespace:Tebello.Presentation"
         MinWidth="800" SizeChanged="Window_SizeChanged" Width="777">
     <Window.Resources>

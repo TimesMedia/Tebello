@@ -521,3 +521,5 @@ C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Presentation\obj\Debug\Tebell
 C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Presentation\obj\Debug\Tebello.Presentation.csproj.CopyComplete
 C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Presentation\obj\Debug\Tebello.Presentation.exe
 C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Presentation\obj\Debug\Tebello.Presentation.pdb
+C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Presentation\obj\Debug\Document.g.cs
+C:\Users\NhlapoT\Documents\GitHub\Tebello2\Tebello.Presentation\obj\Debug\Document.baml

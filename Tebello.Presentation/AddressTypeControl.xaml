@@ -7,8 +7,8 @@
              mc:Ignorable="d" Width="209" Height="79">
 
 
-    <GroupBox Header="Address Type" Margin="0,0,0,0" Background="AliceBlue" Width="220">
-        <Canvas Margin="0,0,0,0">
+    <GroupBox Header="Address Type" Margin="0,0,0,4" Background="Lavender">
+        <Canvas Margin="0,0,8,0">
             <RadioButton Name="radioBox" Content="Post Box" Canvas.Left="10" Canvas.Top="14" Click="Click_RadioButton" />
             <RadioButton Name="radioStreet" Content="Post Street" Canvas.Left="10" Canvas.Top="34" Click="Click_RadioButton"/>
             <RadioButton Name="radioInternational" Content="International" Canvas.Left="102" Canvas.Top="14" Click="Click_RadioButton"/>

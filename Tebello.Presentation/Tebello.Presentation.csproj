@@ -170,6 +170,9 @@
     <Compile Include="DeliveryOptionsControl.xaml.cs">
       <DependentUpon>DeliveryOptionsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Document.xaml.cs">
+      <DependentUpon>Document.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ElicitDate.xaml.cs">
       <DependentUpon>ElicitDate.xaml</DependentUpon>
     </Compile>
@@ -323,6 +326,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Document.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ElicitDate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -451,6 +458,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -470,6 +478,9 @@
     <Resource Include="mims-small.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MIMS Blue Small transparent.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

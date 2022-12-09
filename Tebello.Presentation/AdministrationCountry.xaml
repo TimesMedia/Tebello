@@ -12,7 +12,7 @@
         <CollectionViewSource x:Key="countryViewSource" Source="{Binding Country, Source={StaticResource deliveryAddressDoc}}"/>
         <CollectionViewSource x:Key="countryDeliveryCostViewSource" Source="{Binding FK_DeliveryCost_Country, Source={StaticResource countryViewSource}}"/>
         <Style TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="Aquamarine"/>
+            <Setter Property="Background" Value="LightBlue"/>
             <Setter Property="Height" Value="22"/>
         </Style>
         <Style x:Key="AlignRight" TargetType="{x:Type FrameworkElement}">

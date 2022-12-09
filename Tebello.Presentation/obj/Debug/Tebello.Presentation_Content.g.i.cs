@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("mims-small.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("mims%20blue%20small%20transparent.jpg")]
 
 

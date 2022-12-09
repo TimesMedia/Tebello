@@ -19,7 +19,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Name="borderZero" BorderThickness="2" BorderBrush="Black" Background="Aquamarine" CornerRadius="10">
+                        <Border Name="borderZero" BorderThickness="2" BorderBrush="Lavender" Background="LightBlue" CornerRadius="10">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
@@ -30,8 +30,8 @@
         <Style TargetType="{x:Type DataGridCell}">
             <Style.Triggers>
                 <Trigger Property="IsSelected"  Value="true">
-                    <Setter Property="Background" Value="Yellow"/>
-                    <Setter Property="Foreground" Value="Red"/>
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Lavender"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -73,8 +73,8 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.ColumnSpan="2" Margin="20,05,0,50">Search string</Label>
-                <TextBox x:Name="SearchString" Height="23" TextWrapping="Wrap" Width="250"  Margin="0,25,0,0" Grid.ColumnSpan="2"/>
-                
+                <TextBox x:Name="SearchString" Height="23" TextWrapping="Wrap" Width="250"  Margin="26,41,27,16" Grid.ColumnSpan="2"/>
+
                 <StackPanel  Grid.Column="2">
                     <Button Name="buttonSearchOnCompany" Content="Search on company name"  Width="284" Click="ButtonSearchOnCompany_Click" Height="23" Margin="0,10,0,0"/>
                     <Button Name="buttonSearchOnVatregistration" Content="Search on VatRegistration" Width="284" Click="ButtonSearchOnVatregistration_Click" Height="24" Margin="0,10,0,0"/>
@@ -100,9 +100,9 @@
 
                     <DataGrid.RowHeaderStyle>
                         <Style TargetType="{x:Type DataGridRowHeader}">
-                            <Setter Property="Background"  Value="Yellow"/>
+                            <Setter Property="Background"  Value="AntiqueWhite"/>
                             <Setter Property="Width"  Value="30"/>
-                            <Setter Property="BorderBrush" Value="Blue" />
+                            <Setter Property="BorderBrush" Value="lightBlue" />
                             <Setter Property="BorderThickness"  Value="3" />
                         </Style>
                     </DataGrid.RowHeaderStyle>
@@ -123,9 +123,9 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-             
-                
-                <GroupBox   Header="Save company template data" Height="200" Grid.Column="4" Grid.Row="1">
+
+
+                <GroupBox   Header="Save company template data" Height="200" Grid.Column="4" Grid.Row="1" Margin="0,28,0,27">
                     <StackPanel VerticalAlignment="Bottom">
                         <Button Name="buttonUpdateCompany" Content="Update" Width="164" Click="ButtonUpdateCompany_Click" Margin="0,10,0,0"/>
                         <Button Name ="buttonAddCompany" Content="Add" Width="164" Canvas.Top="391" Click="ButtonAddCompany_Click" Height="25" Margin="0,10,0,0"/>
@@ -147,7 +147,7 @@
                 </GroupBox>
 
 
-                <GroupBox Header="Verify company on customer" Height="200" Grid.Column="4" Grid.Row="3">
+                <GroupBox Header="Verify company on customer" Height="200" Grid.Column="4" Grid.Row="3" Margin="0,28,0,27">
                     <Button Name="buttonUpdateCustomer" Content="Verify" Width="164" Click="ButtonUpdateCustomer_Click" Margin="0,10,0,0"/>
                 </GroupBox>
 

@@ -85,16 +85,16 @@
                             Height="auto" VerticalAlignment="Stretch" FrozenColumnCount="6" KeyUp="CustomerDataGrid_KeyUp" CanUserSortColumns="True" CanUserReorderColumns="True">
                     <DataGrid.RowHeaderStyle>
                         <Style TargetType="{x:Type DataGridRowHeader}">
-                            <Setter Property="Background"  Value="Yellow"/>
+                            <Setter Property="Background"  Value="White"/>
                             <Setter Property="Width"  Value="30"/>
-                            <Setter Property="BorderBrush" Value="Red" />
+                            <Setter Property="BorderBrush" Value="LightBlue" />
                             <Setter Property="BorderThickness"  Value="3" />
                         </Style>
                     </DataGrid.RowHeaderStyle>
                     <DataGrid.ItemContainerStyle>
                         <Style>
                             <Setter Property="DataGridRow.Margin" Value="6"/>
-                            <Setter Property="DataGridRow.Background" Value="Aquamarine"/>
+                            <Setter Property="DataGridRow.Background" Value="LightBlue"/>
                         </Style>
                     </DataGrid.ItemContainerStyle>
                     <DataGrid.Columns>

@@ -9,7 +9,7 @@
         Title="CreditNote" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" Width="1207" Height="807"  >
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="Aquamarine"/>
+            <Setter Property="Background" Value="White"/>
             <Setter Property="Margin" Value="3"/>
             <Setter Property="Padding" Value="2"/>
         </Style>
@@ -71,11 +71,11 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Button x:Name="buttonPrint" Grid.Column ="0"  Click="ButtonPrint_Click" Width="50">Print</Button>
+                            <Button x:Name="buttonPrint" Grid.Column ="0"  Click="ButtonPrint_Click" Margin="78,3,48,3">Print</Button>
                             <Label Grid.Column="1" FontFamily="Arial" FontSize="26" Foreground="Red">
                                 <Bold>Credit note</Bold>
                             </Label>
-                            <Button x:Name="buttonEmail" Grid.Column="2" Click="ButtonEmail_Click" Width="50">Email</Button>
+                            <Button x:Name="buttonEmail" Grid.Column="2" Click="ButtonEmail_Click" Margin="49,3,77,3">Email</Button>
                         </Grid>
                     </BlockUIContainer>
 

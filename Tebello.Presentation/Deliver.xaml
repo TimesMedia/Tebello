@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tebello.Presentation" xmlns:my="clr-namespace:Subs.Data;assembly=Subs.Data" xmlns:cm="clr-namespace:System.ComponentModel;assembly=System"
         mc:Ignorable="d"
-        Title="Deliver" Height="450" Width="800">
+        Title="Deliver" Height="450" Width="1169">
     <Window.Resources>
         <my:DeliveryDoc x:Key="deliveryDoc" />
         <CollectionViewSource x:Key="deliveryRecordViewSource" Source="{Binding Path=DeliveryRecord, Source={StaticResource deliveryDoc}}" />

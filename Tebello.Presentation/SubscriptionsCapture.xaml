@@ -6,7 +6,7 @@
         Title="Subscriptions capture" Height="726" Width="1138.368" WindowStartupLocation="Manual" WindowState="Normal">
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="Aquamarine"/>
+            <Setter Property="Background" Value="LightBlue"/>
             <Setter Property="Height" Value="22"/>
         </Style>
         <Style x:Key="AlignRight" TargetType="{x:Type FrameworkElement}">
@@ -22,7 +22,7 @@
     <TabControl Name="TabControl" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" Margin="0,0,-0,0">
         <TabItem Header="Select">
 
-            <Canvas x:Name="SubscriptionCanvas" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="LightGreen" DataContext="{StaticResource product2ViewSource}" Margin="0,-4,-12,-34" >
+            <Canvas x:Name="SubscriptionCanvas" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Lavender" DataContext="{StaticResource product2ViewSource}" Margin="0,-4,-12,-34" >
                 <GroupBox Header="Who" Canvas.Left="10" Canvas.Top="25" Height="88" Width="986">
                     <Canvas>
                         <TextBox x:Name="textReceiverSurname" Height="23"   Width="270" Canvas.Left="201" Canvas.Top="5" IsReadOnly="True"
@@ -83,7 +83,7 @@
 
         <TabItem Name="Basket" Header="Basket">
 
-            <Canvas Name="myCanvas" Margin="0,0,2,0">
+            <Canvas Name="myCanvas" Margin="0,0,2,0" Background="Lavender">
 
                 <DataGrid Name="BasketGrid" Height="590" Width="1098"  AutoGenerateColumns="False" EnableRowVirtualization="True" 
                              SelectionMode="Single" AlternatingRowBackground="AquaMarine" SelectionUnit="CellOrRowHeader" IsReadOnly="True"

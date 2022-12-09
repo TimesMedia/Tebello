@@ -1053,7 +1053,7 @@ namespace Tebello.Presentation
 
                 OpenFileDialog lFileDialog = new OpenFileDialog();
 
-                lFileDialog.InitialDirectory = Settings.DirectoryPath + "\\Deliveries";
+                lFileDialog.InitialDirectory = Settings.DirectoryPath + "Deliveries";
                 lFileDialog.Multiselect = true;
                 lFileDialog.ShowDialog();
 
