@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Subs.Presentation"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Maintenance" Height="623.333" Width="800" BorderBrush="Coral" BorderThickness="4">
+        Title="Maintenance" Height="623.333" Width="800" BorderBrush="Lavender" BorderThickness="4">
     <Window.Resources>
         <!--<ControlTemplate TargetType="{x:Type Button}" x:Key="ButtonTemplate">
             <Border CornerRadius="10" BorderBrush="Blue" BorderThickness="2">
@@ -22,7 +22,7 @@
         </Style>-->
 
         <Style TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="Aquamarine"/>
+            <Setter Property="Background" Value="LightBlue"/>
             <Setter Property="Margin" Value="3"/>
             <Setter Property="Padding" Value="2"/>
         </Style>

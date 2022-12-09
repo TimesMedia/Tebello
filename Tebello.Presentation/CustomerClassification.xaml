@@ -11,7 +11,7 @@
         <ControlTemplate TargetType="{x:Type Button}" x:Key="ButtonTemplate">
             <Border CornerRadius="8" BorderBrush="White" BorderThickness="2">
                 <Grid>
-                    <Rectangle Fill="LightBlue" RadiusX="10" RadiusY="20"/>
+                    <Rectangle Fill="LightGray" RadiusX="10" RadiusY="20"/>
                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
                 </Grid>
             </Border>

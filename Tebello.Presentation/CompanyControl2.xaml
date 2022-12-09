@@ -40,7 +40,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <Label Background="Aqua" Height="30">
+                                <Label Background="LightBlue" Height="30">
                                     <Label.Content>
                                         <TextBlock Text="{Binding CompanyName}"/>
                                     </Label.Content>

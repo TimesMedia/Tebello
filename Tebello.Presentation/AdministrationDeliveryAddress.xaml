@@ -22,7 +22,7 @@
         </Style>
 
         <Style TargetType="{x:Type TextBox}" >
-            <Setter Property="Background" Value="Yellow"/>
+            <Setter Property="Background" Value="White"/>
         </Style>
 
 
@@ -57,7 +57,7 @@
                                 Margin="10" DataContext="{StaticResource deliveryAddressViewSource}" ItemsSource="{Binding}">
                 <DataGrid.RowHeaderStyle>
                     <Style TargetType="{x:Type DataGridRowHeader}">
-                        <Setter Property="Background"  Value="Yellow"/>
+                        <Setter Property="Background"  Value="White"/>
                         <Setter Property="Width"  Value="30"/>
                         <Setter Property="BorderBrush" Value="Red" />
                         <Setter Property="BorderThickness"  Value="3" />
@@ -97,7 +97,9 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="46*"/>
                     <ColumnDefinition Width="34*"/>
-                    <ColumnDefinition Width="194*"/>
+                    <ColumnDefinition Width="27*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="127*"/>
                     <ColumnDefinition Width="275*"/>
                     <ColumnDefinition Width="229*"/>
                     <ColumnDefinition Width="458*"/>
@@ -110,11 +112,11 @@
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
 
-                <TextBox  x:Name="textCountry" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
-                <TextBox  x:Name="textProvince" IsReadOnly="True" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"/>
-                <TextBox  x:Name="textCity"  IsReadOnly="True" Grid.Row="0" Grid.Column="3" Margin="10,0,0,0"/>
-                <TextBox  x:Name="textSuburb" IsReadOnly="True" Grid.Row="0" Grid.Column="4" Margin="10,0,0,0"/>
-                <StackPanel Orientation="Horizontal"  Grid.Row="0" Grid.Column="5">
+                <TextBox  x:Name="textCountry" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"/>
+                <TextBox  x:Name="textProvince" IsReadOnly="True" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5"/>
+                <TextBox  x:Name="textCity"  IsReadOnly="True" Grid.Row="0" Grid.Column="5" Margin="10,0,0,0"/>
+                <TextBox  x:Name="textSuburb" IsReadOnly="True" Grid.Row="0" Grid.Column="6" Margin="10,0,0,0"/>
+                <StackPanel Orientation="Horizontal"  Grid.Row="0" Grid.Column="7">
                     <TextBox  x:Name="textStreet" IsReadOnly="True" Margin="10,0,0,0" Width="{Binding ActualWidth, ElementName=streetNameColumn}"/>
 
                     <TextBox  x:Name="textExtension" IsReadOnly="True" Width="{Binding ActualWidth, ElementName=streetExtensionColumn}"/>
@@ -124,7 +126,7 @@
 
                 <DataGrid x:Name="countryDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="false" Grid.Row="2" Grid.Column="0"
                       ItemsSource="{Binding Source={StaticResource countryViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" 
-                      Width="auto" IsReadOnly="True" Grid.ColumnSpan="3" IsSynchronizedWithCurrentItem="True">
+                      Width="auto" IsReadOnly="True" Grid.ColumnSpan="5" IsSynchronizedWithCurrentItem="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="countryNameColumn" Binding="{Binding CountryName}" Header="Country Name" Width="auto"/>
                         <DataGridTextColumn x:Name="countryIdColumn" Binding="{Binding CountryName}" Header="CountryId" Width="auto" IsReadOnly="True"/>
@@ -133,7 +135,7 @@
 
                 <DataGrid x:Name="Province_DataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="0,0,0,0" 
                       ItemsSource="{Binding Source={StaticResource provinceViewSource}}" 
-                      EnableRowVirtualization="True" AutoGenerateColumns="False" Width="auto" Grid.Row="3" Grid.ColumnSpan="3">
+                      EnableRowVirtualization="True" AutoGenerateColumns="False" Width="auto" Grid.Row="3" Grid.ColumnSpan="5">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="provinceNameColumn" Width="Auto" Header="Province Name" Binding="{Binding ProvinceName}"/>
                         <DataGridTextColumn Width="Auto" Header="CountryId" Binding="{Binding CountryId}"/>
@@ -142,7 +144,7 @@
                 </DataGrid>
                 <DataGrid x:Name="City_DataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True"  Width="auto" 
                       ItemsSource="{Binding Source={StaticResource provinceCityViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" 
-                      Grid.Row="2" Grid.Column="3" Grid.RowSpan="2">
+                      Grid.Row="2" Grid.Column="5" Grid.RowSpan="2">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="cityNameColumn" Binding="{Binding CityName}" Header="City Name" Width="auto"/>
                         <DataGridTextColumn x:Name="cityIdColumn" Binding="{Binding CityId}" Header="CityId" Width="SizeToHeader" IsReadOnly="True"/>
@@ -156,7 +158,7 @@
                 </DataGrid>
                 <DataGrid x:Name="Suburb_DataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True"
                       ItemsSource="{Binding Source={StaticResource provinceCitySuburbViewSource}}" 
-                      RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Row="2" Grid.Column="4" Width="auto" Grid.RowSpan="2">
+                      RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Row="2" Grid.Column="6" Width="auto" Grid.RowSpan="2">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="suburbNameColumn" Binding="{Binding SuburbName}" Header="Suburb Name" Width="auto"/>
                         <DataGridTextColumn x:Name="suburbIdColumn" Binding="{Binding SuburbId}" Header="SuburbId" Width="SizeToHeader" IsReadOnly="True"/>
@@ -169,7 +171,7 @@
                     </DataGrid.ContextMenu>
                 </DataGrid>
                 <DataGrid x:Name="Street_DataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Width="auto" Grid.Row="2" Grid.RowSpan="2"
-                      ItemsSource="{Binding Source={StaticResource provinceCitySuburbStreetViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Column="5">
+                      ItemsSource="{Binding Source={StaticResource provinceCitySuburbStreetViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Column="7">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="streetNameColumn" Binding="{Binding StreetName}" Header="Street Name" Width="auto"/>
                         <DataGridTextColumn x:Name="streetExtensionColumn" Binding="{Binding StreetExtension}" Header="Street Extension" Width="auto"/>
@@ -178,12 +180,12 @@
                         <DataGridTextColumn  Binding="{Binding StreetId}" Header="StreetId" Width="auto" IsReadOnly="True"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="Submit Country" Grid.Row="4" Width="101" HorizontalAlignment="Left"   Click="SubmitCountry" Grid.ColumnSpan="3"/>
-                <Button Content="Submit Province" Grid.Row="4" Width="97"  HorizontalAlignment="Right"  Click="SubmitProvince" Grid.Column="2"/>
-                <Button Content="Submit City" Grid.Row="4" Grid.Column="3" Width="75" Click="SubmitCity" Margin="100,0"/>
-                <Button Content="Submit Suburb"  Grid.Row="4" Grid.Column="4" Click="SubmitSuburb" Width="100" />
-                <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="5">
-                    <Button Content="Submit Street"  Width="83" Click="SubmitStreet" Margin="12,0,0,0"/>
+                <Button Content="Submit Country" Grid.Row="4" Width="101" HorizontalAlignment="Left"   Click="SubmitCountry" Grid.ColumnSpan="3" />
+                <Button Content="Submit Province" Grid.Row="4" Width="97"  HorizontalAlignment="Right"  Click="SubmitProvince" Grid.Column="4" />
+                <Button Content="Submit City" Grid.Row="4" Grid.Column="5" Width="75" Click="SubmitCity" Margin="100,0" />
+                <Button Content="Submit Suburb"  Grid.Row="4" Grid.Column="6" Click="SubmitSuburb" Width="100"  Margin="65,0,64,0"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="7">
+                    <Button Content="Submit Street"  Width="83" Click="SubmitStreet" Margin="12,0,0,0" />
                     <Button Content="Standardise address"  Width="135" Click="SubmitStreetId" Margin="180,0,0,0" />
                 </StackPanel>
             </Grid>

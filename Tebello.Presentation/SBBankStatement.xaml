@@ -9,7 +9,7 @@
         Title="SB bank statement" Height="838.235" Width="1573.294" Loaded="Window_Loaded">
 
     <Window.Resources>
-        <!--<local:PaymentState2String x:Key="lPaymentState2String"/>-->
+        <local1:PaymentState2String x:Key="lPaymentState2String"/>
         <local1:DateConverter x:Key="lDateConverter"/>
         <local1:IntegerConverter x:Key="lIntegerConverter"/>
         <local1:RandConverter x:Key="lRandConverter"/>
@@ -23,7 +23,7 @@
         <CollectionViewSource x:Key="SBBankStatementViewSource" Source="{Binding SBBankStatement, Source={StaticResource paymentDoc}}"/>
     </Window.Resources>
 
-    <Canvas Margin="0,0,0,0" DataContext="{StaticResource SBBankStatementViewSource}">
+    <Canvas Margin="0,0,0,0" DataContext="{StaticResource SBBankStatementViewSource}" Background="Lavender">
         <Button x:Name="buttonLoad" Content="Load a new bank statement from a file" Canvas.Left="10" Canvas.Top="10" Width="270" Click="buttonLoad_Click"/>
 
         <DatePicker Name ="pickerStartDate" Margin="0,0,0,0" Canvas.Left="93" Canvas.Top="94"/>
